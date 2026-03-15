@@ -5,12 +5,10 @@
 function rollDice(input) {
   const str = String(input).trim().toLowerCase();
 
-  // Plain number
   if (/^\d+$/.test(str)) {
-    return Math.min(parseInt(str, 10), 10);
+    return parseInt(str, 10);
   }
 
-  // Dice notation: optional NdN, optional +/- modifier
   const match = str.match(/^(\d*)d(\d+)([+-]\d+)?$/);
   if (!match) return 0;
 
@@ -23,7 +21,7 @@ function rollDice(input) {
     total += Math.floor(Math.random() * sides) + 1;
   }
 
-  return Math.max(0, Math.min(total, 10));
+  return Math.max(0, total);
 }
 
 // Filters the full item list down to eligible items for a given rarity and active filters.
