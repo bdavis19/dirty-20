@@ -277,10 +277,12 @@ function renderItems(items) {
 
   items.forEach(item => {
     const tr = document.createElement('tr');
+    const qtyDisplay = (item.quantity != null) ? item.quantity : '';
     tr.innerHTML = `
       <td>${item.name}</td>
       <td>${item.rarity}</td>
       <td>${item.type}</td>
+      <td>${qtyDisplay}</td>
       <td data-base-price="${item.priceless ? '' : item.basePrice ?? ''}">${item.priceless ? 'Priceless' : item.adjustedPrice1 != null ? item.adjustedPrice1 + ' gp' + (item.adjustedPrice1 !== item.basePrice ? ` (${item.basePrice} gp)` : '') : '—'}</td>
     `;
     tbody.appendChild(tr);

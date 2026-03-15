@@ -24,6 +24,39 @@ function rollDice(input) {
   return Math.max(0, total);
 }
 
+function rollItemQuantity(item) {
+  // Mundane: 1d6
+  if (item.rarity === 'mundane') {
+    return Math.floor(Math.random() * 6) + 1;
+  }
+
+  // Common consumable magic items: 1d6-3, minimum 1
+  if (item.rarity === 'common' && item.categories?.includes('consumable')) {
+    return Math.max(1, (Math.floor(Math.random() * 6) + 1) - 3);
+  }
+
+  // Potions of Healing by rarity tier
+  const healingPotionRolls = {
+    'common':    () => Math.floor(Math.random() * 10) + 1,           // 1d10
+    'uncommon':  () => Math.max(1, (Math.floor(Math.random() * 10) + 1) - 2), // 1d10-2
+    'rare':      () => Math.max(1, (Math.floor(Math.random() * 10) + 1) - 4), // 1d10-4
+    'very rare': () => Math.max(1, (Math.floor(Math.random() * 10) + 1) - 6), // 1d10-6
+  };
+
+  const healingPotionNames = [
+    'Potion of Healing',
+    'Potion of Greater Healing',
+    'Potion of Superior Healing',
+    'Potion of Supreme Healing',
+  ];
+
+  if (healingPotionNames.includes(item.name)) {
+    return healingPotionRolls[item.rarity]?.() ?? 1;
+  }
+
+  return 1; // No quantity for other items
+}
+
 // Filters the full item list down to eligible items for a given rarity and active filters.
 // Returns an array of matching items.
 function filterItems(allItems, rarity, filters) {
@@ -107,7 +140,10 @@ function generateShop(allItems, settings) {
   for (const { key, inputId } of rarities) {
     const count = rollDice(inputId);
     const pool  = filterItems(allItems, key, filters);
-    const picks = pickItems(pool, count);
+    const picks = pickItems(pool, count).map(item => ({
+      ...item,
+      quantity: rollItemQuantity(item)
+    }));
     results = results.concat(picks);
   }
 
@@ -121,7 +157,10 @@ function generateShop(allItems, settings) {
     ];
     healingPotions.forEach(name => {
       const potion = allItems.find(item => item.name === name);
-      if (potion) results.push(potion);
+      if (potion) results.push({
+        ...potion,
+        quantity: rollItemQuantity(potion)
+      });
     });
   }
 
