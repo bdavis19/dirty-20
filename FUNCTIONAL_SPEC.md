@@ -43,7 +43,6 @@
 - There are six quantity fields: **Mundane, Common, Uncommon, Rare, Very Rare, Legendary**.
 - Each field accepts either a plain integer (`5`) or dice notation (`2d4`, `1d6+2`, `1d10-2`).
 - Invalid or empty input resolves to **0 items** for that rarity tier.
-- The result of any dice roll is **capped at a maximum of 10** items per rarity.
 - A separate checkbox labeled **"Include Potions of Healing"** adds all four tiers of healing potions (Potion of Healing, Greater, Superior, Supreme) to the output. These do **not** count against any rarity quantity total.
 
 ---
@@ -98,21 +97,25 @@
 ## 6. Filters
 
 **Magic Types** (applies to non-mundane items only):
+
 - Options: Armor, Potion, Ring, Rod, Scroll, Staff, Wand, Weapon, Wondrous, Ammunition.
 - Only items whose `type` matches a checked option are eligible for generation.
 - "Select All" checks all options in this group. "Select None" unchecks all.
 
 **Mundane Categories** (applies to mundane-rarity items only):
+
 - Options include adventuring gear, arcane gear, tools, etc.
 - Only mundane items whose `mundaneCategory` matches a checked option are eligible.
 - "Select All" checks all options in this group. "Select None" unchecks all.
 
 **Overall Categories** (applies to all items):
+
 - Options: Nonmagical, Consumable, Combat, Noncombat, Summoning, Gamechanging.
 - An item is eligible if **at least one** of its `categories` values matches a checked option.
 - "Select All" checks all options in this group. "Select None" unchecks all.
 
 **Price Range**:
+
 - Min Price: excludes items with a `basePrice` below this value. Empty means no minimum.
 - Max Price: excludes items with a `basePrice` above this value. Empty means no maximum.
 - Items with no `basePrice` (null) are **not** excluded by price range filters.
@@ -136,7 +139,8 @@
 
 ## 8. Shop Output Table
 
-- The table has four columns: **Name, Rarity, Type, Price**.
+- The table has four columns: **Name, Rarity, Type, Qty, Price**.
+- The Qty column displays the quantity of each item. Mundane items roll 1d6. Common consumable magic items roll 1d6-3, minimum 1. Potions of Healing roll 1d10 minus 2 per rarity level above common (minimum 1): common 1d10, uncommon 1d10-2, rare 1d10-4, very rare 1d10-6. All other items display 1.
 - Price displays as `X gp`. If a markup was applied and the adjusted price differs from the base price, the base price is shown in parentheses: `150 gp (100 gp)`.
 - Items flagged as `priceless: true` display **"Priceless"** in the Price column regardless of markup.
 - Items with no price data display **"—"**.
