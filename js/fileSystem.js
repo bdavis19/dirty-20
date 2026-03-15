@@ -1,155 +1,98 @@
-// fileSystem.js — Chunk 1: Folder selection & IndexedDB handle persistence
-
-let _dataFolderHandle = null;
-
-const DB_NAME = 'shopGeneratorDB';
-const DB_STORE = 'handles';
-
-function openDB() {
-  return new Promise((resolve, reject) => {
-    const req = indexedDB.open(DB_NAME, 1);
-    req.onupgradeneeded = () => req.result.createObjectStore(DB_STORE);
-    req.onsuccess = () => resolve(req.result);
-    req.onerror = () => reject(req.error);
-  });
-}
-
-async function storeHandle(handle) {
-  const db = await openDB();
-  return new Promise((resolve, reject) => {
-    const tx = db.transaction(DB_STORE, 'readwrite');
-    tx.objectStore(DB_STORE).put(handle, 'dataFolder');
-    tx.oncomplete = resolve;
-    tx.onerror = () => reject(tx.error);
-  });
-}
-
-async function loadHandle() {
-  const db = await openDB();
-  return new Promise((resolve, reject) => {
-    const tx = db.transaction(DB_STORE, 'readonly');
-    const req = tx.objectStore(DB_STORE).get('dataFolder');
-    req.onsuccess = () => resolve(req.result ?? null);
-    req.onerror = () => reject(req.error);
-  });
-}
-
-async function getDataFolder() {
-  if (_dataFolderHandle) return _dataFolderHandle;
-
-  const stored = await loadHandle();
-  if (stored) {
-    const permission = await stored.requestPermission({ mode: 'readwrite' });
-    if (permission === 'granted') {
-      _dataFolderHandle = stored;
-      return _dataFolderHandle;
-    }
-  }
-
-  return null; // No folder yet — UI should call pickDataFolder()
-}
-
-async function pickDataFolder() {
-  const handle = await window.showDirectoryPicker({ mode: 'readwrite' });
-  await storeHandle(handle);
-  _dataFolderHandle = handle;
-  return handle;
-}
-
-// fileSystem.js — Chunk 2: readSettings / writeSettings
+// fileSystem.js — Firebase Firestore backend
 
 async function readSettings() {
-  const folder = await getDataFolder();
-  if (!folder) {
-    return { dataFolderPath: null, defaultFilters: {}, markupPresets: [], customPresets: [] };
-  }
+  const uid = window.currentUser?.uid;
+  if (!uid) return { markupPresets: [], customPresets: [] };
 
-  try {
-    const fileHandle = await folder.getFileHandle('settings.json');
-    const file = await fileHandle.getFile();
-    const text = await file.text();
-    return JSON.parse(text);
-  } catch {
-    // File doesn't exist yet — return defaults
-    return { dataFolderPath: null, defaultFilters: {}, markupPresets: [], customPresets: [] };
-  }
+  const docRef = doc(window.db, 'users', uid, 'settings', 'main');
+  const snap = await getDoc(docRef);
+  return snap.exists() ? snap.data() : { markupPresets: [], customPresets: [] };
 }
 
 async function writeSettings(settings) {
-  const folder = await getDataFolder();
-  if (!folder) throw new Error('No data folder selected.');
+  const uid = window.currentUser?.uid;
+  if (!uid) throw new Error('Not signed in.');
 
-  const fileHandle = await folder.getFileHandle('settings.json', { create: true });
-  const writable = await fileHandle.createWritable();
-  await writable.write(JSON.stringify(settings, null, 2));
-  await writable.close();
-}
-
-// fileSystem.js — Chunk 3: saveShop / loadShop
-
-async function getShopsFolder() {
-  const folder = await getDataFolder();
-  if (!folder) throw new Error('No data folder selected.');
-  return folder.getDirectoryHandle('shops', { create: true });
+  const docRef = doc(window.db, 'users', uid, 'settings', 'main');
+  await setDoc(docRef, settings);
 }
 
 async function saveShop(shopData) {
-  const shopsFolder = await getShopsFolder();
-  const fileName = `${shopData.name.replace(/[^a-z0-9\-_ ]/gi, '_')}.json`;
+  const uid = window.currentUser?.uid;
+  if (!uid) throw new Error('Not signed in.');
 
   shopData.lastModified = new Date().toISOString();
   if (!shopData.created) shopData.created = shopData.lastModified;
 
-  const fileHandle = await shopsFolder.getFileHandle(fileName, { create: true });
-  const writable = await fileHandle.createWritable();
-  await writable.write(JSON.stringify(shopData, null, 2));
-  await writable.close();
-
-  return fileName;
+  const shopsRef = collection(window.db, 'users', uid, 'shops');
+  const docRef = doc(shopsRef, shopData.name.replace(/[^a-z0-9\-_ ]/gi, '_'));
+  await setDoc(docRef, shopData);
+  return docRef.id;
 }
 
-async function loadShop(fileName) {
-  const shopsFolder = await getShopsFolder();
-  const fileHandle = await shopsFolder.getFileHandle(fileName);
-  const file = await fileHandle.getFile();
-  const text = await file.text();
-  return JSON.parse(text);
+async function loadShop(docId) {
+  const uid = window.currentUser?.uid;
+  if (!uid) throw new Error('Not signed in.');
+
+  const docRef = doc(window.db, 'users', uid, 'shops', docId);
+  const snap = await getDoc(docRef);
+  return snap.exists() ? snap.data() : null;
 }
 
 async function listShops() {
-  const shopsFolder = await getShopsFolder();
-  const shops = [];
+  const uid = window.currentUser?.uid;
+  if (!uid) throw new Error('Not signed in.');
 
-  for await (const [name, handle] of shopsFolder.entries()) {
-    if (name.endsWith('.json')) {
-      const file = await handle.getFile();
-      const text = await file.text();
-      const data = JSON.parse(text);
-      shops.push({ fileName: name, name: data.name, lastModified: data.lastModified });
-    }
-  }
-
+  const shopsRef = collection(window.db, 'users', uid, 'shops');
+  const snap = await getDocs(shopsRef);
+  const shops = snap.docs.map(d => ({ docId: d.id, ...d.data() }));
   return shops.sort((a, b) => new Date(b.lastModified) - new Date(a.lastModified));
 }
 
-async function deleteShop(fileName) {
-  const shopsFolder = await getShopsFolder();
-  await shopsFolder.removeEntry(fileName);
+async function deleteShop(docId) {
+  const uid = window.currentUser?.uid;
+  if (!uid) throw new Error('Not signed in.');
+
+  const docRef = doc(window.db, 'users', uid, 'shops', docId);
+  await deleteDoc(docRef);
 }
 
-async function renameShop(oldFileName, newName) {
-  const shopsFolder = await getShopsFolder();
-  const oldHandle = await shopsFolder.getFileHandle(oldFileName);
-  const file = await oldHandle.getFile();
-  const text = await file.text();
-  const data = JSON.parse(text);
+async function renameShop(docId, newName) {
+  const uid = window.currentUser?.uid;
+  if (!uid) throw new Error('Not signed in.');
 
+  const oldRef = doc(window.db, 'users', uid, 'shops', docId);
+  const snap = await getDoc(oldRef);
+  if (!snap.exists()) throw new Error('Shop not found.');
+
+  const data = snap.data();
   data.name = newName;
-  await deleteShop(oldFileName);
+  await deleteDoc(oldRef);
   return saveShop(data);
 }
 
-// fileSystem.js — Chunk 4: Shop browser UI wiring
+function initFileSystem() {
+  document.getElementById('btn-save-shop').addEventListener('click', async () => {
+    const name = document.getElementById('shop-name').value.trim();
+    if (!name) {
+      alert('Please enter a shop name before saving.');
+      return;
+    }
+    await saveShop(buildShopData());
+    alert(`"${name}" saved.`);
+    setUnsavedChanges(false);
+  });
+
+  document.getElementById('btn-load-shop').addEventListener('click', () => {
+    openShopBrowser();
+  });
+
+  document.getElementById('shop-browser-modal').addEventListener('click', (e) => {
+    if (e.target === document.getElementById('shop-browser-modal')) {
+      document.getElementById('shop-browser-modal').classList.add('hidden');
+    }
+  });
+}
 
 async function openShopBrowser() {
   const modal = document.getElementById('shop-browser-modal');
@@ -162,7 +105,7 @@ async function openShopBrowser() {
   try {
     shops = await listShops();
   } catch {
-    listEl.innerHTML = '<p>Could not load shops. Make sure a data folder is selected.</p>';
+    listEl.innerHTML = '<p>Could not load shops. Make sure you are signed in.</p>';
     return;
   }
 
@@ -188,7 +131,7 @@ async function openShopBrowser() {
     const btnOpen = document.createElement('button');
     btnOpen.textContent = 'Open';
     btnOpen.addEventListener('click', async () => {
-      const data = await loadShop(shop.fileName);
+      const data = await loadShop(shop.docId);
       applyLoadedShop(data);
       modal.classList.add('hidden');
     });
@@ -198,7 +141,7 @@ async function openShopBrowser() {
     btnRename.addEventListener('click', async () => {
       const newName = prompt('New shop name:', shop.name);
       if (!newName || !newName.trim()) return;
-      await renameShop(shop.fileName, newName.trim());
+      await renameShop(shop.docId, newName.trim());
       openShopBrowser();
     });
 
@@ -206,7 +149,7 @@ async function openShopBrowser() {
     btnDelete.textContent = 'Delete';
     btnDelete.addEventListener('click', async () => {
       if (!confirm(`Delete "${shop.name}"? This cannot be undone.`)) return;
-      await deleteShop(shop.fileName);
+      await deleteShop(shop.docId);
       openShopBrowser();
     });
 
@@ -214,34 +157,3 @@ async function openShopBrowser() {
     listEl.appendChild(row);
   });
 }
-
-function initFileSystem() {
-  document.getElementById('btn-save-shop').addEventListener('click', async () => {
-    const name = document.getElementById('shop-name').value.trim();
-    if (!name) {
-      alert('Please enter a shop name before saving.');
-      return;
-    }
-
-    let folder = await getDataFolder();
-    if (!folder) folder = await pickDataFolder();
-
-    await saveShop(buildShopData());
-    alert(`"${name}" saved.`);
-    setUnsavedChanges(false);
-  });
-
-  document.getElementById('btn-load-shop').addEventListener('click', async () => {
-    let folder = await getDataFolder();
-    if (!folder) folder = await pickDataFolder();
-    openShopBrowser();
-  });
-
-  document.getElementById('shop-browser-modal').addEventListener('click', (e) => {
-    if (e.target === document.getElementById('shop-browser-modal')) {
-      document.getElementById('shop-browser-modal').classList.add('hidden');
-    }
-  });
-}
-
-document.addEventListener('DOMContentLoaded', initFileSystem);

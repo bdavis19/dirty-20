@@ -2,6 +2,31 @@
 
 All notable changes to this project will be documented in this file.
 
+## [2.0.0] - 2026-03-15
+
+Migrated to Firebase for GitHub Pages hosting and cross-device support.
+
+### Added
+
+- Google Sign-In authentication via Firebase Auth.
+- Cloud storage for shops and settings via Firebase Firestore.
+- Login screen displayed before app loads; app hidden until authenticated.
+- Per-user data isolation — users can only access their own shops and settings.
+
+### Changed
+
+- Save/load system replaced: local File System Access API removed, Firestore used instead.
+- App is now hosted on GitHub Pages at https://bdavis19.github.io/dirty-20/
+- App no longer requires Chrome/Edge exclusively — any modern browser is supported.
+- App no longer requires a local web server to run.
+- README updated to reflect GitHub Pages hosting, Firebase auth, and removal of local setup instructions.
+
+### Removed
+
+- Local data folder selection (no longer needed).
+- IndexedDB handle persistence (no longer needed).
+- `launch.bat` is no longer the primary way to run the app.
+
 ## [1.3.0] - 2026-03-15
 
 ### Added

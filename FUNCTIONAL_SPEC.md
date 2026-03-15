@@ -217,10 +217,11 @@
 
 ---
 
-## 15. Data Folder Selection
+15. Authentication & Cloud Storage
 
-- The app requires a local data folder to save and load shops and settings.
-- The folder handle is persisted in the browser's **IndexedDB** so the user does not need to re-select it on every visit.
-- On any operation that requires the data folder (save, load, read/write settings), the app checks IndexedDB for a stored handle and requests permission.
-- If permission is denied or no handle is stored, the user is prompted to pick a folder via the browser's directory picker.
-- The app only supports **Chrome and Edge** for file system operations. Firefox does not support the File System Access API.
+- The app requires a Google account to use. A login screen is shown on first load.
+- Clicking Sign in with Google opens a Google OAuth popup. On success, the login screen is hidden and the app is shown.
+- All shops and settings are stored in Firebase Firestore, scoped to the signed-in user's UID.
+- Users can only access their own shops and settings — no cross-user data access is possible.
+- Data is accessible from any browser and any device after signing in.
+- The app is hosted on GitHub Pages and requires no local server or installation.
