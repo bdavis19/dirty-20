@@ -110,11 +110,11 @@ function applyMarkup(items, markupPercent) {
 
   return items.map(item => {
     const adj1 = item.basePrice != null
-      ? Math.round(item.basePrice * multiplier)
+      ? Math.round(item.basePrice * multiplier * 100) / 100
       : null;
 
     const adj2 = item.basePrice2 != null
-      ? Math.round(item.basePrice2 * multiplier)
+      ? Math.round(item.basePrice * multiplier * 100) / 100
       : null;
 
     return { ...item, adjustedPrice1: adj1, adjustedPrice2: adj2 };

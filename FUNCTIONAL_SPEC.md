@@ -141,7 +141,7 @@
 
 - The table has four columns: **Name, Rarity, Type, Qty, Price**.
 - The Qty column displays the quantity of each item. Mundane items roll 1d6. Common consumable magic items roll 1d6-3, minimum 1. Potions of Healing roll 1d10 minus 2 per rarity level above common (minimum 1): common 1d10, uncommon 1d10-2, rare 1d10-4, very rare 1d10-6. All other items display 1.
-- Price displays as `X gp`. If a markup was applied and the adjusted price differs from the base price, the base price is shown in parentheses: `150 gp (100 gp)`.
+- Price displays in the most appropriate D&D currency denomination (cp, sp, ep, gp). Marked-up prices that fall between denominations may display as mixed currency (e.g. 1 ep 1 sp 2 cp). If a markup was applied and the adjusted price differs from the base price, the base price is shown in parentheses: 1 gp 5 sp (1 gp). The Price column header displays "Price" when no markup is applied, and "Price Markup (Base Price)" when markup is active.
 - Items flagged as `priceless: true` display **"Priceless"** in the Price column regardless of markup.
 - Items with no price data display **"—"**.
 - Before any generation, the table is hidden and the empty-state message is shown.

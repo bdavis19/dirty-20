@@ -185,7 +185,9 @@ function buildShopData() {
       name:           cells[0]?.textContent,
       rarity:         cells[1]?.textContent,
       type:           cells[2]?.textContent,
-      adjustedPrice1: cells[3]?.textContent,
+      qty:            cells[3]?.textContent,
+      basePrice:      cells[4]?.dataset.basePrice,
+      adjustedPrice1: cells[4]?.textContent,
     };
   });
 
@@ -248,7 +250,8 @@ function applyLoadedShop(data) {
         <td>${item.name || ''}</td>
         <td>${item.rarity || ''}</td>
         <td>${item.type || ''}</td>
-        <td>${item.adjustedPrice1 || ''}</td>
+        <td>${item.qty || ''}</td>
+        <td data-base-price="${item.basePrice || ''}">${item.adjustedPrice1 || ''}</td>
       `;
       tbody.appendChild(tr);
     });
@@ -283,13 +286,14 @@ function renderItems(items) {
       <td>${item.rarity}</td>
       <td>${item.type}</td>
       <td>${qtyDisplay}</td>
-      <td data-base-price="${item.priceless ? '' : item.basePrice ?? ''}">${item.priceless ? 'Priceless' : item.adjustedPrice1 != null ? item.adjustedPrice1 + ' gp' + (item.adjustedPrice1 !== item.basePrice ? ` (${item.basePrice} gp)` : '') : '—'}</td>
+      <td data-base-price="${item.priceless ? '' : item.basePrice ?? ''}">${item.priceless ? 'Priceless' : item.adjustedPrice1 != null ? formatPrice(item.adjustedPrice1) + (item.adjustedPrice1 !== item.basePrice ? ` (${formatPrice(item.basePrice)})` : '') : '—'}</td>
     `;
     tbody.appendChild(tr);
   });
 
   table.classList.remove('hidden');
   empty.classList.add('hidden');
+  updatePriceHeader();
 }
 
 document.getElementById('btn-generate').addEventListener('click', () => {
@@ -521,12 +525,13 @@ function applyMarkupToRenderedItems() {
 
   document.querySelectorAll('#items-tbody tr').forEach(row => {
     const cells = row.querySelectorAll('td');
-    const basePrice = parseFloat(cells[3].dataset.basePrice);
+    const basePrice = parseFloat(cells[4].dataset.basePrice);
     if (isNaN(basePrice)) return;
-    const adjusted = Math.round(basePrice * multiplier);
-    cells[3].textContent = `${adjusted} gp${adjusted !== basePrice ? ` (${basePrice} gp)` : ''}`;
+    const adjusted = Math.round(basePrice * multiplier * 100) / 100;
+    cells[4].textContent = formatPrice(adjusted) + (adjusted !== basePrice ? ` (${formatPrice(basePrice)})` : '');
   });
 
+  updatePriceHeader();
   setUnsavedChanges(true);
 }
 
@@ -537,4 +542,28 @@ function setUnsavedChanges(state) {
   } else {
     warning.classList.add('hidden');
   }
+}
+
+function updatePriceHeader() {
+  const percent = parseFloat(document.getElementById('markup-applied').value) || 0;
+  const header = document.getElementById('price-col-header');
+  header.textContent = percent !== 0 ? 'Price Markup (Base Price)' : 'Price';
+}
+
+function formatPrice(gp) {
+  const totalCp = Math.round(gp * 100);
+
+  const gpAmount = Math.floor(totalCp / 100);
+  const remainder = totalCp % 100;
+  const epAmount = Math.floor(remainder / 50);
+  const spAmount = Math.floor((remainder % 50) / 10);
+  const cpAmount = remainder % 10;
+
+  const parts = [];
+  if (gpAmount) parts.push(`${gpAmount} gp`);
+  if (epAmount) parts.push(`${epAmount} ep`);
+  if (spAmount) parts.push(`${spAmount} sp`);
+  if (cpAmount) parts.push(`${cpAmount} cp`);
+
+  return parts.length ? parts.join(' ') : '0 cp';
 }
