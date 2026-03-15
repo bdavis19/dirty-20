@@ -237,8 +237,10 @@ function initFileSystem() {
     openShopBrowser();
   });
 
-  document.getElementById('btn-close-shop-browser').addEventListener('click', () => {
-    document.getElementById('shop-browser-modal').classList.add('hidden');
+  document.getElementById('shop-browser-modal').addEventListener('click', (e) => {
+    if (e.target === document.getElementById('shop-browser-modal')) {
+      document.getElementById('shop-browser-modal').classList.add('hidden');
+    }
   });
 }
 

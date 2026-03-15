@@ -200,7 +200,7 @@
 - **Open**: loads the shop, restores all UI state (name, quantities, filters, markup, items table), and closes the modal.
 - **Rename**: prompts for a new name. If confirmed, renames the file and updates the shop name inside the JSON. The shop list refreshes.
 - **Delete**: prompts for confirmation. If confirmed, permanently deletes the file. The shop list refreshes. This action cannot be undone.
-- Closing the modal (✕ button) dismisses it without loading anything.
+- Closing the modal (✕ button or clicking outside the dialog) dismisses it without loading anything.
 - When a shop is loaded, both `markup-percent` and `markup-applied` are restored to the saved markup value.
 - The unsaved changes warning is hidden after a shop is loaded.
 
