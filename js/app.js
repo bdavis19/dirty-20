@@ -139,21 +139,21 @@ async function loadItemData() {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-  initFilterDefaults();
-  initMarkupPresets();
-  initCustomPresets();
-  loadItemData();
-  initNameGenerator();
-
-  document.getElementById('builtin-preset-select').addEventListener('change', (e) => {
-    if (e.target.value !== '') {
-      applyPreset(e.target.value);
-    }
-  });
-
-  document.getElementById('btn-apply-markup').addEventListener('click', () => {
-  applyMarkupToRenderedItems();
+  if (window.userIsSignedIn) {
+    initApp();
+    initFileSystem();
+  } else {
+    window.addEventListener('userSignedIn', () => {
+      initApp();
+      initFileSystem();
+    });
+  }
 });
+
+window.addEventListener('userSignedIn', () => {
+  console.log('userSignedIn fired');
+  initApp();
+  initFileSystem();
 });
 
 // app.js — buildShopData()
