@@ -194,7 +194,7 @@ function buildShopData() {
     settings: {
       quantities,
       includePotionsOfHealing: document.getElementById('include-potions').checked,
-      markupPercent: parseFloat(document.getElementById('markup-percent').value) || 0,
+      markupPercent: parseFloat(document.getElementById('markup-applied').value) || 0,
       filters,
     },
     items,
@@ -217,6 +217,7 @@ function applyLoadedShop(data) {
 
   document.getElementById('include-potions').checked    = data.settings.includePotionsOfHealing || false;
   document.getElementById('markup-percent').value       = data.settings.markupPercent ?? 0;
+  document.getElementById('markup-applied').value       = data.settings.markupPercent ?? 0;  
 
   const f = data.settings.filters || {};
 
