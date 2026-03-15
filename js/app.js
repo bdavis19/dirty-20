@@ -138,20 +138,25 @@ async function loadItemData() {
   allItems = await response.json();
 }
 
-document.addEventListener('DOMContentLoaded', () => {
-  if (window.userIsSignedIn) {
-    initApp();
-    initFileSystem();
-  } else {
-    window.addEventListener('userSignedIn', () => {
-      initApp();
-      initFileSystem();
-    });
-  }
-});
+function initApp() {
+  initFilterDefaults();
+  initMarkupPresets();
+  initCustomPresets();
+  loadItemData();
+  initNameGenerator();
+
+  document.getElementById('builtin-preset-select').addEventListener('change', (e) => {
+    if (e.target.value !== '') {
+      applyPreset(e.target.value);
+    }
+  });
+
+  document.getElementById('btn-apply-markup').addEventListener('click', () => {
+    applyMarkupToRenderedItems();
+  });
+}
 
 window.addEventListener('userSignedIn', () => {
-  console.log('userSignedIn fired');
   initApp();
   initFileSystem();
 });

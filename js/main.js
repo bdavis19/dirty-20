@@ -21,8 +21,9 @@ onAuthStateChanged(auth, (user) => {
     window.currentUser = user;
     document.getElementById('login-screen').classList.add('hidden');
     document.getElementById('main-app').classList.remove('hidden');
-    window.userIsSignedIn = true;
+    setTimeout(() => {
     window.dispatchEvent(new CustomEvent('userSignedIn'));
+    }, 500);
   } else {
     window.currentUser = null;
     document.getElementById('login-screen').classList.remove('hidden');

@@ -2,6 +2,23 @@
 
 All notable changes to this project will be documented in this file.
 
+## [2.0.1] - 2026-03-15
+
+Bug fixes for Firebase migration.
+
+### Fixed
+
+- App scripts not loading after Firebase migration (missing script tags in index.html).
+- App initialization not running after auto sign-in due to module/non-module script timing.
+- initApp function missing from app.js after refactor.
+
+```
+
+**Commit message:**
+```
+
+fix: restore script tags and app initialization after Firebase migration
+
 ## [2.0.0] - 2026-03-15
 
 Migrated to Firebase for GitHub Pages hosting and cross-device support.
