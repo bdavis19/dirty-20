@@ -6,11 +6,21 @@ All notable changes to this project will be documented in this file.
 
 ### Added
 
-- `css/themes.css` — 5 setting-specific visual themes (Generic D&D,
-  Ravenloft, Forgotten Realms, Greyhawk, Deadwell), each overriding
-  CSS custom properties and Google Fonts via body class.
-- `js/themes.js` — theme switching logic; loads preference from
-  Firestore on sign-in, saves on change, defaults to Generic D&D.
+- 5 setting-specific visual themes selectable from the top bar:
+  Generic D&D (default, light parchment), Ravenloft (dark gothic),
+  Forgotten Realms (dark navy/gold), Greyhawk (light sepia),
+  Deadwell (dark Egyptian gold).
+- Theme preference persists per user in Firestore settings.
+- `css/themes.css` — theme definitions as body classes overriding
+  CSS custom properties and fonts.
+- `js/themes.js` — theme switching, Firestore load/save, dropdown
+  initialization.
+
+### Changed
+
+- `index.html` — theme dropdown added to top bar.
+- `js/app.js` — `initTheme()` called at start of `initApp()`.
+- `css/style.css` — `#theme-controls` top bar styles added.
 
 ## [3.0.0] - 2026-03-16
 
