@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file.
 
+## [Unreleased] - 2026-03-16
+
+### Changed
+
+- Item database moved from `data/items.json` (public static file) to
+  Firestore `items` collection, grouped by source book.
+- App now loads item data from Firestore on sign-in instead of fetching
+  a static JSON file.
+
+### Removed
+
+- `data/items.json` removed from the repository.
+
 ## [2.2.0] - 2026-03-15
 
 ### Added
@@ -13,6 +26,7 @@ All notable changes to this project will be documented in this file.
 - Load Shop button on the generator view, so saved shops can be opened without generating first.
 
 ### Fixed
+
 - Generating a new shop no longer carries over the name from a previously loaded shop.
 - Opening a saved shop from the Shop Browser now correctly navigates to the results view and displays the item table.
 

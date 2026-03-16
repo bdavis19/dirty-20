@@ -153,8 +153,10 @@ function initMarkupPresets() {
 let allItems = [];
 
 async function loadItemData() {
-  const response = await fetch('data/items.json');
-  allItems = await response.json();
+  const itemsRef = window.collection(window.db, 'items');
+  const snap = await window.getDocs(itemsRef);
+  const chunks = snap.docs.map(d => d.data().items || []);
+  allItems = chunks.flat();
 }
 
 function initApp() {
