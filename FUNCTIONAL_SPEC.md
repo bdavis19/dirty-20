@@ -238,3 +238,23 @@
 - Clicking a nav link navigates to that tool's generator view.
 - Clicking ← New Shop from the results view resets all generator fields to defaults and returns to the generator view.
 - Loading a saved shop navigates to the results view.
+
+---
+
+## 17. Themes
+
+- A theme dropdown is visible in the top bar at all times after sign-in.
+- Five themes are available: **Generic D&D**, **Ravenloft**, **Forgotten Realms**,
+  **Greyhawk**, **Deadwell**.
+- Selecting a theme immediately applies it to the entire UI by swapping a class
+  on `<body>`. No page reload is required.
+- Each theme controls color palette and typography (heading and body fonts).
+- The selected theme persists per user in Firestore under the existing
+  `users/{uid}/settings/main` document as a `theme` field.
+- On sign-in, the saved theme preference is loaded and applied before the rest
+  of the app initializes, preventing a flash of the wrong theme.
+- If no theme preference has been saved, **Generic D&D** is the default.
+- Generic D&D and Greyhawk are light themes (parchment backgrounds, dark text).
+  Ravenloft, Forgotten Realms, and Deadwell are dark themes.
+- Themes apply globally to all views: generator, results, and the shop browser
+  modal.
