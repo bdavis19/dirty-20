@@ -4,18 +4,14 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="robots" content="noindex, nofollow">
-  <title>Magic Item Shop Generator</title>
+  <title>Dirty 20</title>
   <link rel="stylesheet" href="css/style.css" />
 </head>
 <body>
 
-  <header>
-    <h1>Magic Item Shop Generator</h1>
-  </header>
-
   <!-- Login Screen -->
   <div id="login-screen">
-    <h2>Magic Item Shop Generator</h2>
+    <h2>Dirty 20</h2>
     <p>Sign in to save and load your shops.</p>
     <button id="btn-google-signin">Sign in with Google</button>
     <p id="access-denied-msg" class="hidden" style="color: var(--color-accent); margin-top: 1rem;">
@@ -23,224 +19,228 @@
     </p>
   </div>
 
-  <main id="main-app" class="hidden">
+  <!-- App Shell -->
+  <div id="main-app" class="hidden">
 
-    <div id="user-bar">
-      <span id="user-email"></span>
-      <button id="btn-signout">Sign Out</button>
+    <!-- Top Bar -->
+    <div id="top-bar">
+      <div id="app-title">Dirty 20</div>
+      <nav id="main-nav">
+        <button class="nav-link active" data-tool="shop-generator">Shop Generator</button>
+      </nav>
+      <div id="user-bar">
+        <span id="user-email"></span>
+        <button id="btn-signout">Sign Out</button>
+      </div>
     </div>
 
-    <!-- Generator Controls -->
-    <section id="generator-section">
-    <h2>Inventory Quantities</h2>
+    <!-- View: Generator -->
+    <main id="view-generator" class="view active">
+      <div class="view-content">
 
-        <div id="preset-controls">
+        <!-- Generator Controls -->
+        <section id="generator-section">
+          <h2>Inventory Quantities</h2>
+
+          <div id="preset-controls">
             <label for="builtin-preset-select">Load Preset</label>
             <select id="builtin-preset-select">
-            <option value="">— Select a preset —</option>
-            <option value="Village">Village</option>
-            <option value="Small Town">Small Town</option>
-            <option value="Large Town">Large Town</option>
-            <option value="Small City">Small City</option>
-            <option value="Large City">Large City</option>
-            <option value="General Store">General Store</option>
+              <option value="">— Select a preset —</option>
+              <option value="Village">Village</option>
+              <option value="Small Town">Small Town</option>
+              <option value="Large Town">Large Town</option>
+              <option value="Small City">Small City</option>
+              <option value="Large City">Large City</option>
+              <option value="General Store">General Store</option>
             </select>
-        </div>
-        <br>
-        <div id="custom-preset-controls">
+          </div>
+          <br>
+          <div id="custom-preset-controls">
             <label for="custom-preset-select">Custom Presets</label>
             <select id="custom-preset-select">
-                <option value="">— Select a custom preset —</option>
+              <option value="">— Select a custom preset —</option>
             </select>
             <button id="btn-save-custom-preset">Save Current as Preset</button>
             <button id="btn-delete-custom-preset">Delete</button>
-        </div>
-        <br>
-        <!-- Markup -->
-        <div id="markup-preset-controls">
+          </div>
+          <br>
+          <div id="markup-preset-controls">
             <label for="markup-preset-select">Markup Preset</label>
             <select id="markup-preset-select">
-                <option value="">— Select a markup preset —</option>
+              <option value="">— Select a markup preset —</option>
             </select>
             <input type="number" id="markup-percent" value="0" /> %
             <button id="btn-save-markup-preset">Save Current as Preset</button>
             <button id="btn-delete-markup-preset">Delete</button>
-        </div>
+          </div>
 
-      <div id="quantity-inputs">
-        <div class="quantity-row">
-          <label for="qty-mundane">Mundane</label>
-          <input type="text" id="qty-mundane" placeholder="e.g. 5 or 2d4" />
-        </div>
-        <div class="quantity-row">
-          <label for="qty-common">Common</label>
-          <input type="text" id="qty-common" placeholder="e.g. 5 or 2d4" />
-        </div>
-        <div class="quantity-row">
-          <label for="qty-uncommon">Uncommon</label>
-          <input type="text" id="qty-uncommon" placeholder="e.g. 5 or 2d4" />
-        </div>
-        <div class="quantity-row">
-          <label for="qty-rare">Rare</label>
-          <input type="text" id="qty-rare" placeholder="e.g. 5 or 2d4" />
-        </div>
-        <div class="quantity-row">
-          <label for="qty-very-rare">Very Rare</label>
-          <input type="text" id="qty-very-rare" placeholder="e.g. 5 or 2d4" />
-        </div>
-        <div class="quantity-row">
-          <label for="qty-legendary">Legendary</label>
-          <input type="text" id="qty-legendary" placeholder="e.g. 5 or 2d4" />
-        </div>
+          <div id="quantity-inputs">
+            <div class="quantity-row">
+              <label for="qty-mundane">Mundane</label>
+              <input type="text" id="qty-mundane" placeholder="e.g. 5 or 2d4" />
+            </div>
+            <div class="quantity-row">
+              <label for="qty-common">Common</label>
+              <input type="text" id="qty-common" placeholder="e.g. 5 or 2d4" />
+            </div>
+            <div class="quantity-row">
+              <label for="qty-uncommon">Uncommon</label>
+              <input type="text" id="qty-uncommon" placeholder="e.g. 5 or 2d4" />
+            </div>
+            <div class="quantity-row">
+              <label for="qty-rare">Rare</label>
+              <input type="text" id="qty-rare" placeholder="e.g. 5 or 2d4" />
+            </div>
+            <div class="quantity-row">
+              <label for="qty-very-rare">Very Rare</label>
+              <input type="text" id="qty-very-rare" placeholder="e.g. 5 or 2d4" />
+            </div>
+            <div class="quantity-row">
+              <label for="qty-legendary">Legendary</label>
+              <input type="text" id="qty-legendary" placeholder="e.g. 5 or 2d4" />
+            </div>
+          </div>
+          <div id="potions-of-healing">
+            <input type="checkbox" id="include-potions" />
+            <label for="include-potions">Include Potions of Healing</label>
+          </div>
+          <div id="generator-actions">
+            <button id="btn-generate">Generate Shop</button>
+            <button id="btn-load-shop-generator">Load Shop</button>
+          </div>
+        </section>
+
+        <!-- Advanced Filters -->
+        <section id="filters-section">
+          <h2>Advanced Filters</h2>
+
+          <div class="filter-group">
+            <h3>Magic Types</h3>
+            <button class="btn-select-all" data-group="magic-types">Select All</button>
+            <button class="btn-select-none" data-group="magic-types">Select None</button>
+            <div class="filter-checkboxes" id="magic-types">
+              <label><input type="checkbox" value="armor" /> Armor</label>
+              <label><input type="checkbox" value="potion" /> Potion</label>
+              <label><input type="checkbox" value="ring" /> Ring</label>
+              <label><input type="checkbox" value="rod" /> Rod</label>
+              <label><input type="checkbox" value="scroll" /> Scroll</label>
+              <label><input type="checkbox" value="staff" /> Staff</label>
+              <label><input type="checkbox" value="wand" /> Wand</label>
+              <label><input type="checkbox" value="weapon" /> Weapon</label>
+              <label><input type="checkbox" value="wondrous" /> Wondrous</label>
+              <label><input type="checkbox" value="ammunition" /> Ammunition</label>
+            </div>
+          </div>
+
+          <div class="filter-group">
+            <h3>Mundane Categories</h3>
+            <button class="btn-select-all" data-group="mundane-categories">Select All</button>
+            <button class="btn-select-none" data-group="mundane-categories">Select None</button>
+            <div class="filter-checkboxes" id="mundane-categories">
+              <label><input type="checkbox" value="adventuring gear" /> Adventuring Gear</label>
+              <label><input type="checkbox" value="arcane gear" /> Arcane Gear</label>
+              <label><input type="checkbox" value="tools" /> Tools</label>
+            </div>
+          </div>
+
+          <div class="filter-group">
+            <h3>Overall Categories</h3>
+            <button class="btn-select-all" data-group="overall-categories">Select All</button>
+            <button class="btn-select-none" data-group="overall-categories">Select None</button>
+            <div class="filter-checkboxes" id="overall-categories">
+              <label><input type="checkbox" value="nonmagical" /> Nonmagical</label>
+              <label><input type="checkbox" value="consumable" /> Consumable</label>
+              <label><input type="checkbox" value="combat" /> Combat</label>
+              <label><input type="checkbox" value="noncombat" /> Noncombat</label>
+              <label><input type="checkbox" value="summoning" /> Summoning</label>
+              <label><input type="checkbox" value="gamechanging" /> Gamechanging</label>
+            </div>
+          </div>
+
+          <div class="filter-group">
+            <h3>Price Range</h3>
+            <label for="min-price">Min Price (gp)</label>
+            <input type="number" id="min-price" placeholder="0" />
+            <label for="max-price">Max Price (gp)</label>
+            <input type="number" id="max-price" placeholder="No maximum" />
+          </div>
+        </section>
+
       </div>
-      <div id="potions-of-healing">
-        <input type="checkbox" id="include-potions" />
-        <label for="include-potions">Include Potions of Healing</label>
+    </main>
+
+    <!-- View: Results -->
+    <main id="view-results" class="view hidden">
+      <div class="view-content">
+
+        <section id="output-section">
+          <div id="results-header">
+            <button id="btn-new-shop">← New Shop</button>
+            <h2 id="results-shop-title">Generated Shop</h2>
+          </div>
+
+          <section id="shop-name-section">
+            <label for="shop-name">Shop Name</label>
+            <input type="text" id="shop-name" placeholder="Enter shop name..." />
+            <button id="btn-random-name">Get Random Names</button>
+            <div id="random-name-dropdown" class="hidden"></div>
+          </section>
+
+          <div id="markup-controls">
+            <label for="markup-applied">Markup / Markdown %</label>
+            <input type="number" id="markup-applied" value="0" />
+            <button id="btn-apply-markup">Apply</button>
+          </div>
+
+          <div id="output-actions">
+            <button id="btn-save-shop">Save Shop</button>
+            <button id="btn-load-shop">Load Shop</button>
+            <button id="btn-print">Print</button>
+          </div>
+
+          <p id="unsaved-warning" class="hidden" style="color: red;">Unsaved changes — this shop has not been saved.</p>
+
+          <div id="items-output">
+            <p id="empty-state">No items generated yet. Configure your shop above and click Generate.</p>
+            <table id="items-table" class="hidden">
+              <thead>
+                <tr>
+                  <th>Name</th>
+                  <th>Rarity</th>
+                  <th>Type</th>
+                  <th>Qty</th>
+                  <th id="price-col-header">Price</th>
+                </tr>
+              </thead>
+              <tbody id="items-tbody">
+              </tbody>
+            </table>
+          </div>
+        </section>
+
       </div>
-      <button id="btn-generate">Generate Shop</button>
-    </section>
-
-    <!-- Advanced Filters -->
-    <section id="filters-section">
-      <h2>Advanced Filters</h2>
-
-      <!-- Magic Types -->
-      <div class="filter-group">
-        <h3>Magic Types</h3>
-        <button class="btn-select-all" data-group="magic-types">Select All</button>
-        <button class="btn-select-none" data-group="magic-types">Select None</button>
-        <div class="filter-checkboxes" id="magic-types">
-          <label><input type="checkbox" value="armor" /> Armor</label>
-          <label><input type="checkbox" value="potion" /> Potion</label>
-          <label><input type="checkbox" value="ring" /> Ring</label>
-          <label><input type="checkbox" value="rod" /> Rod</label>
-          <label><input type="checkbox" value="scroll" /> Scroll</label>
-          <label><input type="checkbox" value="staff" /> Staff</label>
-          <label><input type="checkbox" value="wand" /> Wand</label>
-          <label><input type="checkbox" value="weapon" /> Weapon</label>
-          <label><input type="checkbox" value="wondrous" /> Wondrous</label>
-        </div>
-      </div>
-
-      <!-- Mundane Categories -->
-      <div class="filter-group">
-        <h3>Mundane Categories</h3>
-        <button class="btn-select-all" data-group="mundane-categories">Select All</button>
-        <button class="btn-select-none" data-group="mundane-categories">Select None</button>
-        <div class="filter-checkboxes" id="mundane-categories">
-          <label><input type="checkbox" value="adventuring gear" /> Adventuring Gear</label>
-          <label><input type="checkbox" value="arcane gear" /> Arcane Gear</label>
-          <label><input type="checkbox" value="divine gear" /> Divine Gear</label>
-          <label><input type="checkbox" value="containers" /> Containers</label>
-          <label><input type="checkbox" value="artisan supplies" /> Artisan Supplies</label>
-          <label><input type="checkbox" value="trade tools" /> Trade Tools</label>
-          <label><input type="checkbox" value="gemstones" /> Gemstones</label>
-          <label><input type="checkbox" value="clothes" /> Clothes</label>
-          <label><input type="checkbox" value="gaming" /> Gaming</label>
-          <label><input type="checkbox" value="packs" /> Packs</label>
-          <label><input type="checkbox" value="kits" /> Kits</label>
-          <label><input type="checkbox" value="musical instruments" /> Musical Instruments</label>
-          <label><input type="checkbox" value="alchemical supplies" /> Alchemical Supplies</label>
-          <label><input type="checkbox" value="armor" /> Armor</label>
-          <label><input type="checkbox" value="weapons" /> Weapons</label>
-          <label><input type="checkbox" value="ammunition" /> Ammunition</label>
-          <label><input type="checkbox" value="furnishings" /> Furnishings</label>
-        </div>
-      </div>
-
-      <!-- Overall Categories -->
-      <div class="filter-group">
-        <h3>Overall Categories</h3>
-        <button class="btn-select-all" data-group="overall-categories">Select All</button>
-        <button class="btn-select-none" data-group="overall-categories">Select None</button>
-        <div class="filter-checkboxes" id="overall-categories">
-          <label><input type="checkbox" value="nonmagical" /> Nonmagical</label>
-          <label><input type="checkbox" value="consumable" /> Consumable</label>
-          <label><input type="checkbox" value="combat" /> Combat</label>
-          <label><input type="checkbox" value="noncombat" /> Noncombat</label>
-          <label><input type="checkbox" value="summoning" /> Summoning</label>
-          <label><input type="checkbox" value="gamechanging" /> Gamechanging</label>
-        </div>
-      </div>
-
-      <!-- Price Range -->
-      <div class="filter-group">
-        <h3>Price Range</h3>
-        <label for="min-price">Min Price (gp)</label>
-        <input type="number" id="min-price" placeholder="0" />
-        <label for="max-price">Max Price (gp)</label>
-        <input type="number" id="max-price" placeholder="No maximum" />
-      </div>
-
-    </section>
-
-    <!-- Generated Items Output -->
-    <section id="output-section">
-      <h2>Generated Shop</h2>
-
-        <!-- Shop Name -->
-      <section id="shop-name-section">
-        <label for="shop-name">Shop Name</label>
-        <input type="text" id="shop-name" placeholder="Enter shop name..." />
-        <button id="btn-random-name">Get Random Names</button>
-        <div id="random-name-dropdown" class="hidden"></div>
-      </section>
-
-      <div id="markup-controls">
-        <label for="markup-applied">Markup / Markdown %</label>
-        <input type="number" id="markup-applied" value="0" />
-        <button id="btn-apply-markup">Apply</button>
-      </div>
-
-      <!-- Save / Print -->
-      <div id="output-actions">
-        <button id="btn-save-shop">Save Shop</button>
-        <button id="btn-load-shop">Load Shop</button>
-        <button id="btn-print">Print</button>
-      </div>
-
-      <!-- Items Table -->
-       <p id="unsaved-warning" class="hidden" style="color: red;">Unsaved changes — this shop has not been saved.</p>
-      <div id="items-output">
-        <p id="empty-state">No items generated yet. Configure your shop above and click Generate.</p>
-        <table id="items-table" class="hidden">
-          <thead>
-            <tr>
-              <th>Name</th>
-              <th>Rarity</th>
-              <th>Type</th>
-              <th>Qty</th>
-              <th id="price-col-header">Price</th>
-            </tr>
-          </thead>
-          <tbody id="items-tbody">
-          </tbody>
-        </table>
-      </div>
-
-    </section>
+    </main>
 
     <!-- Shop Browser Modal -->
     <div id="shop-browser-modal" class="modal hidden">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h2>Saved Shops</h2>
-                <button id="btn-close-shop-browser">✕</button>
-            </div>
-            <div id="shop-list">
-                <p id="shop-list-empty">No saved shops found.</p>
-            </div>
+      <div class="modal-content">
+        <div class="modal-header">
+          <h2>Saved Shops</h2>
+          <button id="btn-close-shop-browser">✕</button>
         </div>
+        <div id="shop-list">
+          <p id="shop-list-empty">No saved shops found.</p>
+        </div>
+      </div>
     </div>
 
-  </main>
+  </div><!-- /#main-app -->
 
   <script src="js/generator.js"></script>
   <script src="js/nameGenerator.js"></script>
   <script src="js/app.js"></script>
   <script src="js/fileSystem.js"></script>
   <script src="js/print.js"></script>
-  <script type="module" src="js/main.js"></script>
   <script type="module" src="js/main.js"></script>
 
 </body>

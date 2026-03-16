@@ -35,6 +35,7 @@
 - Custom presets and markup presets are loaded from `settings.json` and populated into their respective dropdowns.
 - The items table is hidden and the empty-state message ("No items generated yet...") is shown.
 - The unsaved changes warning is hidden.
+- The app shell consists of a persistent top navigation bar and two views: the generator view (default) and the results view. Only one view is visible at a time.
 
 ---
 
@@ -134,6 +135,7 @@
   7. Sorts results by rarity order (mundane → legendary), then by type alphabetically, then by name alphabetically.
   8. Renders the results in the output table.
   9. Sets the unsaved changes warning to **visible**.
+  10. Navigates to the results view.
 
 ---
 
@@ -203,6 +205,7 @@
 - Closing the modal (✕ button or clicking outside the dialog) dismisses it without loading anything.
 - When a shop is loaded, both `markup-percent` and `markup-applied` are restored to the saved markup value.
 - The unsaved changes warning is hidden after a shop is loaded.
+- The Shop Browser can be opened from both the generator view and the results view.
 
 ---
 
@@ -217,7 +220,7 @@
 
 ---
 
-15. Authentication & Cloud Storage
+## 15. Authentication & Cloud Storage
 
 - The app requires a Google account to use. A login screen is shown on first load.
 - Clicking Sign in with Google opens a Google OAuth popup. On success, the login screen is hidden and the app is shown.
@@ -226,3 +229,12 @@
 - Data is accessible from any browser and any device after signing in.
 - The app is hosted on GitHub Pages and requires no local server or installation.
 - On sign-in, the user's email is checked against the allowedUsers Firestore collection. If no matching document exists, the user is signed out and an error message is displayed on the login screen. Access is denied without exposing app content.
+
+---
+
+## 16. Navigation & Views
+
+- The top bar is always visible and contains the app title, nav links, and user controls.
+- Clicking a nav link navigates to that tool's generator view.
+- Clicking ← New Shop from the results view resets all generator fields to defaults and returns to the generator view.
+- Loading a saved shop navigates to the results view.
