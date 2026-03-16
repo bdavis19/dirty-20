@@ -2,11 +2,21 @@
 
 All notable changes to this project will be documented in this file.
 
+## [2.1.0] - 2026-03-15
+
+### Added
+
+- Access control via Firestore `allowedUsers` collection. Only users whose email
+  exists as a document ID in that collection can sign in.
+- Unauthorized users are signed out automatically and shown an error message on
+  the login screen.
+
 ## [2.0.3] - 2025-03-15
 
 Adds robots file to discourage search engines
 
 ### Added
+
 - robots.txt
 - meta data to index.html
 
@@ -15,6 +25,7 @@ Adds robots file to discourage search engines
 Add sign out and user display.
 
 ### Added
+
 - Sign out button visible after authentication.
 - Signed-in user's email displayed in the user bar.
 
