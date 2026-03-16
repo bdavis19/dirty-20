@@ -306,6 +306,13 @@ body.theme-deadwell section h3 {
   font-size: 1.25rem;
 }
 
+body.theme-deadwell .modal-header h2 {
+  font-family: var(--font-heading);
+  color: var(--color-accent);
+  letter-spacing: 0.08em;
+  font-size: 1.75rem;
+}
+
 /* ============================================================
    GLOBAL: Apply heading font variable across all themes
    ============================================================ */

@@ -30,6 +30,10 @@ All notable changes to this project will be documented in this file.
   special characters fall back to EB Garamond.
 - Deadwell heading sizes increased (h2: 1.75rem, h3: 1.25rem,
   app title: 1.4rem) for better readability.
+- Deadwell theme now applies heading font and sizing to the
+  Saved Shops modal header.
+- Shop browser ✕ button now correctly closes the modal (event
+  listener was missing from initFileSystem).
 
 ## [3.0.0] - 2026-03-16
 

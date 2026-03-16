@@ -96,6 +96,10 @@ function initFileSystem() {
   document.getElementById('btn-load-shop-generator').addEventListener('click', () => {
     openShopBrowser();
   });
+
+  document.getElementById('btn-close-shop-browser').addEventListener('click', () => {
+    document.getElementById('shop-browser-modal').classList.add('hidden');
+  });
 }
 
 async function openShopBrowser() {
