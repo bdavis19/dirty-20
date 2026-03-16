@@ -20,13 +20,24 @@ document.getElementById('btn-signout').addEventListener('click', () => {
   signOut(auth);
 });
 
-onAuthStateChanged(auth, (user) => {
+onAuthStateChanged(auth, async (user) => {
   if (user) {
+    // Check allowlist
+    const allowRef = doc(db, 'allowedUsers', user.email);
+    const allowSnap = await getDoc(allowRef);
+
+    if (!allowSnap.exists()) {
+      await signOut(auth);
+      document.getElementById('access-denied-msg').classList.remove('hidden');
+      return;
+    }
+
+    document.getElementById('access-denied-msg').classList.add('hidden');
     window.currentUser = user;
     document.getElementById('login-screen').classList.add('hidden');
     document.getElementById('main-app').classList.remove('hidden');
     setTimeout(() => {
-    window.dispatchEvent(new CustomEvent('userSignedIn'));
+      window.dispatchEvent(new CustomEvent('userSignedIn'));
     }, 500);
     document.getElementById('user-email').textContent = user.email;
   } else {
