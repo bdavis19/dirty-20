@@ -22,6 +22,15 @@ All notable changes to this project will be documented in this file.
 - `js/app.js` — `initTheme()` called at start of `initApp()`.
 - `css/style.css` — `#theme-controls` top bar styles added.
 
+### Fixed
+
+- Deadwell theme font (`sketsa_ramadhanregular`) now loads correctly
+  via quoted base64 data URI.
+- Font restricted to letters only via `unicode-range`; numbers and
+  special characters fall back to EB Garamond.
+- Deadwell heading sizes increased (h2: 1.75rem, h3: 1.25rem,
+  app title: 1.4rem) for better readability.
+
 ## [3.0.0] - 2026-03-16
 
 ### Changed
