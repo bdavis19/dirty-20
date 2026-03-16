@@ -326,12 +326,13 @@ function renderItems(items) {
 }
 
 document.getElementById('btn-generate').addEventListener('click', () => {
+  document.getElementById('shop-name').value = '';          // ← new line
   document.getElementById('markup-applied').value = document.getElementById('markup-percent').value || 0;
   const shopData = buildShopData();
   const items = generateShop(allItems, shopData.settings);
   renderItems(items);
   setUnsavedChanges(true);
-  showView('results');  // ← new line
+  showView('results');
 });
 
 // app.js — Random name generator UI
