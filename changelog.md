@@ -11,7 +11,10 @@ All notable changes to this project will be documented in this file.
 - "← New Shop" button on the results view resets all generator fields and returns to the generator view.
 - Loading a saved shop via the Shop Browser also navigates to the results view.
 - Load Shop button on the generator view, so saved shops can be opened without generating first.
+
+### Fixed
 - Generating a new shop no longer carries over the name from a previously loaded shop.
+- Opening a saved shop from the Shop Browser now correctly navigates to the results view and displays the item table.
 
 ### Changed
 

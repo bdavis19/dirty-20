@@ -290,6 +290,10 @@ function applyLoadedShop(data) {
     table.classList.add('hidden');
     empty.classList.remove('hidden');
   }
+
+  updatePriceHeader();
+  setUnsavedChanges(false);
+  showView('results');   // ← navigates to results view after restoring
 }
 
 // app.js — Generate button
