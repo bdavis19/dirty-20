@@ -39,7 +39,26 @@ const BUILT_IN_PRESETS = {
   }
 };
 
-// app.js — applyPreset()
+function showView(viewId) {
+  document.querySelectorAll('.view').forEach(v => v.classList.add('hidden'));
+  const target = document.getElementById('view-' + viewId);
+  if (target) { target.classList.remove('hidden'); window.scrollTo(0, 0); }
+}
+
+function resetGeneratorForm() {
+  ['qty-mundane','qty-common','qty-uncommon','qty-rare','qty-very-rare','qty-legendary']
+    .forEach(id => { document.getElementById(id).value = ''; });
+  document.getElementById('include-potions').checked = false;
+  document.getElementById('markup-percent').value = 0;
+  document.getElementById('builtin-preset-select').value = '';
+  document.getElementById('custom-preset-select').value = '';
+  document.getElementById('markup-preset-select').value = '';
+  ['magic-types','mundane-categories','overall-categories'].forEach(group => {
+    document.querySelectorAll(`#${group} input[type="checkbox"]`).forEach(cb => cb.checked = true);
+  });
+  document.getElementById('min-price').value = '';
+  document.getElementById('max-price').value = '';
+}
 
 function applyPreset(presetName) {
   const preset = BUILT_IN_PRESETS[presetName];
@@ -153,6 +172,11 @@ function initApp() {
 
   document.getElementById('btn-apply-markup').addEventListener('click', () => {
     applyMarkupToRenderedItems();
+  });
+
+  document.getElementById('btn-new-shop').addEventListener('click', () => {
+    resetGeneratorForm();
+    showView('generator');
   });
 }
 
@@ -307,6 +331,7 @@ document.getElementById('btn-generate').addEventListener('click', () => {
   const items = generateShop(allItems, shopData.settings);
   renderItems(items);
   setUnsavedChanges(true);
+  showView('results');  // ← new line
 });
 
 // app.js — Random name generator UI

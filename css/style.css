@@ -23,31 +23,109 @@ body {
   font-family: var(--font);
   font-size: 16px;
   line-height: 1.5;
+  padding: 0;
+}
+
+/* === App Shell === */
+#main-app {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* === Top Bar === */
+#top-bar {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  padding: 0 2rem;
+  height: 52px;
+  background-color: var(--color-surface);
+  border-bottom: 2px solid var(--color-accent);
+  position: sticky;
+  top: 0;
+  z-index: 50;
+}
+
+#app-title {
+  font-size: 1.1rem;
+  font-weight: bold;
+  color: var(--color-accent);
+  letter-spacing: 0.05em;
+  white-space: nowrap;
+}
+
+/* === Main Nav === */
+#main-nav {
+  display: flex;
+  align-items: stretch;
+  gap: 0;
+  flex: 1;
+  height: 100%;
+}
+
+.nav-link {
+  background: none;
+  border: none;
+  border-bottom: 3px solid transparent;
+  border-radius: 0;
+  color: var(--color-text-muted);
+  font-size: 0.9rem;
+  padding: 0 1rem;
+  cursor: pointer;
+  height: 100%;
+  transition: color 0.15s, border-color 0.15s;
+}
+
+.nav-link:hover {
+  color: var(--color-text);
+  background: none;
+  opacity: 1;
+}
+
+.nav-link.active {
+  color: var(--color-accent);
+  border-bottom-color: var(--color-accent);
+}
+
+/* === User Bar (in top bar) === */
+#user-bar {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-left: auto;
+  white-space: nowrap;
+}
+
+#user-email {
+  font-size: 0.8rem;
+  color: var(--color-text-muted);
+}
+
+#user-bar button {
+  font-size: 0.8rem;
+  padding: 0.3rem 0.75rem;
+}
+
+/* === Views === */
+.view {
+  flex: 1;
   padding: 2rem;
 }
 
-/* === Header === */
-header {
-  margin-bottom: 2rem;
-  border-bottom: 2px solid var(--color-accent);
-  padding-bottom: 1rem;
+.view.hidden {
+  display: none !important;
 }
 
-header h1 {
-  font-size: 2rem;
-  color: var(--color-accent);
-  letter-spacing: 0.05em;
-}
-
-/* === Sections === */
-main {
+.view-content {
+  max-width: 960px;
+  margin: 0 auto;
   display: flex;
   flex-direction: column;
   gap: 2rem;
-  max-width: 960px;
-  margin: 0 auto;
 }
 
+/* === Sections === */
 section {
   background-color: var(--color-surface);
   border: 1px solid var(--color-border);
@@ -153,6 +231,7 @@ button.secondary {
   margin-bottom: 0.5rem;
   background-color: var(--color-surface-2);
   border: 1px solid var(--color-border);
+  color: var(--color-text);
 }
 
 .filter-checkboxes {
@@ -183,8 +262,35 @@ button.secondary {
   color: var(--color-text-muted);
 }
 
-#markup-percent {
+#markup-percent,
+#markup-applied {
   width: 80px;
+}
+
+/* === Results Header === */
+#results-header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 0.5rem;
+}
+
+#results-header h2 {
+  margin-bottom: 0;
+}
+
+#btn-new-shop {
+  font-size: 0.85rem;
+  padding: 0.3rem 0.75rem;
+  background-color: var(--color-surface-2);
+  border: 1px solid var(--color-border);
+  color: var(--color-text-muted);
+}
+
+#btn-new-shop:hover {
+  color: var(--color-text);
+  border-color: var(--color-text-muted);
+  opacity: 1;
 }
 
 /* === Output Actions === */
@@ -226,6 +332,22 @@ button.secondary {
 /* === Utility === */
 .hidden {
   display: none !important;
+}
+
+/* === Login Screen === */
+#login-screen {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  gap: 1rem;
+  text-align: center;
+}
+
+#login-screen h2 {
+  font-size: 2rem;
+  color: var(--color-accent);
 }
 
 /* === Shop Browser Modal === */
@@ -305,6 +427,7 @@ button.secondary {
   color: var(--color-text);
 }
 
+/* === Name Dropdown === */
 .name-option {
   padding: 0.4rem 0.75rem;
 }
@@ -319,4 +442,46 @@ button.secondary {
 
 .name-option:hover {
   background-color: var(--color-surface-2);
+}
+
+/* === Shop Name Section === */
+#shop-name-section {
+  background: none;
+  border: none;
+  padding: 0;
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  position: relative;
+}
+
+#shop-name-section label {
+  font-size: 0.9rem;
+  color: var(--color-text-muted);
+}
+
+#shop-name {
+  width: auto;
+  flex: 1;
+  min-width: 180px;
+}
+
+#random-name-dropdown {
+  position: absolute;
+  top: calc(100% + 4px);
+  left: 0;
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  z-index: 10;
+  min-width: 240px;
+  max-height: 240px;
+  overflow-y: auto;
+}
+
+#generator-actions {
+  display: flex;
+  gap: 0.75rem;
 }

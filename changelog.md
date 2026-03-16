@@ -2,6 +2,21 @@
 
 All notable changes to this project will be documented in this file.
 
+## [Unreleased] - 2026-03-15
+
+### Added
+
+- Top navigation bar replacing the old page header, containing the app title, tool nav links, and user bar.
+- Page-switching framework: Generate now navigates to a dedicated results view instead of appending to the bottom of the same page.
+- "← New Shop" button on the results view resets all generator fields and returns to the generator view.
+- Loading a saved shop via the Shop Browser also navigates to the results view.
+- Load Shop button on the generator view, so saved shops can be opened without generating first.
+
+### Changed
+
+- App title changed from "Magic Item Shop Generator" to "Dirty 20" in the UI and page title.
+- Generator and results are now separate views; the page no longer scrolls through both at once.
+
 ## [2.1.0] - 2026-03-15
 
 ### Added

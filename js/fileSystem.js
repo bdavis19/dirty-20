@@ -92,6 +92,10 @@ function initFileSystem() {
       document.getElementById('shop-browser-modal').classList.add('hidden');
     }
   });
+
+  document.getElementById('btn-load-shop-generator').addEventListener('click', () => {
+    openShopBrowser();
+  });
 }
 
 async function openShopBrowser() {
