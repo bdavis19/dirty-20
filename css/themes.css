@@ -1,0 +1,289 @@
+/* === themes.css === */
+/* Each theme overrides the CSS custom properties defined in style.css.
+   Light themes also override specific component styles that assume a dark background. */
+
+/* === Google Fonts === */
+@import url('https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,600;1,400&family=Cinzel:wght@400;600;700&family=Uncial+Antiqua&family=Almendra:ital,wght@0,400;0,700;1,400&display=swap');
+
+/* ============================================================
+   THEME: Generic D&D (default light — parchment / ink)
+   ============================================================ */
+body.theme-generic {
+  --color-bg:           #f5f0e8;
+  --color-surface:      #ede6d6;
+  --color-surface-2:    #e0d8c4;
+  --color-accent:       #7a3b1e;
+  --color-text:         #1c1008;
+  --color-text-muted:   #6b5a42;
+  --color-border:       #c4b49a;
+  --font-heading:       'EB Garamond', Georgia, serif;
+  --font-body:          'EB Garamond', Georgia, serif;
+}
+
+body.theme-generic,
+body.theme-generic input[type="text"],
+body.theme-generic input[type="number"],
+body.theme-generic select,
+body.theme-generic .modal-content {
+  color: var(--color-text);
+}
+
+body.theme-generic button {
+  background-color: var(--color-accent);
+  color: #f5f0e8;
+}
+
+body.theme-generic button.secondary,
+body.theme-generic #btn-new-shop,
+body.theme-generic .filter-group .btn-select-all,
+body.theme-generic .filter-group .btn-select-none,
+body.theme-generic .shop-row button:not(:first-of-type) {
+  background-color: var(--color-surface-2);
+  border: 1px solid var(--color-border);
+  color: var(--color-text);
+}
+
+body.theme-generic #top-bar {
+  background-color: var(--color-surface);
+  border-bottom: 2px solid var(--color-accent);
+}
+
+body.theme-generic .nav-link {
+  color: var(--color-text-muted);
+}
+
+body.theme-generic .nav-link.active {
+  color: var(--color-accent);
+  border-bottom-color: var(--color-accent);
+}
+
+body.theme-generic #items-table tr:hover td {
+  background-color: var(--color-surface-2);
+}
+
+body.theme-generic h2 {
+  font-family: var(--font-heading);
+}
+
+/* ============================================================
+   THEME: Ravenloft (dark gothic — current default, refined)
+   ============================================================ */
+body.theme-ravenloft {
+  --color-bg:           #0d0d0d;
+  --color-surface:      #1a1514;
+  --color-surface-2:    #231e1e;
+  --color-accent:       #c41e1e;
+  --color-text:         #d4c5a9;
+  --color-text-muted:   #7a6e5f;
+  --color-border:       #3a2e2e;
+  --font-heading:       'Cinzel', Georgia, serif;
+  --font-body:          'EB Garamond', Georgia, serif;
+}
+
+body.theme-ravenloft h2,
+body.theme-ravenloft h3,
+body.theme-ravenloft #app-title {
+  font-family: var(--font-heading);
+}
+
+/* ============================================================
+   THEME: Forgotten Realms (dark — royal blue + gold)
+   ============================================================ */
+body.theme-forgotten-realms {
+  --color-bg:           #0a0e1a;
+  --color-surface:      #111828;
+  --color-surface-2:    #1a2438;
+  --color-accent:       #c8a94a;
+  --color-text:         #ddd5bb;
+  --color-text-muted:   #7a8aaa;
+  --color-border:       #1e3060;
+  --font-heading:       'Cinzel', Georgia, serif;
+  --font-body:          'EB Garamond', Georgia, serif;
+}
+
+body.theme-forgotten-realms #top-bar {
+  background-color: #0d1630;
+  border-bottom: 2px solid #1e3060;
+  box-shadow: 0 2px 12px rgba(30, 48, 96, 0.6);
+}
+
+body.theme-forgotten-realms .nav-link.active {
+  color: var(--color-accent);
+  border-bottom-color: var(--color-accent);
+}
+
+body.theme-forgotten-realms section {
+  border-color: #1e3060;
+}
+
+body.theme-forgotten-realms section h2 {
+  font-family: var(--font-heading);
+  color: var(--color-accent);
+  letter-spacing: 0.06em;
+}
+
+body.theme-forgotten-realms button {
+  background-color: #1e3060;
+  border: 1px solid var(--color-accent);
+  color: var(--color-accent);
+}
+
+body.theme-forgotten-realms button:hover {
+  background-color: var(--color-accent);
+  color: #0a0e1a;
+  opacity: 1;
+}
+
+body.theme-forgotten-realms #items-table th {
+  color: var(--color-accent);
+  border-bottom-color: #1e3060;
+}
+
+/* ============================================================
+   THEME: Greyhawk (light — aged parchment / sepia / old map)
+   ============================================================ */
+body.theme-greyhawk {
+  --color-bg:           #f2e8d0;
+  --color-surface:      #e8dab8;
+  --color-surface-2:    #ddd0a4;
+  --color-accent:       #5c3d11;
+  --color-text:         #2a1a08;
+  --color-text-muted:   #7a5c30;
+  --color-border:       #b8a070;
+  --font-heading:       'Almendra', Georgia, serif;
+  --font-body:          'Almendra', Georgia, serif;
+}
+
+body.theme-greyhawk,
+body.theme-greyhawk input[type="text"],
+body.theme-greyhawk input[type="number"],
+body.theme-greyhawk select,
+body.theme-greyhawk .modal-content {
+  color: var(--color-text);
+}
+
+body.theme-greyhawk button {
+  background-color: var(--color-accent);
+  color: #f2e8d0;
+}
+
+body.theme-greyhawk button.secondary,
+body.theme-greyhawk #btn-new-shop,
+body.theme-greyhawk .filter-group .btn-select-all,
+body.theme-greyhawk .filter-group .btn-select-none,
+body.theme-greyhawk .shop-row button:not(:first-of-type) {
+  background-color: var(--color-surface-2);
+  border: 1px solid var(--color-border);
+  color: var(--color-text);
+}
+
+body.theme-greyhawk #top-bar {
+  background-color: var(--color-surface);
+  border-bottom: 2px solid var(--color-accent);
+}
+
+body.theme-greyhawk .nav-link {
+  color: var(--color-text-muted);
+}
+
+body.theme-greyhawk .nav-link.active {
+  color: var(--color-accent);
+  border-bottom-color: var(--color-accent);
+}
+
+body.theme-greyhawk section h2 {
+  font-family: var(--font-heading);
+  font-style: italic;
+}
+
+body.theme-greyhawk #items-table tr:hover td {
+  background-color: var(--color-surface-2);
+}
+
+body.theme-greyhawk #items-table th {
+  color: var(--color-text-muted);
+  border-bottom-color: var(--color-border);
+}
+
+/* Parchment texture feel via subtle gradient */
+body.theme-greyhawk {
+  background-image: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 28px,
+    rgba(90, 60, 10, 0.04) 28px,
+    rgba(90, 60, 10, 0.04) 29px
+  );
+}
+
+/* ============================================================
+   THEME: Deadwell (dark — Egyptian gothic, lapis + sand gold)
+   ============================================================ */
+body.theme-deadwell {
+  --color-bg:           #0c0a08;
+  --color-surface:      #16120e;
+  --color-surface-2:    #201a12;
+  --color-accent:       #c9a84c;
+  --color-text:         #e8d9b0;
+  --color-text-muted:   #8a7a58;
+  --color-border:       #2e2518;
+  --font-heading:       'sketsa_ramadhanregular', 'Uncial Antiqua', Georgia, serif;
+  --font-body:          'EB Garamond', Georgia, serif;
+}
+
+body.theme-deadwell #top-bar {
+  background-color: var(--color-surface);
+  border-bottom: 2px solid var(--color-accent);
+  box-shadow: 0 2px 16px rgba(201, 168, 76, 0.15);
+}
+
+body.theme-deadwell .nav-link.active {
+  color: var(--color-accent);
+  border-bottom-color: var(--color-accent);
+}
+
+body.theme-deadwell section h2 {
+  font-family: var(--font-heading);
+  color: var(--color-accent);
+  letter-spacing: 0.08em;
+}
+
+body.theme-deadwell #app-title {
+  font-family: var(--font-heading);
+  color: var(--color-accent);
+  letter-spacing: 0.1em;
+}
+
+body.theme-deadwell button {
+  background-color: var(--color-surface-2);
+  border: 1px solid var(--color-accent);
+  color: var(--color-accent);
+}
+
+body.theme-deadwell button:hover {
+  background-color: var(--color-accent);
+  color: #0c0a08;
+  opacity: 1;
+}
+
+body.theme-deadwell #items-table th {
+  color: var(--color-accent);
+  border-bottom-color: var(--color-border);
+  letter-spacing: 0.05em;
+}
+
+body.theme-deadwell section {
+  border-color: #2e2518;
+  box-shadow: inset 0 0 40px rgba(201, 168, 76, 0.03);
+}
+
+/* ============================================================
+   GLOBAL: Apply heading font variable across all themes
+   ============================================================ */
+h1, h2, h3, #app-title {
+  font-family: var(--font-heading, var(--font));
+}
+
+body {
+  font-family: var(--font-body, var(--font));
+}

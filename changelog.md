@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## [Unreleased] - 2026-03-16
+
+### Added
+- `css/themes.css` — 5 setting-specific visual themes (Generic D&D,
+  Ravenloft, Forgotten Realms, Greyhawk, Deadwell), each overriding
+  CSS custom properties and Google Fonts via body class.
+
 ## [3.0.0] - 2026-03-16
 
 ### Changed
