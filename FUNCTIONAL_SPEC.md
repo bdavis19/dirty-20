@@ -225,3 +225,4 @@
 - Users can only access their own shops and settings — no cross-user data access is possible.
 - Data is accessible from any browser and any device after signing in.
 - The app is hosted on GitHub Pages and requires no local server or installation.
+- On sign-in, the user's email is checked against the allowedUsers Firestore collection. If no matching document exists, the user is signed out and an error message is displayed on the login screen. Access is denied without exposing app content.
