@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file.
 
+## [2.0.3] - 2025-03-15
+
+Adds robots file to discourage search engines
+
+### Added
+- robots.txt
+- meta data to index.html
+
 ## [2.0.2] - 2026-03-15
 
 Add sign out and user display.
