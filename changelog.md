@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file.
 
+## [2.0.2] - 2026-03-15
+
+Add sign out and user display.
+
+### Added
+- Sign out button visible after authentication.
+- Signed-in user's email displayed in the user bar.
+
 ## [2.0.1] - 2026-03-15
 
 Bug fixes for Firebase migration.

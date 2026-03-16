@@ -1,5 +1,5 @@
 import { auth, provider, db } from './firebase.js';
-import { signInWithPopup, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/12.10.0/firebase-auth.js";
+import { signInWithPopup, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/12.10.0/firebase-auth.js";
 import { doc, getDoc, setDoc, collection, getDocs, deleteDoc } from "https://www.gstatic.com/firebasejs/12.10.0/firebase-firestore.js";
 
 // Expose to non-module scripts
@@ -16,6 +16,10 @@ document.getElementById('btn-google-signin').addEventListener('click', () => {
   signInWithPopup(auth, provider);
 });
 
+document.getElementById('btn-signout').addEventListener('click', () => {
+  signOut(auth);
+});
+
 onAuthStateChanged(auth, (user) => {
   if (user) {
     window.currentUser = user;
@@ -24,6 +28,7 @@ onAuthStateChanged(auth, (user) => {
     setTimeout(() => {
     window.dispatchEvent(new CustomEvent('userSignedIn'));
     }, 500);
+    document.getElementById('user-email').textContent = user.email;
   } else {
     window.currentUser = null;
     document.getElementById('login-screen').classList.remove('hidden');
