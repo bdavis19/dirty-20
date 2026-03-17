@@ -396,35 +396,38 @@ function _toggleSpeciesPanel() {
     return;
   }
 
+  const section = document.getElementById('merchant-section');
+  const saved = section._speciesPanel || {};
+
   panel = document.createElement('div');
   panel.id = 'merchant-species-panel';
   panel.className = 'merchant-species-panel';
 
   panel.innerHTML = `
     <div class="species-panel-branch">
-      <label><input type="checkbox" id="sp-check-species" checked /> Species</label>
+      <label><input type="checkbox" id="sp-check-species" /> Species</label>
       <label><input type="checkbox" id="sp-check-creature" /> Creature Type</label>
     </div>
     <div id="sp-species-options" class="species-panel-options">
-      <label><input type="checkbox" class="sp-species-type" value="human" checked /> Human</label>
-      <label><input type="checkbox" class="sp-species-type" value="elf" checked /> Elf</label>
-      <label><input type="checkbox" class="sp-species-type" value="dwarf" checked /> Dwarf</label>
-      <label><input type="checkbox" class="sp-species-type" value="gnome" checked /> Gnome</label>
-      <label><input type="checkbox" class="sp-species-type" value="halfling" checked /> Halfling</label>
-      <label><input type="checkbox" class="sp-species-type" value="tiefling" checked /> Tiefling</label>
-      <label><input type="checkbox" class="sp-species-type" value="dragonborn" checked /> Dragonborn</label>
+      <label><input type="checkbox" class="sp-species-type" value="human" /> Human</label>
+      <label><input type="checkbox" class="sp-species-type" value="elf" /> Elf</label>
+      <label><input type="checkbox" class="sp-species-type" value="dwarf" /> Dwarf</label>
+      <label><input type="checkbox" class="sp-species-type" value="gnome" /> Gnome</label>
+      <label><input type="checkbox" class="sp-species-type" value="halfling" /> Halfling</label>
+      <label><input type="checkbox" class="sp-species-type" value="tiefling" /> Tiefling</label>
+      <label><input type="checkbox" class="sp-species-type" value="dragonborn" /> Dragonborn</label>
     </div>
-    <div id="sp-creature-options" class="species-panel-options" style="display:none">
-      <label><input type="checkbox" class="sp-creature-type" value="humanoid" checked /> Humanoid</label>
-      <label><input type="checkbox" class="sp-creature-type" value="giant" checked /> Giant</label>
-      <label><input type="checkbox" class="sp-creature-type" value="dragon" checked /> Dragon</label>
-      <label><input type="checkbox" class="sp-creature-type" value="monstrosity" checked /> Monstrosity</label>
-      <label><input type="checkbox" class="sp-creature-type" value="celestial" checked /> Celestial</label>
-      <label><input type="checkbox" class="sp-creature-type" value="construct" checked /> Construct</label>
-      <label><input type="checkbox" class="sp-creature-type" value="elemental" checked /> Elemental</label>
-      <label><input type="checkbox" class="sp-creature-type" value="fey" checked /> Fey</label>
-      <label><input type="checkbox" class="sp-creature-type" value="fiend" checked /> Fiend</label>
-      <label><input type="checkbox" class="sp-creature-type" value="undead" checked /> Undead</label>
+    <div id="sp-creature-options" class="species-panel-options">
+      <label><input type="checkbox" class="sp-creature-type" value="humanoid" /> Humanoid</label>
+      <label><input type="checkbox" class="sp-creature-type" value="giant" /> Giant</label>
+      <label><input type="checkbox" class="sp-creature-type" value="dragon" /> Dragon</label>
+      <label><input type="checkbox" class="sp-creature-type" value="monstrosity" /> Monstrosity</label>
+      <label><input type="checkbox" class="sp-creature-type" value="celestial" /> Celestial</label>
+      <label><input type="checkbox" class="sp-creature-type" value="construct" /> Construct</label>
+      <label><input type="checkbox" class="sp-creature-type" value="elemental" /> Elemental</label>
+      <label><input type="checkbox" class="sp-creature-type" value="fey" /> Fey</label>
+      <label><input type="checkbox" class="sp-creature-type" value="fiend" /> Fiend</label>
+      <label><input type="checkbox" class="sp-creature-type" value="undead" /> Undead</label>
     </div>
     <button id="sp-roll-btn">Roll</button>
   `;
@@ -437,17 +440,48 @@ function _toggleSpeciesPanel() {
   const creatureOpts  = panel.querySelector('#sp-creature-options');
   const rollBtn       = panel.querySelector('#sp-roll-btn');
 
+  // Restore saved state, defaulting to all-species-checked on first open
+  const defaultSpeciesTypes  = ['human','elf','dwarf','gnome','halfling','tiefling','dragonborn'];
+  const defaultCreatureTypes = ['humanoid','giant','dragon','monstrosity','celestial','construct','elemental','fey','fiend','undead'];
+
+  checkSpecies.checked  = saved.wantSpecies  ?? true;
+  checkCreature.checked = saved.wantCreature ?? false;
+
+  panel.querySelectorAll('.sp-species-type').forEach(cb => {
+    cb.checked = saved.speciesTypes
+      ? saved.speciesTypes.includes(cb.value)
+      : defaultSpeciesTypes.includes(cb.value);
+  });
+  panel.querySelectorAll('.sp-creature-type').forEach(cb => {
+    cb.checked = saved.creatureTypes
+      ? saved.creatureTypes.includes(cb.value)
+      : defaultCreatureTypes.includes(cb.value);
+  });
+
+  function saveState() {
+    section._speciesPanel = {
+      wantSpecies:  checkSpecies.checked,
+      wantCreature: checkCreature.checked,
+      speciesTypes:  [...panel.querySelectorAll('.sp-species-type:checked')].map(el => el.value),
+      creatureTypes: [...panel.querySelectorAll('.sp-creature-type:checked')].map(el => el.value),
+    };
+  }
+
   function updatePanelVisibility() {
     speciesOpts.style.display  = checkSpecies.checked  ? '' : 'none';
     creatureOpts.style.display = checkCreature.checked ? '' : 'none';
     rollBtn.disabled = !checkSpecies.checked && !checkCreature.checked;
+    saveState();
   }
 
-  checkSpecies.addEventListener('change',  updatePanelVisibility);
-  checkCreature.addEventListener('change', updatePanelVisibility);
+  panel.addEventListener('change', () => {
+    updatePanelVisibility();
+  });
+
+  // Apply initial visibility
+  updatePanelVisibility();
 
   rollBtn.addEventListener('click', () => {
-    const section = document.getElementById('merchant-section');
     const md = section._merchantData || {};
 
     const wantSpecies  = checkSpecies.checked;
@@ -478,7 +512,7 @@ function _toggleSpeciesPanel() {
 
     document.getElementById('merchant-species').value = newSpecies;
     section._merchantData = { ...md, species: newSpecies, speciesType: newSpeciesType };
-    panel.remove();
+    // Panel stays open — user can keep rolling
   });
 }
 

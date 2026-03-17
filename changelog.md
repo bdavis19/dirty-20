@@ -5,6 +5,7 @@ All notable changes to this project will be documented in this file.
 ## [Unreleased]
 
 ### Added
+
 - `js/merchant.js`: merchant NPC generation logic (Phase M1) — species/creature
   rolls with full sub-tables, background, personality, bias, quirk, and name
   resolution; `generateMerchant()` orchestrator returns a complete merchant object.
@@ -30,7 +31,12 @@ All notable changes to this project will be documented in this file.
   species/creature reroll panel.
 
 ### Fixed
+
 - `js/merchantData.js` and `js/merchant.js` not loaded — added script tags to `index.html`.
+- Species/creature reroll panel now remembers branch and per-type
+  checkbox selections between opens.
+- Clicking Roll no longer closes the species/creature reroll panel;
+  selections persist and the button can be clicked repeatedly.
 
 ## [3.2.0] - 2026-03-16
 
@@ -41,6 +47,7 @@ All notable changes to this project will be documented in this file.
 - Editing any qty field triggers the unsaved changes warning.
 
 ### Fixed
+
 - Loaded shops now render qty as an editable input (was still rendering as plain text).
 - Blur-to-zero and keydown filtering now apply correctly to loaded shops.
 
