@@ -12,6 +12,9 @@ All notable changes to this project will be documented in this file.
   personalities, biases, species, and creature types; placeholder banks for
   names, appearances, and quirks (to be populated in phases M5/M6).
 
+### Fixed
+- `js/merchantData.js` and `js/merchant.js` not loaded — added script tags to `index.html`.
+
 ## [3.2.0] - 2026-03-16
 
 ### Added
