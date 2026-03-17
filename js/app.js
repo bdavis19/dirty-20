@@ -291,6 +291,11 @@ function applyLoadedShop(data) {
     empty.classList.add('hidden');
     tbody.querySelectorAll('.qty-edit').forEach(input => {
       input.addEventListener('change', () => setUnsavedChanges(true));
+      input.addEventListener('blur', () => { if (input.value === '') input.value = 0; });
+      input.addEventListener('keydown', (e) => {
+        const allowed = ['Backspace','Delete','Tab','ArrowLeft','ArrowRight','ArrowUp','ArrowDown'];
+        if (!allowed.includes(e.key) && !/^\d$/.test(e.key)) e.preventDefault();
+      });
     });
   } else {
     table.classList.add('hidden');
@@ -336,6 +341,13 @@ function renderItems(items) {
 
   tbody.querySelectorAll('.qty-edit').forEach(input => {
     input.addEventListener('change', () => setUnsavedChanges(true));
+    input.addEventListener('blur', () => {
+      if (input.value === '') input.value = 0;
+    });
+    input.addEventListener('keydown', (e) => {
+      const allowed = ['Backspace','Delete','Tab','ArrowLeft','ArrowRight','ArrowUp','ArrowDown'];
+      if (!allowed.includes(e.key) && !/^\d$/.test(e.key)) e.preventDefault();
+    });
   });
 }
 

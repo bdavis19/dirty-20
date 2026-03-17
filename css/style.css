@@ -325,8 +325,8 @@ button.secondary {
 }
 
 /* === Qty Edit Input (inline in table) === */
-.qty-edit {
-  width: 56px;
+#items-table .qty-edit {
+  width: 40px;
   padding: 0.2rem 0.4rem;
   font-size: 0.9rem;
   text-align: center;
