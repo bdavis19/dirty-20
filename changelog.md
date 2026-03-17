@@ -2,6 +2,43 @@
 
 All notable changes to this project will be documented in this file.
 
+## [Unreleased] - 2026-03-16
+
+### Added
+
+- 5 setting-specific visual themes selectable from the top bar:
+  Generic D&D (default, light parchment), Ravenloft (dark gothic),
+  Forgotten Realms (dark navy/gold), Greyhawk (light sepia),
+  Deadwell (dark Egyptian gold).
+- Theme preference persists per user in Firestore settings.
+- `css/themes.css` — theme definitions as body classes overriding
+  CSS custom properties and fonts.
+- `js/themes.js` — theme switching, Firestore load/save, dropdown
+  initialization.
+- 13 D&D class themes: Artificer, Barbarian, Bard, Cleric, Druid, Fighter, Monk, Paladin, Ranger, Rogue, Sorcerer, Warlock, Wizard.
+- New Google Fonts import for class theme fonts.
+- Theme dropdown now uses optgroups (Worlds / Classes).
+
+### Changed
+
+- `index.html` — theme dropdown added to top bar.
+- `js/app.js` — `initTheme()` called at start of `initApp()`.
+- `css/style.css` — `#theme-controls` top bar styles added.
+
+### Fixed
+
+- Deadwell theme font (`sketsa_ramadhanregular`) now loads correctly
+  via quoted base64 data URI.
+- Font restricted to letters only via `unicode-range`; numbers and
+  special characters fall back to EB Garamond.
+- Deadwell heading sizes increased (h2: 1.75rem, h3: 1.25rem,
+  app title: 1.4rem) for better readability.
+- Deadwell theme now applies heading font and sizing to the
+  Saved Shops modal header.
+- Shop browser ✕ button now correctly closes the modal (event
+  listener was missing from initFileSystem).
+- Nav-link appearance broken across multiple themes (Barbarian, Cleric, Fighter, Generic, Greyhawk, Ravenloft) due to theme button rules overriding `.nav-link` styles. Scoped nav-link rules to `#main-nav .nav-link` for sufficient specificity.
+
 ## [3.0.0] - 2026-03-16
 
 ### Changed

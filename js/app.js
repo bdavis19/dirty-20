@@ -160,6 +160,7 @@ async function loadItemData() {
 }
 
 function initApp() {
+  initTheme();
   initFilterDefaults();
   initMarkupPresets();
   initCustomPresets();

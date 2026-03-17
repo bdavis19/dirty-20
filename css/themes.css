@@ -1,0 +1,1014 @@
+/* === themes.css === */
+/* Each theme overrides the CSS custom properties defined in style.css.
+   Light themes also override specific component styles that assume a dark background. */
+
+/* === Google Fonts === */
+@import url('https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,600;1,400&family=Cinzel:wght@400;600;700&family=Uncial+Antiqua&family=Almendra:ital,wght@0,400;0,700;1,400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=MedievalSharp&family=Oswald:wght@400;600&family=Spectral:ital,wght@0,400;0,600;1,400&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Lora:ital,wght@0,400;0,600;1,400&family=Barlow+Condensed:wght@400;600;700&family=Noto+Serif:ital,wght@0,400;0,600;1,400&family=Merriweather:ital,wght@0,400;0,700;1,400&family=IBM+Plex+Mono:wght@400;600&family=Raleway:wght@400;600;700&family=Metamorphous&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap');
+/* === Custom Fonts === */
+@font-face {
+  font-family: 'sketsa_ramadhanregular';
+  src: url("data:application/font-woff2;charset=utf-8;base64,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") format('woff2');
+  font-weight: normal;
+  font-style: normal;
+  unicode-range: U+0041-005A, U+0061-007A; /* A-Z and a-z only */
+}
+
+/* ============================================================
+   THEME: Generic D&D (default light — parchment / ink)
+   ============================================================ */
+body.theme-generic {
+  --color-bg:           #f5f0e8;
+  --color-surface:      #ede6d6;
+  --color-surface-2:    #e0d8c4;
+  --color-accent:       #7a3b1e;
+  --color-text:         #1c1008;
+  --color-text-muted:   #6b5a42;
+  --color-border:       #c4b49a;
+  --font-heading:       'EB Garamond', Georgia, serif;
+  --font-body:          'EB Garamond', Georgia, serif;
+}
+
+body.theme-generic,
+body.theme-generic input[type="text"],
+body.theme-generic input[type="number"],
+body.theme-generic select,
+body.theme-generic .modal-content {
+  color: var(--color-text);
+}
+
+body.theme-generic button {
+  background-color: var(--color-accent);
+  color: #f5f0e8;
+}
+
+body.theme-generic button.secondary,
+body.theme-generic #btn-new-shop,
+body.theme-generic .filter-group .btn-select-all,
+body.theme-generic .filter-group .btn-select-none,
+body.theme-generic .shop-row button:not(:first-of-type) {
+  background-color: var(--color-surface-2);
+  border: 1px solid var(--color-border);
+  color: var(--color-text);
+}
+
+body.theme-generic #top-bar {
+  background-color: var(--color-surface);
+  border-bottom: 2px solid var(--color-accent);
+}
+
+body.theme-generic .nav-link {
+  color: var(--color-text-muted);
+}
+
+body.theme-generic .nav-link.active {
+  color: var(--color-accent);
+  border-bottom-color: var(--color-accent);
+}
+
+body.theme-generic #items-table tr:hover td {
+  background-color: var(--color-surface-2);
+}
+
+body.theme-generic h2 {
+  font-family: var(--font-heading);
+}
+
+/* ============================================================
+   THEME: Ravenloft (dark gothic — current default, refined)
+   ============================================================ */
+body.theme-ravenloft {
+  --color-bg:           #0d0d0d;
+  --color-surface:      #1a1514;
+  --color-surface-2:    #231e1e;
+  --color-accent:       #c41e1e;
+  --color-text:         #d4c5a9;
+  --color-text-muted:   #7a6e5f;
+  --color-border:       #3a2e2e;
+  --font-heading:       'Cinzel', Georgia, serif;
+  --font-body:          'EB Garamond', Georgia, serif;
+}
+
+body.theme-ravenloft h2,
+body.theme-ravenloft h3,
+body.theme-ravenloft #app-title {
+  font-family: var(--font-heading);
+}
+
+/* ============================================================
+   THEME: Forgotten Realms (dark — royal blue + gold)
+   ============================================================ */
+body.theme-forgotten-realms {
+  --color-bg:           #0a0e1a;
+  --color-surface:      #111828;
+  --color-surface-2:    #1a2438;
+  --color-accent:       #c8a94a;
+  --color-text:         #ddd5bb;
+  --color-text-muted:   #7a8aaa;
+  --color-border:       #1e3060;
+  --font-heading:       'Cinzel', Georgia, serif;
+  --font-body:          'EB Garamond', Georgia, serif;
+}
+
+body.theme-forgotten-realms #top-bar {
+  background-color: #0d1630;
+  border-bottom: 2px solid #1e3060;
+  box-shadow: 0 2px 12px rgba(30, 48, 96, 0.6);
+}
+
+body.theme-forgotten-realms .nav-link.active {
+  color: var(--color-accent);
+  border-bottom-color: var(--color-accent);
+}
+
+body.theme-forgotten-realms section {
+  border-color: #1e3060;
+}
+
+body.theme-forgotten-realms section h2 {
+  font-family: var(--font-heading);
+  color: var(--color-accent);
+  letter-spacing: 0.06em;
+}
+
+body.theme-forgotten-realms button {
+  background-color: #1e3060;
+  border: 1px solid var(--color-accent);
+  color: var(--color-accent);
+}
+
+body.theme-forgotten-realms button:hover {
+  background-color: var(--color-accent);
+  color: #0a0e1a;
+  opacity: 1;
+}
+
+body.theme-forgotten-realms #items-table th {
+  color: var(--color-accent);
+  border-bottom-color: #1e3060;
+}
+
+/* ============================================================
+   THEME: Greyhawk (light — aged parchment / sepia / old map)
+   ============================================================ */
+body.theme-greyhawk {
+  --color-bg:           #f2e8d0;
+  --color-surface:      #e8dab8;
+  --color-surface-2:    #ddd0a4;
+  --color-accent:       #5c3d11;
+  --color-text:         #2a1a08;
+  --color-text-muted:   #7a5c30;
+  --color-border:       #b8a070;
+  --font-heading:       'Almendra', Georgia, serif;
+  --font-body:          'Almendra', Georgia, serif;
+}
+
+body.theme-greyhawk,
+body.theme-greyhawk input[type="text"],
+body.theme-greyhawk input[type="number"],
+body.theme-greyhawk select,
+body.theme-greyhawk .modal-content {
+  color: var(--color-text);
+}
+
+body.theme-greyhawk button {
+  background-color: var(--color-accent);
+  color: #f2e8d0;
+}
+
+body.theme-greyhawk button.secondary,
+body.theme-greyhawk #btn-new-shop,
+body.theme-greyhawk .filter-group .btn-select-all,
+body.theme-greyhawk .filter-group .btn-select-none,
+body.theme-greyhawk .shop-row button:not(:first-of-type) {
+  background-color: var(--color-surface-2);
+  border: 1px solid var(--color-border);
+  color: var(--color-text);
+}
+
+body.theme-greyhawk #top-bar {
+  background-color: var(--color-surface);
+  border-bottom: 2px solid var(--color-accent);
+}
+
+body.theme-greyhawk .nav-link {
+  color: var(--color-text-muted);
+}
+
+body.theme-greyhawk .nav-link.active {
+  color: var(--color-accent);
+  border-bottom-color: var(--color-accent);
+}
+
+body.theme-greyhawk section h2 {
+  font-family: var(--font-heading);
+  font-style: italic;
+}
+
+body.theme-greyhawk #items-table tr:hover td {
+  background-color: var(--color-surface-2);
+}
+
+body.theme-greyhawk #items-table th {
+  color: var(--color-text-muted);
+  border-bottom-color: var(--color-border);
+}
+
+/* Parchment texture feel via subtle gradient */
+body.theme-greyhawk {
+  background-image: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 28px,
+    rgba(90, 60, 10, 0.04) 28px,
+    rgba(90, 60, 10, 0.04) 29px
+  );
+}
+
+/* ============================================================
+   THEME: Deadwell (dark — Egyptian gothic, lapis + sand gold)
+   ============================================================ */
+body.theme-deadwell {
+  --color-bg:           #0c0a08;
+  --color-surface:      #16120e;
+  --color-surface-2:    #201a12;
+  --color-accent:       #c9a84c;
+  --color-text:         #e8d9b0;
+  --color-text-muted:   #8a7a58;
+  --color-border:       #2e2518;
+  --font-heading:       'sketsa_ramadhanregular', 'Uncial Antiqua', Georgia, serif;
+  --font-body:          'EB Garamond', Georgia, serif;
+}
+
+body.theme-deadwell #top-bar {
+  background-color: var(--color-surface);
+  border-bottom: 2px solid var(--color-accent);
+  box-shadow: 0 2px 16px rgba(201, 168, 76, 0.15);
+}
+
+body.theme-deadwell .nav-link.active {
+  color: var(--color-accent);
+  border-bottom-color: var(--color-accent);
+}
+
+body.theme-deadwell section h2 {
+  font-family: var(--font-heading);
+  color: var(--color-accent);
+  letter-spacing: 0.08em;
+}
+
+body.theme-deadwell #app-title {
+  font-family: var(--font-heading);
+  color: var(--color-accent);
+  letter-spacing: 0.1em;
+}
+
+body.theme-deadwell button {
+  background-color: var(--color-surface-2);
+  border: 1px solid var(--color-accent);
+  color: var(--color-accent);
+}
+
+body.theme-deadwell button:hover {
+  background-color: var(--color-accent);
+  color: #0c0a08;
+  opacity: 1;
+}
+
+body.theme-deadwell #items-table th {
+  color: var(--color-accent);
+  border-bottom-color: var(--color-border);
+  letter-spacing: 0.05em;
+}
+
+body.theme-deadwell section {
+  border-color: #2e2518;
+  box-shadow: inset 0 0 40px rgba(201, 168, 76, 0.03);
+}
+
+body.theme-deadwell section h2 {
+  font-family: var(--font-heading);
+  color: var(--color-accent);
+  letter-spacing: 0.08em;
+  font-size: 1.75rem;
+}
+
+body.theme-deadwell #app-title {
+  font-family: var(--font-heading);
+  color: var(--color-accent);
+  letter-spacing: 0.1em;
+  font-size: 1.4rem;
+}
+
+body.theme-deadwell section h3 {
+  font-family: var(--font-heading);
+  color: var(--color-text-muted);
+  letter-spacing: 0.06em;
+  font-size: 1.25rem;
+}
+
+body.theme-deadwell .modal-header h2 {
+  font-family: var(--font-heading);
+  color: var(--color-accent);
+  letter-spacing: 0.08em;
+  font-size: 1.75rem;
+}
+
+/* ============================================================
+   THEME: Artificer (dark steel — forge sparks, arcane industry)
+   ============================================================ */
+body.theme-artificer {
+  --color-bg:           #0e0f11;
+  --color-surface:      #16191e;
+  --color-surface-2:    #1f2430;
+  --color-accent:       #e07b2a;
+  --color-text:         #c8cdd8;
+  --color-text-muted:   #6a7280;
+  --color-border:       #2a3040;
+  --font-heading:       'MedievalSharp', 'Cinzel', Georgia, serif;
+  --font-body:          'EB Garamond', Georgia, serif;
+}
+
+body.theme-artificer #top-bar {
+  background-color: #111418;
+  border-bottom: 2px solid var(--color-accent);
+  box-shadow: 0 2px 14px rgba(224, 123, 42, 0.2);
+}
+
+body.theme-artificer .nav-link.active {
+  color: var(--color-accent);
+  border-bottom-color: var(--color-accent);
+}
+
+body.theme-artificer section {
+  border-color: var(--color-border);
+  box-shadow: inset 0 0 30px rgba(224, 123, 42, 0.03);
+}
+
+body.theme-artificer section h2,
+body.theme-artificer #app-title {
+  font-family: var(--font-heading);
+  color: var(--color-accent);
+  letter-spacing: 0.06em;
+}
+
+body.theme-artificer button {
+  background-color: var(--color-surface-2);
+  border: 1px solid var(--color-accent);
+  color: var(--color-accent);
+}
+
+body.theme-artificer button:hover {
+  background-color: var(--color-accent);
+  color: #0e0f11;
+  opacity: 1;
+}
+
+body.theme-artificer #items-table th {
+  color: var(--color-accent);
+  border-bottom-color: var(--color-border);
+}
+
+/* ============================================================
+   THEME: Barbarian (dark — ash, bone, bloodrage)
+   ============================================================ */
+body.theme-barbarian {
+  --color-bg:           #100b08;
+  --color-surface:      #1c1410;
+  --color-surface-2:    #271c16;
+  --color-accent:       #c03a1a;
+  --color-text:         #d8cfc0;
+  --color-text-muted:   #7a6a58;
+  --color-border:       #3a2518;
+  --font-heading:       'Oswald', 'Cinzel', sans-serif;
+  --font-body:          'EB Garamond', Georgia, serif;
+}
+
+body.theme-barbarian #top-bar {
+  background-color: var(--color-surface);
+  border-bottom: 3px solid var(--color-accent);
+}
+
+body.theme-barbarian .nav-link.active {
+  color: var(--color-accent);
+  border-bottom-color: var(--color-accent);
+}
+
+body.theme-barbarian section h2,
+body.theme-barbarian #app-title {
+  font-family: var(--font-heading);
+  color: var(--color-accent);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+body.theme-barbarian button {
+  background-color: var(--color-accent);
+  color: #f0e8dc;
+  font-family: var(--font-heading);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  font-size: 0.85rem;
+}
+
+body.theme-barbarian #items-table th {
+  color: var(--color-accent);
+  border-bottom-color: var(--color-border);
+  font-family: var(--font-heading);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+/* ============================================================
+   THEME: Bard (dark — velvet, stage gold, spotlight violet)
+   ============================================================ */
+body.theme-bard {
+  --color-bg:           #0d0a12;
+  --color-surface:      #18132a;
+  --color-surface-2:    #221c38;
+  --color-accent:       #d4a017;
+  --color-text:         #e0d4f0;
+  --color-text-muted:   #7a6aa0;
+  --color-border:       #3a2e58;
+  --font-heading:       'Spectral', Georgia, serif;
+  --font-body:          'Spectral', Georgia, serif;
+}
+
+body.theme-bard #top-bar {
+  background-color: #110d20;
+  border-bottom: 2px solid var(--color-accent);
+  box-shadow: 0 2px 16px rgba(100, 60, 160, 0.3);
+}
+
+body.theme-bard .nav-link.active {
+  color: var(--color-accent);
+  border-bottom-color: var(--color-accent);
+}
+
+body.theme-bard section {
+  border-color: var(--color-border);
+  box-shadow: inset 0 0 40px rgba(100, 60, 160, 0.05);
+}
+
+body.theme-bard section h2,
+body.theme-bard #app-title {
+  font-family: var(--font-heading);
+  color: var(--color-accent);
+  font-style: italic;
+  letter-spacing: 0.04em;
+}
+
+body.theme-bard button {
+  background-color: #3a2e58;
+  border: 1px solid var(--color-accent);
+  color: var(--color-accent);
+}
+
+body.theme-bard button:hover {
+  background-color: var(--color-accent);
+  color: #0d0a12;
+  opacity: 1;
+}
+
+body.theme-bard #items-table th {
+  color: var(--color-accent);
+  border-bottom-color: var(--color-border);
+  font-style: italic;
+}
+
+/* ============================================================
+   THEME: Cleric (light — ivory, holy gold, sacred blue-grey)
+   ============================================================ */
+body.theme-cleric {
+  --color-bg:           #f7f3ec;
+  --color-surface:      #ede6d8;
+  --color-surface-2:    #e0d8c8;
+  --color-accent:       #8a6a10;
+  --color-text:         #1a1408;
+  --color-text-muted:   #5c5038;
+  --color-border:       #c8b880;
+  --font-heading:       'Cormorant Garamond', Georgia, serif;
+  --font-body:          'Cormorant Garamond', Georgia, serif;
+}
+
+body.theme-cleric,
+body.theme-cleric input[type="text"],
+body.theme-cleric input[type="number"],
+body.theme-cleric select,
+body.theme-cleric .modal-content {
+  color: var(--color-text);
+}
+
+body.theme-cleric #top-bar {
+  background-color: var(--color-surface);
+  border-bottom: 2px solid var(--color-accent);
+  box-shadow: 0 2px 12px rgba(138, 106, 16, 0.15);
+}
+
+body.theme-cleric .nav-link {
+  color: var(--color-text-muted);
+}
+
+body.theme-cleric .nav-link.active {
+  color: var(--color-accent);
+  border-bottom-color: var(--color-accent);
+}
+
+body.theme-cleric section h2,
+body.theme-cleric #app-title {
+  font-family: var(--font-heading);
+  color: var(--color-accent);
+  letter-spacing: 0.05em;
+}
+
+body.theme-cleric button {
+  background-color: var(--color-accent);
+  color: #f7f3ec;
+}
+
+body.theme-cleric button.secondary,
+body.theme-cleric #btn-new-shop,
+body.theme-cleric .filter-group .btn-select-all,
+body.theme-cleric .filter-group .btn-select-none,
+body.theme-cleric .shop-row button:not(:first-of-type) {
+  background-color: var(--color-surface-2);
+  border: 1px solid var(--color-border);
+  color: var(--color-text);
+}
+
+body.theme-cleric #items-table tr:hover td {
+  background-color: var(--color-surface-2);
+}
+
+body.theme-cleric #items-table th {
+  color: var(--color-text-muted);
+  border-bottom-color: var(--color-border);
+}
+
+/* ============================================================
+   THEME: Druid (dark — ancient forest, moss, moonlight)
+   ============================================================ */
+body.theme-druid {
+  --color-bg:           #080d08;
+  --color-surface:      #101810;
+  --color-surface-2:    #182018;
+  --color-accent:       #6aaa44;
+  --color-text:         #c8d8b8;
+  --color-text-muted:   #5a7850;
+  --color-border:       #1e3020;
+  --font-heading:       'Lora', Georgia, serif;
+  --font-body:          'Lora', Georgia, serif;
+}
+
+body.theme-druid #top-bar {
+  background-color: #0a100a;
+  border-bottom: 2px solid #2a5020;
+  box-shadow: 0 2px 16px rgba(30, 60, 20, 0.5);
+}
+
+body.theme-druid .nav-link.active {
+  color: var(--color-accent);
+  border-bottom-color: var(--color-accent);
+}
+
+body.theme-druid section h2,
+body.theme-druid #app-title {
+  font-family: var(--font-heading);
+  color: var(--color-accent);
+  font-style: italic;
+}
+
+body.theme-druid button {
+  background-color: #1e3020;
+  border: 1px solid var(--color-accent);
+  color: var(--color-accent);
+}
+
+body.theme-druid button:hover {
+  background-color: var(--color-accent);
+  color: #080d08;
+  opacity: 1;
+}
+
+body.theme-druid #items-table th {
+  color: var(--color-accent);
+  border-bottom-color: var(--color-border);
+}
+
+/* ============================================================
+   THEME: Fighter (dark — gunmetal, iron grey, campaign red)
+   ============================================================ */
+body.theme-fighter {
+  --color-bg:           #0c0c0e;
+  --color-surface:      #161820;
+  --color-surface-2:    #1e2030;
+  --color-accent:       #b82020;
+  --color-text:         #c8ccd8;
+  --color-text-muted:   #606270;
+  --color-border:       #2a2c3a;
+  --font-heading:       'Barlow Condensed', 'Oswald', sans-serif;
+  --font-body:          'EB Garamond', Georgia, serif;
+}
+
+body.theme-fighter #top-bar {
+  background-color: #10121a;
+  border-bottom: 3px solid var(--color-accent);
+}
+
+body.theme-fighter .nav-link.active {
+  color: var(--color-accent);
+  border-bottom-color: var(--color-accent);
+}
+
+body.theme-fighter section h2,
+body.theme-fighter #app-title {
+  font-family: var(--font-heading);
+  color: var(--color-accent);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  font-weight: 700;
+}
+
+body.theme-fighter button {
+  background-color: var(--color-accent);
+  color: #f0f0f8;
+  font-family: var(--font-heading);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+body.theme-fighter #items-table th {
+  color: var(--color-text-muted);
+  border-bottom-color: var(--color-border);
+  font-family: var(--font-heading);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+/* ============================================================
+   THEME: Monk (dark — ink black, jade, focused stillness)
+   ============================================================ */
+body.theme-monk {
+  --color-bg:           #080a0a;
+  --color-surface:      #101414;
+  --color-surface-2:    #181e1e;
+  --color-accent:       #3aaa88;
+  --color-text:         #c0ccc8;
+  --color-text-muted:   #506660;
+  --color-border:       #1a2828;
+  --font-heading:       'Noto Serif', Georgia, serif;
+  --font-body:          'Noto Serif', Georgia, serif;
+}
+
+body.theme-monk #top-bar {
+  background-color: var(--color-surface);
+  border-bottom: 1px solid var(--color-accent);
+}
+
+body.theme-monk .nav-link.active {
+  color: var(--color-accent);
+  border-bottom-color: var(--color-accent);
+}
+
+body.theme-monk section h2,
+body.theme-monk #app-title {
+  font-family: var(--font-heading);
+  color: var(--color-accent);
+  font-weight: 400;
+}
+
+body.theme-monk button {
+  background-color: transparent;
+  border: 1px solid var(--color-accent);
+  color: var(--color-accent);
+}
+
+body.theme-monk button:hover {
+  background-color: var(--color-accent);
+  color: #080a0a;
+  opacity: 1;
+}
+
+body.theme-monk #items-table th {
+  color: var(--color-accent);
+  border-bottom-color: var(--color-border);
+  font-weight: 400;
+}
+
+/* ============================================================
+   THEME: Paladin (dark — midnight navy, consecrated silver, dawn gold)
+   ============================================================ */
+body.theme-paladin {
+  --color-bg:           #080c18;
+  --color-surface:      #101828;
+  --color-surface-2:    #182030;
+  --color-accent:       #d4c080;
+  --color-text:         #dde4f0;
+  --color-text-muted:   #6878a0;
+  --color-border:       #202c48;
+  --font-heading:       'Cinzel', Georgia, serif;
+  --font-body:          'EB Garamond', Georgia, serif;
+}
+
+body.theme-paladin #top-bar {
+  background-color: #0a1020;
+  border-bottom: 2px solid var(--color-accent);
+  box-shadow: 0 2px 16px rgba(212, 192, 128, 0.12);
+}
+
+body.theme-paladin .nav-link.active {
+  color: var(--color-accent);
+  border-bottom-color: var(--color-accent);
+}
+
+body.theme-paladin section h2,
+body.theme-paladin #app-title {
+  font-family: var(--font-heading);
+  color: var(--color-accent);
+  letter-spacing: 0.07em;
+}
+
+body.theme-paladin button {
+  background-color: #202c48;
+  border: 1px solid var(--color-accent);
+  color: var(--color-accent);
+}
+
+body.theme-paladin button:hover {
+  background-color: var(--color-accent);
+  color: #080c18;
+  opacity: 1;
+}
+
+body.theme-paladin #items-table th {
+  color: var(--color-accent);
+  border-bottom-color: var(--color-border);
+}
+
+/* ============================================================
+   THEME: Ranger (dark — pine shadow, amber lantern, leather)
+   ============================================================ */
+body.theme-ranger {
+  --color-bg:           #090c08;
+  --color-surface:      #131810;
+  --color-surface-2:    #1c2218;
+  --color-accent:       #c08830;
+  --color-text:         #c8c0a8;
+  --color-text-muted:   #607050;
+  --color-border:       #283020;
+  --font-heading:       'Merriweather', Georgia, serif;
+  --font-body:          'Merriweather', Georgia, serif;
+}
+
+body.theme-ranger #top-bar {
+  background-color: #0c1008;
+  border-bottom: 2px solid var(--color-accent);
+}
+
+body.theme-ranger .nav-link.active {
+  color: var(--color-accent);
+  border-bottom-color: var(--color-accent);
+}
+
+body.theme-ranger section h2,
+body.theme-ranger #app-title {
+  font-family: var(--font-heading);
+  color: var(--color-accent);
+}
+
+body.theme-ranger button {
+  background-color: var(--color-surface-2);
+  border: 1px solid var(--color-accent);
+  color: var(--color-accent);
+}
+
+body.theme-ranger button:hover {
+  background-color: var(--color-accent);
+  color: #090c08;
+  opacity: 1;
+}
+
+body.theme-ranger #items-table th {
+  color: var(--color-accent);
+  border-bottom-color: var(--color-border);
+}
+
+/* ============================================================
+   THEME: Rogue (near-black — shadow, poison green, monospace cunning)
+   ============================================================ */
+body.theme-rogue {
+  --color-bg:           #060608;
+  --color-surface:      #0e0f12;
+  --color-surface-2:    #161820;
+  --color-accent:       #44cc66;
+  --color-text:         #b0c0a8;
+  --color-text-muted:   #487050;
+  --color-border:       #1a2018;
+  --font-heading:       'IBM Plex Mono', monospace;
+  --font-body:          'IBM Plex Mono', monospace;
+}
+
+body.theme-rogue #top-bar {
+  background-color: #08090c;
+  border-bottom: 1px solid #1a2018;
+}
+
+body.theme-rogue .nav-link.active {
+  color: var(--color-accent);
+  border-bottom-color: var(--color-accent);
+}
+
+body.theme-rogue section h2,
+body.theme-rogue #app-title {
+  font-family: var(--font-heading);
+  color: var(--color-accent);
+  letter-spacing: 0.08em;
+  text-transform: lowercase;
+}
+
+body.theme-rogue button {
+  background-color: transparent;
+  border: 1px solid var(--color-accent);
+  color: var(--color-accent);
+  font-family: var(--font-heading);
+  font-size: 0.85rem;
+}
+
+body.theme-rogue button:hover {
+  background-color: var(--color-accent);
+  color: #060608;
+  opacity: 1;
+}
+
+body.theme-rogue #items-table th {
+  color: var(--color-accent);
+  border-bottom-color: var(--color-border);
+  font-family: var(--font-heading);
+  font-size: 0.8rem;
+}
+
+/* ============================================================
+   THEME: Sorcerer (void black — raw arcane violet, wild surge)
+   ============================================================ */
+body.theme-sorcerer {
+  --color-bg:           #0a080e;
+  --color-surface:      #120e1c;
+  --color-surface-2:    #1c1830;
+  --color-accent:       #9a44e8;
+  --color-text:         #d0c8e8;
+  --color-text-muted:   #6858a0;
+  --color-border:       #2a2040;
+  --font-heading:       'Raleway', sans-serif;
+  --font-body:          'EB Garamond', Georgia, serif;
+}
+
+body.theme-sorcerer #top-bar {
+  background-color: #0c0a14;
+  border-bottom: 2px solid var(--color-accent);
+  box-shadow: 0 2px 20px rgba(154, 68, 232, 0.25);
+}
+
+body.theme-sorcerer .nav-link.active {
+  color: var(--color-accent);
+  border-bottom-color: var(--color-accent);
+}
+
+body.theme-sorcerer section h2,
+body.theme-sorcerer #app-title {
+  font-family: var(--font-heading);
+  color: var(--color-accent);
+  font-weight: 700;
+  letter-spacing: 0.08em;
+}
+
+body.theme-sorcerer button {
+  background-color: var(--color-surface-2);
+  border: 1px solid var(--color-accent);
+  color: var(--color-accent);
+}
+
+body.theme-sorcerer button:hover {
+  background-color: var(--color-accent);
+  color: #0a080e;
+  opacity: 1;
+}
+
+body.theme-sorcerer #items-table th {
+  color: var(--color-accent);
+  border-bottom-color: var(--color-border);
+}
+
+/* ============================================================
+   THEME: Warlock (void — eldritch teal, pact shadow)
+   ============================================================ */
+body.theme-warlock {
+  --color-bg:           #060810;
+  --color-surface:      #0e1020;
+  --color-surface-2:    #161830;
+  --color-accent:       #28c8c0;
+  --color-text:         #b8d0d0;
+  --color-text-muted:   #406060;
+  --color-border:       #182030;
+  --font-heading:       'Metamorphous', 'Uncial Antiqua', Georgia, serif;
+  --font-body:          'EB Garamond', Georgia, serif;
+}
+
+body.theme-warlock #top-bar {
+  background-color: #08081a;
+  border-bottom: 2px solid var(--color-accent);
+  box-shadow: 0 2px 20px rgba(40, 200, 192, 0.15);
+}
+
+body.theme-warlock .nav-link.active {
+  color: var(--color-accent);
+  border-bottom-color: var(--color-accent);
+}
+
+body.theme-warlock section h2,
+body.theme-warlock #app-title {
+  font-family: var(--font-heading);
+  color: var(--color-accent);
+  letter-spacing: 0.06em;
+}
+
+body.theme-warlock button {
+  background-color: #182030;
+  border: 1px solid var(--color-accent);
+  color: var(--color-accent);
+}
+
+body.theme-warlock button:hover {
+  background-color: var(--color-accent);
+  color: #060810;
+  opacity: 1;
+}
+
+body.theme-warlock #items-table th {
+  color: var(--color-accent);
+  border-bottom-color: var(--color-border);
+}
+
+/* ============================================================
+   THEME: Wizard (deep midnight — sapphire ink, scholarly arcane)
+   ============================================================ */
+body.theme-wizard {
+  --color-bg:           #080a14;
+  --color-surface:      #100e22;
+  --color-surface-2:    #18163a;
+  --color-accent:       #5880d8;
+  --color-text:         #c8d0f0;
+  --color-text-muted:   #5060a0;
+  --color-border:       #201e40;
+  --font-heading:       'Playfair Display', Georgia, serif;
+  --font-body:          'EB Garamond', Georgia, serif;
+}
+
+body.theme-wizard #top-bar {
+  background-color: #0a0818;
+  border-bottom: 2px solid var(--color-accent);
+  box-shadow: 0 2px 16px rgba(88, 128, 216, 0.2);
+}
+
+body.theme-wizard .nav-link.active {
+  color: var(--color-accent);
+  border-bottom-color: var(--color-accent);
+}
+
+body.theme-wizard section h2,
+body.theme-wizard #app-title {
+  font-family: var(--font-heading);
+  color: var(--color-accent);
+  font-style: italic;
+  letter-spacing: 0.04em;
+}
+
+body.theme-wizard button {
+  background-color: #18163a;
+  border: 1px solid var(--color-accent);
+  color: var(--color-accent);
+}
+
+body.theme-wizard button:hover {
+  background-color: var(--color-accent);
+  color: #080a14;
+  opacity: 1;
+}
+
+body.theme-wizard #items-table th {
+  color: var(--color-accent);
+  border-bottom-color: var(--color-border);
+  font-style: italic;
+}
+
+/* ============================================================
+   GLOBAL: Apply heading font variable across all themes
+   ============================================================ */
+h1, h2, h3, #app-title {
+  font-family: var(--font-heading, var(--font));
+}
+
+body {
+  font-family: var(--font-body, var(--font));
+}
