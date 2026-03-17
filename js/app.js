@@ -217,7 +217,7 @@ function buildShopData() {
       name:           cells[0]?.textContent,
       rarity:         cells[1]?.textContent,
       type:           cells[2]?.textContent,
-      qty:            cells[3]?.textContent,
+      qty:            cells[3]?.querySelector('input')?.value ?? cells[3]?.textContent,
       basePrice:      cells[4]?.dataset.basePrice,
       adjustedPrice1: cells[4]?.textContent,
     };
@@ -282,13 +282,16 @@ function applyLoadedShop(data) {
         <td>${item.name || ''}</td>
         <td>${item.rarity || ''}</td>
         <td>${item.type || ''}</td>
-        <td>${item.qty || ''}</td>
+        <td><input class="qty-edit" type="number" min="0" value="${item.qty || ''}" /></td>
         <td data-base-price="${item.basePrice || ''}">${item.adjustedPrice1 || ''}</td>
       `;
       tbody.appendChild(tr);
     });
     table.classList.remove('hidden');
     empty.classList.add('hidden');
+    tbody.querySelectorAll('.qty-edit').forEach(input => {
+      input.addEventListener('change', () => setUnsavedChanges(true));
+    });
   } else {
     table.classList.add('hidden');
     empty.classList.remove('hidden');
@@ -321,7 +324,7 @@ function renderItems(items) {
       <td>${item.name}</td>
       <td>${item.rarity}</td>
       <td>${item.type}</td>
-      <td>${qtyDisplay}</td>
+      <td><input class="qty-edit" type="number" min="0" value="${qtyDisplay}" /></td>
       <td data-base-price="${item.priceless ? '' : item.basePrice ?? ''}">${item.priceless ? 'Priceless' : item.adjustedPrice1 != null ? formatPrice(item.adjustedPrice1) + (item.adjustedPrice1 !== item.basePrice ? ` (${formatPrice(item.basePrice)})` : '') : '—'}</td>
     `;
     tbody.appendChild(tr);
@@ -330,6 +333,10 @@ function renderItems(items) {
   table.classList.remove('hidden');
   empty.classList.add('hidden');
   updatePriceHeader();
+
+  tbody.querySelectorAll('.qty-edit').forEach(input => {
+    input.addEventListener('change', () => setUnsavedChanges(true));
+  });
 }
 
 document.getElementById('btn-generate').addEventListener('click', () => {

@@ -324,6 +324,21 @@ button.secondary {
   background-color: var(--color-surface-2);
 }
 
+/* === Qty Edit Input (inline in table) === */
+.qty-edit {
+  width: 56px;
+  padding: 0.2rem 0.4rem;
+  font-size: 0.9rem;
+  text-align: center;
+  -moz-appearance: textfield;
+}
+
+.qty-edit::-webkit-outer-spin-button,
+.qty-edit::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
 #empty-state {
   color: var(--color-text-muted);
   font-style: italic;

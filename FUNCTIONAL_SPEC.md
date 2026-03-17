@@ -148,6 +148,7 @@
 - Items with no price data display **"—"**.
 - Before any generation, the table is hidden and the empty-state message is shown.
 - After generation, the table is shown and the empty-state message is hidden.
+- The Qty column displays quantities as editable number inputs. Users can click any qty field to change it directly, and tab between rows. Editing a qty value triggers the unsaved changes warning.
 
 ---
 

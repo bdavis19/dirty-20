@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+### Added
+
+- Qty column in the shop output table is now a directly editable number input.
+- Users can tab through qty fields row by row to adjust quantities quickly.
+- Editing any qty field triggers the unsaved changes warning.
+
 ## [3.1.0] - 2026-03-16
 
 ### Added
