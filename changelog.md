@@ -29,6 +29,10 @@ All notable changes to this project will be documented in this file.
   `initMerchant()` called in `initApp()`.
 - `css/style.css`: `.merchant-species-panel` styles for the inline
   species/creature reroll panel.
+- `js/merchant.js`: `readMerchantFromUI()` — reads all merchant UI fields and collapsed state back into a merchant object for persistence.
+- `js/app.js`: merchant data is now saved with the shop via `readMerchantFromUI()` in `buildShopData()`.
+- `js/app.js`: merchant fields are restored on shop load via `renderMerchant()` in `applyLoadedShop()`; shops without a saved merchant generate a fresh one.
+- `js/app.js`: `resetGeneratorForm()` now clears all merchant UI fields.
 
 ### Fixed
 
@@ -37,6 +41,7 @@ All notable changes to this project will be documented in this file.
   checkbox selections between opens.
 - Clicking Roll no longer closes the species/creature reroll panel;
   selections persist and the button can be clicked repeatedly.
+- `js/merchant.js`: `renderMerchant()` now restores the collapsed/expanded state of the merchant section and updates the toggle button label accordingly.
 
 ## [3.2.0] - 2026-03-16
 

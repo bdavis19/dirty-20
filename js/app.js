@@ -58,6 +58,18 @@ function resetGeneratorForm() {
   });
   document.getElementById('min-price').value = '';
   document.getElementById('max-price').value = '';
+
+  // Clear merchant fields
+  document.getElementById('merchant-species').value       = '';
+  document.getElementById('merchant-name').value          = '';
+  document.getElementById('merchant-background').value    = '';
+  document.getElementById('merchant-appearance').value    = '';
+  document.getElementById('merchant-bias-positive').value = '';
+  document.getElementById('merchant-bias-negative').value = '';
+  document.getElementById('merchant-personalities').innerHTML = '';
+  document.getElementById('merchant-quirks').innerHTML        = '';
+  const merchantSection = document.getElementById('merchant-section');
+  if (merchantSection) merchantSection._merchantData = null;
 }
 
 function applyPreset(presetName) {
@@ -233,6 +245,7 @@ function buildShopData() {
       filters,
     },
     items,
+    merchant: readMerchantFromUI(),
   };
 }
 
@@ -306,6 +319,12 @@ function applyLoadedShop(data) {
   updatePriceHeader();
   setUnsavedChanges(false);
   showView('results');   // ← navigates to results view after restoring
+
+  if (data.merchant) {
+    renderMerchant(data.merchant);
+  } else {
+    renderMerchant(generateMerchant());
+  }
 }
 
 // app.js — Generate button

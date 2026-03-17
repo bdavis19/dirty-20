@@ -259,3 +259,13 @@
   Ravenloft, Forgotten Realms, and Deadwell are dark themes.
 - Themes apply globally to all views: generator, results, and the shop browser
   modal.
+
+---
+
+## 18. Merchant NPC — Persistence
+
+- The merchant object is saved as part of the shop data under the `merchant` key.
+- When a shop is loaded, all merchant fields (species, name, background, appearance, personalities, quirks, likes, dislikes) are restored exactly.
+- The collapsed/expanded state of the merchant section is also saved and restored.
+- Shops saved before the merchant feature was added (no `merchant` key) generate a fresh merchant on load.
+- Clicking ← New Shop clears all merchant fields.

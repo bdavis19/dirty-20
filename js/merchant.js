@@ -304,6 +304,41 @@ function renderMerchant(merchantData) {
   // Store current merchant data on the section element for reroll access
   const section = document.getElementById('merchant-section');
   section._merchantData = JSON.parse(JSON.stringify(merchantData));
+
+  // Restore collapsed state
+  const body = document.getElementById('merchant-body');
+  const btn  = document.getElementById('btn-toggle-merchant');
+  const shouldCollapse = merchantData.collapsed === true;
+  body.classList.toggle('hidden', shouldCollapse);
+  btn.textContent = shouldCollapse ? '▼ Expand' : '▲ Collapse';
+}
+
+// ---------------------------------------------------------------------------
+// Read UI → merchant object
+// ---------------------------------------------------------------------------
+
+/**
+ * Reads current merchant UI state back into a merchant object.
+ * Includes collapsed state of the section.
+ * @returns {object} merchant
+ */
+function readMerchantFromUI() {
+  const collapsed = document.getElementById('merchant-body').classList.contains('hidden');
+  const section   = document.getElementById('merchant-section');
+  const md        = section._merchantData || {};
+
+  return {
+    speciesType:   md.speciesType || 'species',
+    species:       document.getElementById('merchant-species').value.trim(),
+    name:          document.getElementById('merchant-name').value.trim(),
+    background:    document.getElementById('merchant-background').value.trim(),
+    appearance:    document.getElementById('merchant-appearance').value.trim(),
+    personalities: _readMultiValues('merchant-personalities'),
+    quirks:        _readMultiValues('merchant-quirks'),
+    biasPositive:  document.getElementById('merchant-bias-positive').value.trim(),
+    biasNegative:  document.getElementById('merchant-bias-negative').value.trim(),
+    collapsed,
+  };
 }
 
 /**
