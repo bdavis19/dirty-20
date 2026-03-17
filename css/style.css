@@ -64,7 +64,7 @@ body {
   height: 100%;
 }
 
-.nav-link {
+#main-nav .nav-link {
   background: none;
   border: none;
   border-bottom: 3px solid transparent;
@@ -77,13 +77,13 @@ body {
   transition: color 0.15s, border-color 0.15s;
 }
 
-.nav-link:hover {
+#main-nav .nav-link:hover {
   color: var(--color-text);
   background: none;
   opacity: 1;
 }
 
-.nav-link.active {
+#main-nav .nav-link.active {
   color: var(--color-accent);
   border-bottom-color: var(--color-accent);
 }

@@ -405,7 +405,6 @@ body.theme-barbarian #app-title {
 body.theme-barbarian button {
   background-color: var(--color-accent);
   color: #f0e8dc;
-  border: none;
   font-family: var(--font-heading);
   letter-spacing: 0.05em;
   text-transform: uppercase;

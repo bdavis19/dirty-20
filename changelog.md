@@ -37,6 +37,7 @@ All notable changes to this project will be documented in this file.
   Saved Shops modal header.
 - Shop browser ✕ button now correctly closes the modal (event
   listener was missing from initFileSystem).
+- Nav-link appearance broken across multiple themes (Barbarian, Cleric, Fighter, Generic, Greyhawk, Ravenloft) due to theme button rules overriding `.nav-link` styles. Scoped nav-link rules to `#main-nav .nav-link` for sufficient specificity.
 
 ## [3.0.0] - 2026-03-16
 
