@@ -4,6 +4,7 @@
 
 /* === Google Fonts === */
 @import url('https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,600;1,400&family=Cinzel:wght@400;600;700&family=Uncial+Antiqua&family=Almendra:ital,wght@0,400;0,700;1,400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=MedievalSharp&family=Oswald:wght@400;600&family=Spectral:ital,wght@0,400;0,600;1,400&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Lora:ital,wght@0,400;0,600;1,400&family=Barlow+Condensed:wght@400;600;700&family=Noto+Serif:ital,wght@0,400;0,600;1,400&family=Merriweather:ital,wght@0,400;0,700;1,400&family=IBM+Plex+Mono:wght@400;600&family=Raleway:wght@400;600;700&family=Metamorphous&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap');
 /* === Custom Fonts === */
 @font-face {
   font-family: 'sketsa_ramadhanregular';
@@ -311,6 +312,695 @@ body.theme-deadwell .modal-header h2 {
   color: var(--color-accent);
   letter-spacing: 0.08em;
   font-size: 1.75rem;
+}
+
+/* ============================================================
+   THEME: Artificer (dark steel — forge sparks, arcane industry)
+   ============================================================ */
+body.theme-artificer {
+  --color-bg:           #0e0f11;
+  --color-surface:      #16191e;
+  --color-surface-2:    #1f2430;
+  --color-accent:       #e07b2a;
+  --color-text:         #c8cdd8;
+  --color-text-muted:   #6a7280;
+  --color-border:       #2a3040;
+  --font-heading:       'MedievalSharp', 'Cinzel', Georgia, serif;
+  --font-body:          'EB Garamond', Georgia, serif;
+}
+
+body.theme-artificer #top-bar {
+  background-color: #111418;
+  border-bottom: 2px solid var(--color-accent);
+  box-shadow: 0 2px 14px rgba(224, 123, 42, 0.2);
+}
+
+body.theme-artificer .nav-link.active {
+  color: var(--color-accent);
+  border-bottom-color: var(--color-accent);
+}
+
+body.theme-artificer section {
+  border-color: var(--color-border);
+  box-shadow: inset 0 0 30px rgba(224, 123, 42, 0.03);
+}
+
+body.theme-artificer section h2,
+body.theme-artificer #app-title {
+  font-family: var(--font-heading);
+  color: var(--color-accent);
+  letter-spacing: 0.06em;
+}
+
+body.theme-artificer button {
+  background-color: var(--color-surface-2);
+  border: 1px solid var(--color-accent);
+  color: var(--color-accent);
+}
+
+body.theme-artificer button:hover {
+  background-color: var(--color-accent);
+  color: #0e0f11;
+  opacity: 1;
+}
+
+body.theme-artificer #items-table th {
+  color: var(--color-accent);
+  border-bottom-color: var(--color-border);
+}
+
+/* ============================================================
+   THEME: Barbarian (dark — ash, bone, bloodrage)
+   ============================================================ */
+body.theme-barbarian {
+  --color-bg:           #100b08;
+  --color-surface:      #1c1410;
+  --color-surface-2:    #271c16;
+  --color-accent:       #c03a1a;
+  --color-text:         #d8cfc0;
+  --color-text-muted:   #7a6a58;
+  --color-border:       #3a2518;
+  --font-heading:       'Oswald', 'Cinzel', sans-serif;
+  --font-body:          'EB Garamond', Georgia, serif;
+}
+
+body.theme-barbarian #top-bar {
+  background-color: var(--color-surface);
+  border-bottom: 3px solid var(--color-accent);
+}
+
+body.theme-barbarian .nav-link.active {
+  color: var(--color-accent);
+  border-bottom-color: var(--color-accent);
+}
+
+body.theme-barbarian section h2,
+body.theme-barbarian #app-title {
+  font-family: var(--font-heading);
+  color: var(--color-accent);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+body.theme-barbarian button {
+  background-color: var(--color-accent);
+  color: #f0e8dc;
+  border: none;
+  font-family: var(--font-heading);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  font-size: 0.85rem;
+}
+
+body.theme-barbarian #items-table th {
+  color: var(--color-accent);
+  border-bottom-color: var(--color-border);
+  font-family: var(--font-heading);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+/* ============================================================
+   THEME: Bard (dark — velvet, stage gold, spotlight violet)
+   ============================================================ */
+body.theme-bard {
+  --color-bg:           #0d0a12;
+  --color-surface:      #18132a;
+  --color-surface-2:    #221c38;
+  --color-accent:       #d4a017;
+  --color-text:         #e0d4f0;
+  --color-text-muted:   #7a6aa0;
+  --color-border:       #3a2e58;
+  --font-heading:       'Spectral', Georgia, serif;
+  --font-body:          'Spectral', Georgia, serif;
+}
+
+body.theme-bard #top-bar {
+  background-color: #110d20;
+  border-bottom: 2px solid var(--color-accent);
+  box-shadow: 0 2px 16px rgba(100, 60, 160, 0.3);
+}
+
+body.theme-bard .nav-link.active {
+  color: var(--color-accent);
+  border-bottom-color: var(--color-accent);
+}
+
+body.theme-bard section {
+  border-color: var(--color-border);
+  box-shadow: inset 0 0 40px rgba(100, 60, 160, 0.05);
+}
+
+body.theme-bard section h2,
+body.theme-bard #app-title {
+  font-family: var(--font-heading);
+  color: var(--color-accent);
+  font-style: italic;
+  letter-spacing: 0.04em;
+}
+
+body.theme-bard button {
+  background-color: #3a2e58;
+  border: 1px solid var(--color-accent);
+  color: var(--color-accent);
+}
+
+body.theme-bard button:hover {
+  background-color: var(--color-accent);
+  color: #0d0a12;
+  opacity: 1;
+}
+
+body.theme-bard #items-table th {
+  color: var(--color-accent);
+  border-bottom-color: var(--color-border);
+  font-style: italic;
+}
+
+/* ============================================================
+   THEME: Cleric (light — ivory, holy gold, sacred blue-grey)
+   ============================================================ */
+body.theme-cleric {
+  --color-bg:           #f7f3ec;
+  --color-surface:      #ede6d8;
+  --color-surface-2:    #e0d8c8;
+  --color-accent:       #8a6a10;
+  --color-text:         #1a1408;
+  --color-text-muted:   #5c5038;
+  --color-border:       #c8b880;
+  --font-heading:       'Cormorant Garamond', Georgia, serif;
+  --font-body:          'Cormorant Garamond', Georgia, serif;
+}
+
+body.theme-cleric,
+body.theme-cleric input[type="text"],
+body.theme-cleric input[type="number"],
+body.theme-cleric select,
+body.theme-cleric .modal-content {
+  color: var(--color-text);
+}
+
+body.theme-cleric #top-bar {
+  background-color: var(--color-surface);
+  border-bottom: 2px solid var(--color-accent);
+  box-shadow: 0 2px 12px rgba(138, 106, 16, 0.15);
+}
+
+body.theme-cleric .nav-link {
+  color: var(--color-text-muted);
+}
+
+body.theme-cleric .nav-link.active {
+  color: var(--color-accent);
+  border-bottom-color: var(--color-accent);
+}
+
+body.theme-cleric section h2,
+body.theme-cleric #app-title {
+  font-family: var(--font-heading);
+  color: var(--color-accent);
+  letter-spacing: 0.05em;
+}
+
+body.theme-cleric button {
+  background-color: var(--color-accent);
+  color: #f7f3ec;
+}
+
+body.theme-cleric button.secondary,
+body.theme-cleric #btn-new-shop,
+body.theme-cleric .filter-group .btn-select-all,
+body.theme-cleric .filter-group .btn-select-none,
+body.theme-cleric .shop-row button:not(:first-of-type) {
+  background-color: var(--color-surface-2);
+  border: 1px solid var(--color-border);
+  color: var(--color-text);
+}
+
+body.theme-cleric #items-table tr:hover td {
+  background-color: var(--color-surface-2);
+}
+
+body.theme-cleric #items-table th {
+  color: var(--color-text-muted);
+  border-bottom-color: var(--color-border);
+}
+
+/* ============================================================
+   THEME: Druid (dark — ancient forest, moss, moonlight)
+   ============================================================ */
+body.theme-druid {
+  --color-bg:           #080d08;
+  --color-surface:      #101810;
+  --color-surface-2:    #182018;
+  --color-accent:       #6aaa44;
+  --color-text:         #c8d8b8;
+  --color-text-muted:   #5a7850;
+  --color-border:       #1e3020;
+  --font-heading:       'Lora', Georgia, serif;
+  --font-body:          'Lora', Georgia, serif;
+}
+
+body.theme-druid #top-bar {
+  background-color: #0a100a;
+  border-bottom: 2px solid #2a5020;
+  box-shadow: 0 2px 16px rgba(30, 60, 20, 0.5);
+}
+
+body.theme-druid .nav-link.active {
+  color: var(--color-accent);
+  border-bottom-color: var(--color-accent);
+}
+
+body.theme-druid section h2,
+body.theme-druid #app-title {
+  font-family: var(--font-heading);
+  color: var(--color-accent);
+  font-style: italic;
+}
+
+body.theme-druid button {
+  background-color: #1e3020;
+  border: 1px solid var(--color-accent);
+  color: var(--color-accent);
+}
+
+body.theme-druid button:hover {
+  background-color: var(--color-accent);
+  color: #080d08;
+  opacity: 1;
+}
+
+body.theme-druid #items-table th {
+  color: var(--color-accent);
+  border-bottom-color: var(--color-border);
+}
+
+/* ============================================================
+   THEME: Fighter (dark — gunmetal, iron grey, campaign red)
+   ============================================================ */
+body.theme-fighter {
+  --color-bg:           #0c0c0e;
+  --color-surface:      #161820;
+  --color-surface-2:    #1e2030;
+  --color-accent:       #b82020;
+  --color-text:         #c8ccd8;
+  --color-text-muted:   #606270;
+  --color-border:       #2a2c3a;
+  --font-heading:       'Barlow Condensed', 'Oswald', sans-serif;
+  --font-body:          'EB Garamond', Georgia, serif;
+}
+
+body.theme-fighter #top-bar {
+  background-color: #10121a;
+  border-bottom: 3px solid var(--color-accent);
+}
+
+body.theme-fighter .nav-link.active {
+  color: var(--color-accent);
+  border-bottom-color: var(--color-accent);
+}
+
+body.theme-fighter section h2,
+body.theme-fighter #app-title {
+  font-family: var(--font-heading);
+  color: var(--color-accent);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  font-weight: 700;
+}
+
+body.theme-fighter button {
+  background-color: var(--color-accent);
+  color: #f0f0f8;
+  font-family: var(--font-heading);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+body.theme-fighter #items-table th {
+  color: var(--color-text-muted);
+  border-bottom-color: var(--color-border);
+  font-family: var(--font-heading);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+/* ============================================================
+   THEME: Monk (dark — ink black, jade, focused stillness)
+   ============================================================ */
+body.theme-monk {
+  --color-bg:           #080a0a;
+  --color-surface:      #101414;
+  --color-surface-2:    #181e1e;
+  --color-accent:       #3aaa88;
+  --color-text:         #c0ccc8;
+  --color-text-muted:   #506660;
+  --color-border:       #1a2828;
+  --font-heading:       'Noto Serif', Georgia, serif;
+  --font-body:          'Noto Serif', Georgia, serif;
+}
+
+body.theme-monk #top-bar {
+  background-color: var(--color-surface);
+  border-bottom: 1px solid var(--color-accent);
+}
+
+body.theme-monk .nav-link.active {
+  color: var(--color-accent);
+  border-bottom-color: var(--color-accent);
+}
+
+body.theme-monk section h2,
+body.theme-monk #app-title {
+  font-family: var(--font-heading);
+  color: var(--color-accent);
+  font-weight: 400;
+}
+
+body.theme-monk button {
+  background-color: transparent;
+  border: 1px solid var(--color-accent);
+  color: var(--color-accent);
+}
+
+body.theme-monk button:hover {
+  background-color: var(--color-accent);
+  color: #080a0a;
+  opacity: 1;
+}
+
+body.theme-monk #items-table th {
+  color: var(--color-accent);
+  border-bottom-color: var(--color-border);
+  font-weight: 400;
+}
+
+/* ============================================================
+   THEME: Paladin (dark — midnight navy, consecrated silver, dawn gold)
+   ============================================================ */
+body.theme-paladin {
+  --color-bg:           #080c18;
+  --color-surface:      #101828;
+  --color-surface-2:    #182030;
+  --color-accent:       #d4c080;
+  --color-text:         #dde4f0;
+  --color-text-muted:   #6878a0;
+  --color-border:       #202c48;
+  --font-heading:       'Cinzel', Georgia, serif;
+  --font-body:          'EB Garamond', Georgia, serif;
+}
+
+body.theme-paladin #top-bar {
+  background-color: #0a1020;
+  border-bottom: 2px solid var(--color-accent);
+  box-shadow: 0 2px 16px rgba(212, 192, 128, 0.12);
+}
+
+body.theme-paladin .nav-link.active {
+  color: var(--color-accent);
+  border-bottom-color: var(--color-accent);
+}
+
+body.theme-paladin section h2,
+body.theme-paladin #app-title {
+  font-family: var(--font-heading);
+  color: var(--color-accent);
+  letter-spacing: 0.07em;
+}
+
+body.theme-paladin button {
+  background-color: #202c48;
+  border: 1px solid var(--color-accent);
+  color: var(--color-accent);
+}
+
+body.theme-paladin button:hover {
+  background-color: var(--color-accent);
+  color: #080c18;
+  opacity: 1;
+}
+
+body.theme-paladin #items-table th {
+  color: var(--color-accent);
+  border-bottom-color: var(--color-border);
+}
+
+/* ============================================================
+   THEME: Ranger (dark — pine shadow, amber lantern, leather)
+   ============================================================ */
+body.theme-ranger {
+  --color-bg:           #090c08;
+  --color-surface:      #131810;
+  --color-surface-2:    #1c2218;
+  --color-accent:       #c08830;
+  --color-text:         #c8c0a8;
+  --color-text-muted:   #607050;
+  --color-border:       #283020;
+  --font-heading:       'Merriweather', Georgia, serif;
+  --font-body:          'Merriweather', Georgia, serif;
+}
+
+body.theme-ranger #top-bar {
+  background-color: #0c1008;
+  border-bottom: 2px solid var(--color-accent);
+}
+
+body.theme-ranger .nav-link.active {
+  color: var(--color-accent);
+  border-bottom-color: var(--color-accent);
+}
+
+body.theme-ranger section h2,
+body.theme-ranger #app-title {
+  font-family: var(--font-heading);
+  color: var(--color-accent);
+}
+
+body.theme-ranger button {
+  background-color: var(--color-surface-2);
+  border: 1px solid var(--color-accent);
+  color: var(--color-accent);
+}
+
+body.theme-ranger button:hover {
+  background-color: var(--color-accent);
+  color: #090c08;
+  opacity: 1;
+}
+
+body.theme-ranger #items-table th {
+  color: var(--color-accent);
+  border-bottom-color: var(--color-border);
+}
+
+/* ============================================================
+   THEME: Rogue (near-black — shadow, poison green, monospace cunning)
+   ============================================================ */
+body.theme-rogue {
+  --color-bg:           #060608;
+  --color-surface:      #0e0f12;
+  --color-surface-2:    #161820;
+  --color-accent:       #44cc66;
+  --color-text:         #b0c0a8;
+  --color-text-muted:   #487050;
+  --color-border:       #1a2018;
+  --font-heading:       'IBM Plex Mono', monospace;
+  --font-body:          'IBM Plex Mono', monospace;
+}
+
+body.theme-rogue #top-bar {
+  background-color: #08090c;
+  border-bottom: 1px solid #1a2018;
+}
+
+body.theme-rogue .nav-link.active {
+  color: var(--color-accent);
+  border-bottom-color: var(--color-accent);
+}
+
+body.theme-rogue section h2,
+body.theme-rogue #app-title {
+  font-family: var(--font-heading);
+  color: var(--color-accent);
+  letter-spacing: 0.08em;
+  text-transform: lowercase;
+}
+
+body.theme-rogue button {
+  background-color: transparent;
+  border: 1px solid var(--color-accent);
+  color: var(--color-accent);
+  font-family: var(--font-heading);
+  font-size: 0.85rem;
+}
+
+body.theme-rogue button:hover {
+  background-color: var(--color-accent);
+  color: #060608;
+  opacity: 1;
+}
+
+body.theme-rogue #items-table th {
+  color: var(--color-accent);
+  border-bottom-color: var(--color-border);
+  font-family: var(--font-heading);
+  font-size: 0.8rem;
+}
+
+/* ============================================================
+   THEME: Sorcerer (void black — raw arcane violet, wild surge)
+   ============================================================ */
+body.theme-sorcerer {
+  --color-bg:           #0a080e;
+  --color-surface:      #120e1c;
+  --color-surface-2:    #1c1830;
+  --color-accent:       #9a44e8;
+  --color-text:         #d0c8e8;
+  --color-text-muted:   #6858a0;
+  --color-border:       #2a2040;
+  --font-heading:       'Raleway', sans-serif;
+  --font-body:          'EB Garamond', Georgia, serif;
+}
+
+body.theme-sorcerer #top-bar {
+  background-color: #0c0a14;
+  border-bottom: 2px solid var(--color-accent);
+  box-shadow: 0 2px 20px rgba(154, 68, 232, 0.25);
+}
+
+body.theme-sorcerer .nav-link.active {
+  color: var(--color-accent);
+  border-bottom-color: var(--color-accent);
+}
+
+body.theme-sorcerer section h2,
+body.theme-sorcerer #app-title {
+  font-family: var(--font-heading);
+  color: var(--color-accent);
+  font-weight: 700;
+  letter-spacing: 0.08em;
+}
+
+body.theme-sorcerer button {
+  background-color: var(--color-surface-2);
+  border: 1px solid var(--color-accent);
+  color: var(--color-accent);
+}
+
+body.theme-sorcerer button:hover {
+  background-color: var(--color-accent);
+  color: #0a080e;
+  opacity: 1;
+}
+
+body.theme-sorcerer #items-table th {
+  color: var(--color-accent);
+  border-bottom-color: var(--color-border);
+}
+
+/* ============================================================
+   THEME: Warlock (void — eldritch teal, pact shadow)
+   ============================================================ */
+body.theme-warlock {
+  --color-bg:           #060810;
+  --color-surface:      #0e1020;
+  --color-surface-2:    #161830;
+  --color-accent:       #28c8c0;
+  --color-text:         #b8d0d0;
+  --color-text-muted:   #406060;
+  --color-border:       #182030;
+  --font-heading:       'Metamorphous', 'Uncial Antiqua', Georgia, serif;
+  --font-body:          'EB Garamond', Georgia, serif;
+}
+
+body.theme-warlock #top-bar {
+  background-color: #08081a;
+  border-bottom: 2px solid var(--color-accent);
+  box-shadow: 0 2px 20px rgba(40, 200, 192, 0.15);
+}
+
+body.theme-warlock .nav-link.active {
+  color: var(--color-accent);
+  border-bottom-color: var(--color-accent);
+}
+
+body.theme-warlock section h2,
+body.theme-warlock #app-title {
+  font-family: var(--font-heading);
+  color: var(--color-accent);
+  letter-spacing: 0.06em;
+}
+
+body.theme-warlock button {
+  background-color: #182030;
+  border: 1px solid var(--color-accent);
+  color: var(--color-accent);
+}
+
+body.theme-warlock button:hover {
+  background-color: var(--color-accent);
+  color: #060810;
+  opacity: 1;
+}
+
+body.theme-warlock #items-table th {
+  color: var(--color-accent);
+  border-bottom-color: var(--color-border);
+}
+
+/* ============================================================
+   THEME: Wizard (deep midnight — sapphire ink, scholarly arcane)
+   ============================================================ */
+body.theme-wizard {
+  --color-bg:           #080a14;
+  --color-surface:      #100e22;
+  --color-surface-2:    #18163a;
+  --color-accent:       #5880d8;
+  --color-text:         #c8d0f0;
+  --color-text-muted:   #5060a0;
+  --color-border:       #201e40;
+  --font-heading:       'Playfair Display', Georgia, serif;
+  --font-body:          'EB Garamond', Georgia, serif;
+}
+
+body.theme-wizard #top-bar {
+  background-color: #0a0818;
+  border-bottom: 2px solid var(--color-accent);
+  box-shadow: 0 2px 16px rgba(88, 128, 216, 0.2);
+}
+
+body.theme-wizard .nav-link.active {
+  color: var(--color-accent);
+  border-bottom-color: var(--color-accent);
+}
+
+body.theme-wizard section h2,
+body.theme-wizard #app-title {
+  font-family: var(--font-heading);
+  color: var(--color-accent);
+  font-style: italic;
+  letter-spacing: 0.04em;
+}
+
+body.theme-wizard button {
+  background-color: #18163a;
+  border: 1px solid var(--color-accent);
+  color: var(--color-accent);
+}
+
+body.theme-wizard button:hover {
+  background-color: var(--color-accent);
+  color: #080a14;
+  opacity: 1;
+}
+
+body.theme-wizard #items-table th {
+  color: var(--color-accent);
+  border-bottom-color: var(--color-border);
+  font-style: italic;
 }
 
 /* ============================================================

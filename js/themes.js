@@ -1,11 +1,24 @@
 // themes.js
 
 const THEMES = [
-  { id: 'generic',          label: 'Generic D&D' },
-  { id: 'ravenloft',        label: 'Ravenloft' },
-  { id: 'forgotten-realms', label: 'Forgotten Realms' },
-  { id: 'greyhawk',         label: 'Greyhawk' },
-  { id: 'deadwell',         label: 'Deadwell' },
+  { id: 'generic',          label: 'Generic D&D',      group: 'Worlds' },
+  { id: 'ravenloft',        label: 'Ravenloft',         group: 'Worlds' },
+  { id: 'forgotten-realms', label: 'Forgotten Realms',  group: 'Worlds' },
+  { id: 'greyhawk',         label: 'Greyhawk',          group: 'Worlds' },
+  { id: 'deadwell',         label: 'Deadwell',          group: 'Worlds' },
+  { id: 'artificer',        label: 'Artificer',         group: 'Classes' },
+  { id: 'barbarian',        label: 'Barbarian',         group: 'Classes' },
+  { id: 'bard',             label: 'Bard',              group: 'Classes' },
+  { id: 'cleric',           label: 'Cleric',            group: 'Classes' },
+  { id: 'druid',            label: 'Druid',             group: 'Classes' },
+  { id: 'fighter',          label: 'Fighter',           group: 'Classes' },
+  { id: 'monk',             label: 'Monk',              group: 'Classes' },
+  { id: 'paladin',          label: 'Paladin',           group: 'Classes' },
+  { id: 'ranger',           label: 'Ranger',            group: 'Classes' },
+  { id: 'rogue',            label: 'Rogue',             group: 'Classes' },
+  { id: 'sorcerer',         label: 'Sorcerer',          group: 'Classes' },
+  { id: 'warlock',          label: 'Warlock',           group: 'Classes' },
+  { id: 'wizard',           label: 'Wizard',            group: 'Classes' },
 ];
 
 const THEME_BODY_PREFIX = 'theme-';
@@ -15,13 +28,9 @@ function applyTheme(themeId) {
   const valid = THEMES.find(t => t.id === themeId);
   const id    = valid ? themeId : DEFAULT_THEME;
 
-  // Remove any existing theme classes
   THEMES.forEach(t => document.body.classList.remove(THEME_BODY_PREFIX + t.id));
-
-  // Apply the new one
   document.body.classList.add(THEME_BODY_PREFIX + id);
 
-  // Keep the dropdown in sync
   const select = document.getElementById('theme-select');
   if (select) select.value = id;
 }
@@ -46,21 +55,29 @@ async function saveThemePreference(themeId) {
 }
 
 function initTheme() {
-  // Build dropdown options
   const select = document.getElementById('theme-select');
   if (!select) return;
 
+  const groups = {};
   THEMES.forEach(t => {
-    const option    = document.createElement('option');
-    option.value    = t.id;
-    option.textContent = t.label;
-    select.appendChild(option);
+    if (!groups[t.group]) groups[t.group] = [];
+    groups[t.group].push(t);
   });
 
-  // Apply saved preference
+  Object.entries(groups).forEach(([groupLabel, themes]) => {
+    const optgroup = document.createElement('optgroup');
+    optgroup.label = groupLabel;
+    themes.forEach(t => {
+      const option       = document.createElement('option');
+      option.value       = t.id;
+      option.textContent = t.label;
+      optgroup.appendChild(option);
+    });
+    select.appendChild(optgroup);
+  });
+
   loadThemePreference();
 
-  // Save on change
   select.addEventListener('change', (e) => {
     applyTheme(e.target.value);
     saveThemePreference(e.target.value);

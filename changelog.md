@@ -15,6 +15,9 @@ All notable changes to this project will be documented in this file.
   CSS custom properties and fonts.
 - `js/themes.js` — theme switching, Firestore load/save, dropdown
   initialization.
+- 13 D&D class themes: Artificer, Barbarian, Bard, Cleric, Druid, Fighter, Monk, Paladin, Ranger, Rogue, Sorcerer, Warlock, Wizard.
+- New Google Fonts import for class theme fonts.
+- Theme dropdown now uses optgroups (Worlds / Classes).
 
 ### Changed
 
