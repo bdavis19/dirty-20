@@ -176,6 +176,72 @@
     <!-- View: Results -->
     <main id="view-results" class="view hidden">
       <div class="view-content">
+        <!-- Merchant Section -->
+        <section id="merchant-section">
+          <div id="merchant-header">
+            <h2>Merchant</h2>
+            <button id="btn-toggle-merchant">▲ Collapse</button>
+          </div>
+          <div id="merchant-body">
+
+            <!-- Row 1: Species/Type + Name -->
+            <div class="merchant-row">
+              <div class="merchant-field">
+                <label>Species / Creature Type</label>
+                <input type="text" id="merchant-species" />
+                <button class="btn-reroll" data-field="species">⟳</button>
+              </div>
+              <div class="merchant-field">
+                <label>Name</label>
+                <input type="text" id="merchant-name" />
+                <button class="btn-reroll" data-field="name">⟳</button>
+              </div>
+            </div>
+
+            <!-- Row 2: Background + Appearance -->
+            <div class="merchant-row">
+              <div class="merchant-field">
+                <label>Background</label>
+                <input type="text" id="merchant-background" />
+                <button class="btn-reroll" data-field="background">⟳</button>
+              </div>
+              <div class="merchant-field">
+                <label>Appearance</label>
+                <input type="text" id="merchant-appearance" />
+                <button class="btn-reroll" data-field="appearance">⟳</button>
+              </div>
+            </div>
+
+            <!-- Personality (multi, max 3) -->
+            <div class="merchant-field">
+              <label>Personality</label>
+              <div id="merchant-personalities"></div>
+              <button id="btn-add-personality">+ Add</button>
+            </div>
+
+            <!-- Quirks (multi, max 3) -->
+            <div class="merchant-field">
+              <label>Quirks</label>
+              <div id="merchant-quirks"></div>
+              <button id="btn-add-quirk">+ Add</button>
+            </div>
+
+            <!-- Biases -->
+            <div class="merchant-row">
+              <div class="merchant-field">
+                <label>Likes</label>
+                <input type="text" id="merchant-bias-positive" />
+                <button class="btn-reroll" data-field="bias-positive">⟳</button>
+              </div>
+              <div class="merchant-field">
+                <label>Dislikes</label>
+                <input type="text" id="merchant-bias-negative" />
+                <button class="btn-reroll" data-field="bias-negative">⟳</button>
+              </div>
+            </div>
+
+          </div><!-- /#merchant-body -->
+        </section>
 
         <section id="output-section">
           <div id="results-header">

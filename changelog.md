@@ -11,6 +11,13 @@ All notable changes to this project will be documented in this file.
 - `js/merchantData.js`: data scaffold — hardcoded tables for backgrounds,
   personalities, biases, species, and creature types; placeholder banks for
   names, appearances, and quirks (to be populated in phases M5/M6).
+- `index.html`: `#merchant-section` added to results view above `#output-section` —
+  collapsible section with fields for Species/Creature Type, Name, Background,
+  Appearance, Personality (multi), Quirks (multi), Likes, and Dislikes (Phase M2).
+- `css/style.css`: merchant section styles — `.merchant-row` two-column flex layout,
+  `.merchant-field` label/input/button stack, `.merchant-multi-row` for personality
+  and quirk rows, `.btn-reroll` and `.btn-remove-item` secondary button styles,
+  `#merchant-body.hidden` visibility toggle.
 
 ### Fixed
 - `js/merchantData.js` and `js/merchant.js` not loaded — added script tags to `index.html`.
