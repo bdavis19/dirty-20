@@ -633,3 +633,57 @@ button.secondary {
   border-color: var(--color-text-muted);
   opacity: 1;
 }
+
+/* === Species/Creature reroll panel === */
+.merchant-species-panel {
+  background-color: var(--color-surface-2);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  padding: 0.75rem;
+  margin-top: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.species-panel-branch {
+  display: flex;
+  gap: 1rem;
+}
+
+.species-panel-branch label,
+.species-panel-options label {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-size: 0.85rem;
+  color: var(--color-text);
+  cursor: pointer;
+}
+
+.species-panel-options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem 1rem;
+}
+
+.merchant-species-panel #sp-roll-btn {
+  align-self: flex-start;
+  background-color: var(--color-accent);
+  border: none;
+  color: #fff;
+  font-size: 0.85rem;
+  padding: 0.3rem 0.8rem;
+  border-radius: var(--radius);
+  cursor: pointer;
+  margin-top: 0.25rem;
+}
+
+.merchant-species-panel #sp-roll-btn:hover {
+  opacity: 0.85;
+}
+
+.merchant-species-panel #sp-roll-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}

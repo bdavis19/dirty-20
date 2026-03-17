@@ -166,6 +166,7 @@ function initApp() {
   initCustomPresets();
   loadItemData();
   initNameGenerator();
+  initMerchant();
 
   document.getElementById('builtin-preset-select').addEventListener('change', (e) => {
     if (e.target.value !== '') {
@@ -352,11 +353,13 @@ function renderItems(items) {
 }
 
 document.getElementById('btn-generate').addEventListener('click', () => {
-  document.getElementById('shop-name').value = '';          // ← new line
+  document.getElementById('shop-name').value = '';
   document.getElementById('markup-applied').value = document.getElementById('markup-percent').value || 0;
   const shopData = buildShopData();
   const items = generateShop(allItems, shopData.settings);
   renderItems(items);
+  const merchant = generateMerchant();        // ← new
+  renderMerchant(merchant);                   // ← new
   setUnsavedChanges(true);
   showView('results');
 });

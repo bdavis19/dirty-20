@@ -18,6 +18,16 @@ All notable changes to this project will be documented in this file.
   `.merchant-field` label/input/button stack, `.merchant-multi-row` for personality
   and quirk rows, `.btn-reroll` and `.btn-remove-item` secondary button styles,
   `#merchant-body.hidden` visibility toggle.
+- `js/merchant.js`: `renderMerchant(merchantData)` — populates all merchant
+  UI fields from a merchant object (Phase M3).
+- `js/merchant.js`: `initMerchant()` — wires collapse toggle, all reroll
+  buttons, add/remove for personality and quirk rows (Phase M3).
+- `js/merchant.js`: species/creature inline reroll panel with branch and
+  per-type checkboxes; constrained reroll respects checked pool only.
+- `js/app.js`: `generateMerchant()` + `renderMerchant()` called on Generate;
+  `initMerchant()` called in `initApp()`.
+- `css/style.css`: `.merchant-species-panel` styles for the inline
+  species/creature reroll panel.
 
 ### Fixed
 - `js/merchantData.js` and `js/merchant.js` not loaded — added script tags to `index.html`.

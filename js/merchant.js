@@ -281,3 +281,364 @@ function generateMerchant() {
     collapsed: false
   };
 }
+
+// ---------------------------------------------------------------------------
+// Render
+// ---------------------------------------------------------------------------
+
+/**
+ * Populates all merchant UI fields from a merchant data object.
+ * @param {object} merchantData — full merchant object (from generateMerchant or saved shop)
+ */
+function renderMerchant(merchantData) {
+  document.getElementById('merchant-species').value        = merchantData.species      || '';
+  document.getElementById('merchant-name').value           = merchantData.name         || '';
+  document.getElementById('merchant-background').value     = merchantData.background   || '';
+  document.getElementById('merchant-appearance').value     = merchantData.appearance   || '';
+  document.getElementById('merchant-bias-positive').value  = merchantData.biasPositive || '';
+  document.getElementById('merchant-bias-negative').value  = merchantData.biasNegative || '';
+
+  _renderMultiField('merchant-personalities', merchantData.personalities || [], 'personality');
+  _renderMultiField('merchant-quirks',        merchantData.quirks        || [], 'quirk');
+
+  // Store current merchant data on the section element for reroll access
+  const section = document.getElementById('merchant-section');
+  section._merchantData = JSON.parse(JSON.stringify(merchantData));
+}
+
+/**
+ * Renders a list of values into a multi-row field container.
+ * Each row: [text input] [⟳ reroll] [− remove]
+ *
+ * @param {string} containerId — id of the container div
+ * @param {string[]} values    — array of string values
+ * @param {string} type        — 'personality' or 'quirk'
+ */
+function _renderMultiField(containerId, values, type) {
+  const container = document.getElementById(containerId);
+  container.innerHTML = '';
+  values.forEach(value => _appendMultiRow(container, value, type));
+  _updateMultiControls(containerId, type);
+}
+
+/**
+ * Appends a single multi-row (input + reroll + remove) to a container.
+ * @param {HTMLElement} container
+ * @param {string} value
+ * @param {string} type — 'personality' or 'quirk'
+ */
+function _appendMultiRow(container, value, type) {
+  const row = document.createElement('div');
+  row.className = 'merchant-multi-row';
+
+  const input = document.createElement('input');
+  input.type = 'text';
+  input.value = value;
+
+  const rerollBtn = document.createElement('button');
+  rerollBtn.className = 'btn-reroll';
+  rerollBtn.textContent = '⟳';
+  rerollBtn.dataset.multiType = type;
+
+  const removeBtn = document.createElement('button');
+  removeBtn.className = 'btn-remove-item';
+  removeBtn.textContent = '−';
+  removeBtn.dataset.multiType = type;
+
+  row.appendChild(input);
+  row.appendChild(rerollBtn);
+  row.appendChild(removeBtn);
+  container.appendChild(row);
+}
+
+/**
+ * Updates visibility of remove buttons and the add button based on current count.
+ * @param {string} containerId
+ * @param {string} type — 'personality' or 'quirk'
+ */
+function _updateMultiControls(containerId, type) {
+  const container = document.getElementById(containerId);
+  const rows = container.querySelectorAll('.merchant-multi-row');
+  const count = rows.length;
+  const addBtnId = type === 'personality' ? 'btn-add-personality' : 'btn-add-quirk';
+
+  rows.forEach(row => {
+    row.querySelector('.btn-remove-item').style.display = count > 1 ? '' : 'none';
+  });
+
+  const addBtn = document.getElementById(addBtnId);
+  addBtn.style.display = count >= 3 ? 'none' : '';
+}
+
+// ---------------------------------------------------------------------------
+// Helper: read current multi-field values from DOM
+// ---------------------------------------------------------------------------
+
+function _readMultiValues(containerId) {
+  return [...document.getElementById(containerId).querySelectorAll('.merchant-multi-row input')]
+    .map(input => input.value.trim())
+    .filter(Boolean);
+}
+
+// ---------------------------------------------------------------------------
+// Species/Creature reroll panel
+// ---------------------------------------------------------------------------
+
+/**
+ * Builds and toggles the inline species/creature reroll panel below the species field.
+ */
+function _toggleSpeciesPanel() {
+  const field = document.getElementById('merchant-species').closest('.merchant-field');
+  let panel = document.getElementById('merchant-species-panel');
+
+  if (panel) {
+    panel.remove();
+    return;
+  }
+
+  panel = document.createElement('div');
+  panel.id = 'merchant-species-panel';
+  panel.className = 'merchant-species-panel';
+
+  panel.innerHTML = `
+    <div class="species-panel-branch">
+      <label><input type="checkbox" id="sp-check-species" checked /> Species</label>
+      <label><input type="checkbox" id="sp-check-creature" /> Creature Type</label>
+    </div>
+    <div id="sp-species-options" class="species-panel-options">
+      <label><input type="checkbox" class="sp-species-type" value="human" checked /> Human</label>
+      <label><input type="checkbox" class="sp-species-type" value="elf" checked /> Elf</label>
+      <label><input type="checkbox" class="sp-species-type" value="dwarf" checked /> Dwarf</label>
+      <label><input type="checkbox" class="sp-species-type" value="gnome" checked /> Gnome</label>
+      <label><input type="checkbox" class="sp-species-type" value="halfling" checked /> Halfling</label>
+      <label><input type="checkbox" class="sp-species-type" value="tiefling" checked /> Tiefling</label>
+      <label><input type="checkbox" class="sp-species-type" value="dragonborn" checked /> Dragonborn</label>
+    </div>
+    <div id="sp-creature-options" class="species-panel-options" style="display:none">
+      <label><input type="checkbox" class="sp-creature-type" value="humanoid" checked /> Humanoid</label>
+      <label><input type="checkbox" class="sp-creature-type" value="giant" checked /> Giant</label>
+      <label><input type="checkbox" class="sp-creature-type" value="dragon" checked /> Dragon</label>
+      <label><input type="checkbox" class="sp-creature-type" value="monstrosity" checked /> Monstrosity</label>
+      <label><input type="checkbox" class="sp-creature-type" value="celestial" checked /> Celestial</label>
+      <label><input type="checkbox" class="sp-creature-type" value="construct" checked /> Construct</label>
+      <label><input type="checkbox" class="sp-creature-type" value="elemental" checked /> Elemental</label>
+      <label><input type="checkbox" class="sp-creature-type" value="fey" checked /> Fey</label>
+      <label><input type="checkbox" class="sp-creature-type" value="fiend" checked /> Fiend</label>
+      <label><input type="checkbox" class="sp-creature-type" value="undead" checked /> Undead</label>
+    </div>
+    <button id="sp-roll-btn">Roll</button>
+  `;
+
+  field.appendChild(panel);
+
+  const checkSpecies  = panel.querySelector('#sp-check-species');
+  const checkCreature = panel.querySelector('#sp-check-creature');
+  const speciesOpts   = panel.querySelector('#sp-species-options');
+  const creatureOpts  = panel.querySelector('#sp-creature-options');
+  const rollBtn       = panel.querySelector('#sp-roll-btn');
+
+  function updatePanelVisibility() {
+    speciesOpts.style.display  = checkSpecies.checked  ? '' : 'none';
+    creatureOpts.style.display = checkCreature.checked ? '' : 'none';
+    rollBtn.disabled = !checkSpecies.checked && !checkCreature.checked;
+  }
+
+  checkSpecies.addEventListener('change',  updatePanelVisibility);
+  checkCreature.addEventListener('change', updatePanelVisibility);
+
+  rollBtn.addEventListener('click', () => {
+    const section = document.getElementById('merchant-section');
+    const md = section._merchantData || {};
+
+    const wantSpecies  = checkSpecies.checked;
+    const wantCreature = checkCreature.checked;
+
+    let branch;
+    if (wantSpecies && wantCreature) {
+      branch = Math.random() < 0.5 ? 'species' : 'creature';
+    } else if (wantSpecies) {
+      branch = 'species';
+    } else {
+      branch = 'creature';
+    }
+
+    let newSpecies, newSpeciesType;
+
+    if (branch === 'species') {
+      const checked = [...panel.querySelectorAll('.sp-species-type:checked')].map(el => el.value);
+      if (checked.length === 0) return;
+      newSpeciesType = 'species';
+      newSpecies = _rollSpeciesFromPool(checked);
+    } else {
+      const checked = [...panel.querySelectorAll('.sp-creature-type:checked')].map(el => el.value);
+      if (checked.length === 0) return;
+      newSpeciesType = 'creature';
+      newSpecies = _rollCreatureFromPool(checked);
+    }
+
+    document.getElementById('merchant-species').value = newSpecies;
+    section._merchantData = { ...md, species: newSpecies, speciesType: newSpeciesType };
+    panel.remove();
+  });
+}
+
+/**
+ * Rolls a species result constrained to the given pool of branch keys.
+ * @param {string[]} pool — e.g. ['human', 'elf', 'dragonborn']
+ * @returns {string}
+ */
+function _rollSpeciesFromPool(pool) {
+  const branch = pool[Math.floor(Math.random() * pool.length)];
+  const map = {
+    human:      () => { const s = _rollDie(6); return s <= 4 ? 'Human' : s === 5 ? 'Half-Elf' : 'Half-Orc'; },
+    elf:        () => { const s = _rollDie(6); return s <= 2 ? 'High Elf' : s <= 4 ? 'Wood Elf' : 'Dark Elf'; },
+    dwarf:      () => { const s = _rollDie(8); return s <= 3 ? 'Hill Dwarf' : s <= 6 ? 'Mountain Dwarf' : 'Duergar'; },
+    gnome:      () => 'Gnome',
+    halfling:   () => 'Halfling',
+    tiefling:   () => 'Tiefling',
+    dragonborn: () => {
+      const colors = ["Black","Blue","Brass","Bronze","Copper","Gold","Green","Red","Silver","White"];
+      return `${colors[_rollDie(10) - 1]} Dragonborn`;
+    }
+  };
+  return (map[branch] || map.human)();
+}
+
+/**
+ * Rolls a creature result constrained to the given pool of category keys.
+ * @param {string[]} pool — e.g. ['humanoid', 'dragon']
+ * @returns {string}
+ */
+function _rollCreatureFromPool(pool) {
+  const cat = pool[Math.floor(Math.random() * pool.length)];
+  const map = {
+    humanoid:    () => { const opts = ["Bugbear","Gnoll","Goblin","Hobgoblin","Kobold","Lizardfolk","Merfolk","Orc"]; return opts[_rollDie(8) - 1]; },
+    giant:       () => { const g = _rollDie(6); if (g===1) return _rollDie(2)===1?'Cloud Giant':'Storm Giant'; if (g===2) return 'Cyclops'; if (g===3) return 'Ettin'; if (g===4) return _rollDie(2)===1?'Fire Giant':'Frost Giant'; if (g===5) return 'Hill Giant'; return 'Stone Giant'; },
+    dragon:      () => { const colors=["Black","Blue","Brass","Bronze","Copper","Gold","Green","Red","Silver","White"]; return `${colors[_rollDie(10)-1]} Dragon`; },
+    monstrosity: () => { const opts=["Centaur","Drider","Ettercap","Medusa","Minotaur","Sphinx"]; return opts[_rollDie(6)-1]; },
+    celestial:   () => { const opts=["Couatl","Deva","Planetar","Unicorn"]; return opts[_rollDie(4)-1]; },
+    construct:   () => { const opts=["Clay Golem","Flesh Golem","Iron Golem","Stone Golem"]; return opts[_rollDie(4)-1]; },
+    elemental:   () => { const opts=["Azer","Djinni","Efreeti","Gargoyle"]; return opts[_rollDie(4)-1]; },
+    fey:         () => { const opts=["Dryad","Hag","Pixie","Satyr"]; return opts[_rollDie(4)-1]; },
+    fiend:       () => { const opts=["Balor","Imp","Pit Fiend","Quasit","Rakshasa","Succubus"]; return opts[_rollDie(6)-1]; },
+    undead:      () => { const opts=["Banshee","Ghast","Ghost","Lich","Mummy","Vampire"]; return opts[_rollDie(6)-1]; }
+  };
+  return (map[cat] || map.humanoid)();
+}
+
+// ---------------------------------------------------------------------------
+// Init
+// ---------------------------------------------------------------------------
+
+/**
+ * Sets up all merchant section interactivity:
+ * collapse toggle, reroll buttons, add/remove for personality and quirk.
+ * Call once from initApp().
+ */
+function initMerchant() {
+  // --- Collapse toggle ---
+  document.getElementById('btn-toggle-merchant').addEventListener('click', () => {
+    const body   = document.getElementById('merchant-body');
+    const btn    = document.getElementById('btn-toggle-merchant');
+    const hidden = body.classList.toggle('hidden');
+    btn.textContent = hidden ? '▼ Expand' : '▲ Collapse';
+
+    const section = document.getElementById('merchant-section');
+    if (section._merchantData) section._merchantData.collapsed = hidden;
+  });
+
+  // --- Reroll buttons (delegated on merchant-section) ---
+  document.getElementById('merchant-section').addEventListener('click', (e) => {
+    const btn = e.target.closest('.btn-reroll');
+    if (!btn) return;
+
+    const field = btn.dataset.field;
+
+    // Multi-row reroll (personality / quirk)
+    if (btn.dataset.multiType) {
+      const type = btn.dataset.multiType;
+      const containerId = type === 'personality' ? 'merchant-personalities' : 'merchant-quirks';
+      const existing = _readMultiValues(containerId);
+      const row = btn.closest('.merchant-multi-row');
+      const input = row.querySelector('input');
+      const newVal = type === 'personality'
+        ? rollMerchantPersonality(existing.filter(v => v !== input.value))
+        : rollMerchantQuirk(existing.filter(v => v !== input.value));
+      input.value = newVal;
+      return;
+    }
+
+    // Single-field rerolls
+    const section = document.getElementById('merchant-section');
+    const md = section._merchantData || {};
+
+    switch (field) {
+      case 'species': {
+        _toggleSpeciesPanel();
+        break;
+      }
+      case 'name': {
+        const species = document.getElementById('merchant-species').value || md.species || '';
+        const bank = MERCHANT_NAMES[_nameKey(species)] || MERCHANT_NAMES.default;
+        document.getElementById('merchant-name').value = _pick(bank);
+        break;
+      }
+      case 'background': {
+        document.getElementById('merchant-background').value = rollMerchantBackground();
+        break;
+      }
+      case 'appearance': {
+        const species = document.getElementById('merchant-species').value || md.species || '';
+        const bank = MERCHANT_APPEARANCES[_appearanceKey(species)] || MERCHANT_APPEARANCES.default;
+        document.getElementById('merchant-appearance').value = _pick(bank);
+        break;
+      }
+      case 'bias-positive': {
+        const negVal = document.getElementById('merchant-bias-negative').value;
+        const { positive } = rollMerchantBiases(null, negVal);
+        document.getElementById('merchant-bias-positive').value = positive;
+        break;
+      }
+      case 'bias-negative': {
+        const posVal = document.getElementById('merchant-bias-positive').value;
+        const { negative } = rollMerchantBiases(posVal, null);
+        document.getElementById('merchant-bias-negative').value = negative;
+        break;
+      }
+    }
+  });
+
+  // --- Remove buttons (delegated) ---
+  document.getElementById('merchant-section').addEventListener('click', (e) => {
+    const btn = e.target.closest('.btn-remove-item');
+    if (!btn) return;
+
+    const type = btn.dataset.multiType;
+    const containerId = type === 'personality' ? 'merchant-personalities' : 'merchant-quirks';
+    const row = btn.closest('.merchant-multi-row');
+    row.remove();
+    _updateMultiControls(containerId, type);
+  });
+
+  // --- Add personality ---
+  document.getElementById('btn-add-personality').addEventListener('click', () => {
+    const containerId = 'merchant-personalities';
+    const container = document.getElementById(containerId);
+    const existing = _readMultiValues(containerId);
+    if (existing.length >= 3) return;
+    const newVal = rollMerchantPersonality(existing);
+    _appendMultiRow(container, newVal, 'personality');
+    _updateMultiControls(containerId, 'personality');
+  });
+
+  // --- Add quirk ---
+  document.getElementById('btn-add-quirk').addEventListener('click', () => {
+    const containerId = 'merchant-quirks';
+    const container = document.getElementById(containerId);
+    const existing = _readMultiValues(containerId);
+    if (existing.length >= 3) return;
+    const newVal = rollMerchantQuirk(existing);
+    _appendMultiRow(container, newVal, 'quirk');
+    _updateMultiControls(containerId, 'quirk');
+  });
+}
