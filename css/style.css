@@ -331,6 +331,7 @@ button.secondary {
   font-size: 0.9rem;
   text-align: center;
   -moz-appearance: textfield;
+  appearance: textfield;
 }
 
 .qty-edit::-webkit-outer-spin-button,
