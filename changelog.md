@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file.
 
+## [Unreleased]
+
+### Added
+- `js/merchant.js`: merchant NPC generation logic (Phase M1) — species/creature
+  rolls with full sub-tables, background, personality, bias, quirk, and name
+  resolution; `generateMerchant()` orchestrator returns a complete merchant object.
+- `js/merchantData.js`: data scaffold — hardcoded tables for backgrounds,
+  personalities, biases, species, and creature types; placeholder banks for
+  names, appearances, and quirks (to be populated in phases M5/M6).
+
 ## [3.2.0] - 2026-03-16
 
 ### Added
