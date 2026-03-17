@@ -212,11 +212,6 @@ function _nameKey(species) {
 // Appearance lookup
 // ---------------------------------------------------------------------------
 
-function _appearanceKey(species) {
-  // Appearance keys mirror name keys for species; creatures fall back to default.
-  return _nameKey(species);
-}
-
 // ---------------------------------------------------------------------------
 // Quirk lookup
 // ---------------------------------------------------------------------------
@@ -255,8 +250,7 @@ function generateMerchant() {
   const name = _pick(nameBank);
 
   // Appearance from species bank
-  const appearanceBank = MERCHANT_APPEARANCES[_appearanceKey(species)] || MERCHANT_APPEARANCES.default;
-  const appearance = _pick(appearanceBank);
+  const appearance = _pick(MERCHANT_APPEARANCES);
 
   // 1–3 quirks, no repeats
   const quirkCount = _rollDie(3);
@@ -657,9 +651,7 @@ function initMerchant() {
         break;
       }
       case 'appearance': {
-        const species = document.getElementById('merchant-species').value || md.species || '';
-        const bank = MERCHANT_APPEARANCES[_appearanceKey(species)] || MERCHANT_APPEARANCES.default;
-        document.getElementById('merchant-appearance').value = _pick(bank);
+        document.getElementById('merchant-appearance').value = _pick(MERCHANT_APPEARANCES);
         break;
       }
       case 'bias-positive': {

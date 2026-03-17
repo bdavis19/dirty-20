@@ -33,6 +33,16 @@ All notable changes to this project will be documented in this file.
 - `js/app.js`: merchant data is now saved with the shop via `readMerchantFromUI()` in `buildShopData()`.
 - `js/app.js`: merchant fields are restored on shop load via `renderMerchant()` in `applyLoadedShop()`; shops without a saved merchant generate a fresh one.
 - `js/app.js`: `resetGeneratorForm()` now clears all merchant UI fields.
+- `js/merchantData.js`: `MERCHANT_NAMES` populated with full name banks for all
+  species and creature type keys (Phase M5).
+- `js/merchantData.js`: `MERCHANT_APPEARANCES` replaced with a flat array of ~200
+  appearance descriptors shared across all species and creature types (Phase M5).
+
+### Changed
+
+- `js/merchant.js`: appearance lookup simplified — `_appearanceKey()` removed;
+  `generateMerchant()` and the appearance reroll handler now draw directly from
+  the flat `MERCHANT_APPEARANCES` array.
 
 ### Fixed
 
