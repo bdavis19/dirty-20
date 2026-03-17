@@ -205,6 +205,41 @@ function _nameKey(species) {
   const humanoids = ["Bugbear","Gnoll","Goblin","Hobgoblin","Kobold","Lizardfolk","Merfolk","Orc"];
   if (humanoids.includes(species)) return "humanoid";
 
+  // Giant subtypes
+  const giants = ["Cloud Giant","Storm Giant","Cyclops","Ettin","Fire Giant","Frost Giant","Hill Giant","Stone Giant"];
+  if (giants.includes(species)) return "giant";
+
+  // Dragon subtypes
+  if (species.endsWith("Dragon")) return "dragon";
+
+  // Monstrosity subtypes
+  const monstrosities = ["Centaur","Drider","Ettercap","Medusa","Minotaur","Sphinx"];
+  if (monstrosities.includes(species)) return "monstrosity";
+
+  // Celestial subtypes
+  const celestials = ["Couatl","Deva","Planetar","Unicorn"];
+  if (celestials.includes(species)) return "celestial";
+
+  // Construct subtypes
+  const constructs = ["Clay Golem","Flesh Golem","Iron Golem","Stone Golem"];
+  if (constructs.includes(species)) return "construct";
+
+  // Elemental subtypes
+  const elementals = ["Azer","Djinni","Efreeti","Gargoyle"];
+  if (elementals.includes(species)) return "elemental";
+
+  // Fey subtypes
+  const fey = ["Dryad","Hag","Pixie","Satyr"];
+  if (fey.includes(species)) return "fey";
+
+  // Fiend subtypes
+  const fiends = ["Balor","Imp","Pit Fiend","Quasit","Rakshasa","Succubus"];
+  if (fiends.includes(species)) return "fiend";
+
+  // Undead subtypes
+  const undead = ["Banshee","Ghast","Ghost","Lich","Mummy","Vampire"];
+  if (undead.includes(species)) return "undead";
+
   return map[species] || "default";
 }
 

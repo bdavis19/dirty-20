@@ -52,6 +52,10 @@ All notable changes to this project will be documented in this file.
 - Clicking Roll no longer closes the species/creature reroll panel;
   selections persist and the button can be clicked repeatedly.
 - `js/merchant.js`: `renderMerchant()` now restores the collapsed/expanded state of the merchant section and updates the toggle button label accordingly.
+- `js/merchant.js`: `_nameKey()` now maps all creature subtypes (giant, dragon,
+  monstrosity, celestial, construct, elemental, fey, fiend, undead) to their
+  respective name bank keys; previously all non-humanoid creatures fell through
+  to the `default` fallback.
 
 ## [3.2.0] - 2026-03-16
 
