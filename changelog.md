@@ -15,6 +15,7 @@ All notable changes to this project will be documented in this file.
 - `js/app.js`: `applyLoadedShop()` restores shop details via `renderShopDetails()`; shops without a saved `shopDetails` key generate a fresh one.
 - `js/app.js`: `resetGeneratorForm()` clears all four `#shop-detail-*` fields.
 - `index.html`: script tags for `js/shopDetailsData.js` and `js/shopDetails.js` added before `main.js`.
+- `js/shopDetailsData.js`: all four arrays populated — 40 locations, 29 appearances, 108 quirks, 108 security entries.
 
 ## [3.3.0] - 2026-03-17
 
