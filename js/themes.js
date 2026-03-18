@@ -32,7 +32,7 @@ function applyTheme(themeId) {
   THEMES.forEach(t => document.body.classList.remove(THEME_BODY_PREFIX + t.id));
   document.body.classList.add(THEME_BODY_PREFIX + id);
 
-  try { localStorage.setItem(THEME_STORAGE_KEY, id); } catch {}
+  try { localStorage.setItem('d20-theme', id); } catch {}
 
   const select = document.getElementById('theme-select');
   if (select) select.value = id;

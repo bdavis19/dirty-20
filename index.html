@@ -9,6 +9,12 @@
   <link rel="stylesheet" href="css/themes.css" />
 </head>
 <body>
+  <script>
+    (function() {
+      var t = localStorage.getItem('d20-theme');
+      if (t) document.body.className = 'theme-' + t;
+    })();
+  </script>
 
   <!-- Login Screen -->
   <div id="login-screen">

@@ -6,9 +6,7 @@ All notable changes to this project will be documented in this file.
 
 ### Fixed
 
-- Brief theme flash on page refresh — last-used theme is now cached in
-  `localStorage` and applied synchronously before the Firestore preference
-  loads, eliminating the default theme flicker.
+- Brief theme flash on page refresh — an inline script immediately after `<body>` reads the cached theme from `localStorage` and applies the body class before any rendering occurs, eliminating the default theme flicker while Firestore loads.
 
 ## [v3.4.0] 2026-03-17
 
