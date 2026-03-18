@@ -4,6 +4,12 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+### Fixed
+
+- Brief theme flash on page refresh — last-used theme is now cached in
+  `localStorage` and applied synchronously before the Firestore preference
+  loads, eliminating the default theme flicker.
+
 ## [v3.4.0] 2026-03-17
 
 ### Added

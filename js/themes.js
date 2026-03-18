@@ -21,8 +21,9 @@ const THEMES = [
   { id: 'wizard',           label: 'Wizard',            group: 'Classes' },
 ];
 
-const THEME_BODY_PREFIX = 'theme-';
-const DEFAULT_THEME     = 'generic';
+const THEME_BODY_PREFIX  = 'theme-';
+const DEFAULT_THEME      = 'generic';
+const THEME_STORAGE_KEY  = 'd20-theme';
 
 function applyTheme(themeId) {
   const valid = THEMES.find(t => t.id === themeId);
@@ -30,6 +31,8 @@ function applyTheme(themeId) {
 
   THEMES.forEach(t => document.body.classList.remove(THEME_BODY_PREFIX + t.id));
   document.body.classList.add(THEME_BODY_PREFIX + id);
+
+  try { localStorage.setItem(THEME_STORAGE_KEY, id); } catch {}
 
   const select = document.getElementById('theme-select');
   if (select) select.value = id;
@@ -57,6 +60,12 @@ async function saveThemePreference(themeId) {
 function initTheme() {
   const select = document.getElementById('theme-select');
   if (!select) return;
+
+  // Apply cached theme immediately to prevent flash on load
+  try {
+    const cached = localStorage.getItem(THEME_STORAGE_KEY);
+    if (cached) applyTheme(cached);
+  } catch {}
 
   const groups = {};
   THEMES.forEach(t => {
