@@ -4,6 +4,24 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+### Added
+
+- `js/shopDetailsData.js` — new file with four placeholder data arrays (`SHOP_LOCATIONS`, `SHOP_APPEARANCES`, `SHOP_QUIRKS`, `SHOP_SECURITY`) for the Shop Details Generator.
+- `js/shopDetails.js` — Shop Details generation logic: `generateShopDetails()`, `renderShopDetails()`, `readShopDetailsFromUI()`, and `initShopDetails()` with collapse toggle and delegated reroll button wiring.
+- `index.html`: `#shop-details-section` added to results view between `#merchant-section` and `#output-section` — collapsible section with Location, Appearance, Quirk, and Security fields, each with a reroll button.
+- `js/app.js`: `initShopDetails()` called in `initApp()`.
+- `js/app.js`: Generate button now calls `generateShopDetails()` and `renderShopDetails()` after shop generation.
+- `js/app.js`: `buildShopData()` now includes `shopDetails: readShopDetailsFromUI()` in the returned shop object.
+- `js/app.js`: `applyLoadedShop()` restores shop details via `renderShopDetails()`; shops without a saved `shopDetails` key generate a fresh one.
+- `js/app.js`: `resetGeneratorForm()` clears all four `#shop-detail-*` fields.
+- `index.html`: script tags for `js/shopDetailsData.js` and `js/shopDetails.js` added before `main.js`.
+- `js/shopDetailsData.js`: all four arrays populated — 40 locations, 29 appearances, 108 quirks, 108 security entries.
+
+### Fixed
+- `css/style.css`: `#shop-details-header` styles added — matches `#merchant-header` layout with `space-between`, correct button size (`0.8rem`, `0.25rem 0.75rem` padding), and hover state. Collapse/expand button now sits to the right of the section title in both Merchant and Shop Details sections.
+- `css/style.css`: `#shop-details-body.hidden` rule added for collapse visibility toggle.
+- `css/style.css`: `#merchant-header` and `#shop-details-header` changed from `justify-content: space-between` to `gap: 0.75rem` — collapse/expand buttons now sit immediately to the right of their section title rather than at the far right edge.
+
 ## [3.3.0] - 2026-03-17
 
 ### Added
