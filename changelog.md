@@ -37,6 +37,7 @@ All notable changes to this project will be documented in this file.
   species and creature type keys (Phase M5).
 - `js/merchantData.js`: `MERCHANT_APPEARANCES` replaced with a flat array of ~200
   appearance descriptors shared across all species and creature types (Phase M5).
+- `js/merchantData.js`: `MERCHANT_QUIRKS` populated with 118 quirk entries covering speech patterns, mannerisms, habits, and physical tics (Phase M6).
 
 ### Changed
 
