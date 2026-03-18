@@ -4,6 +4,8 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+## [v3.4.0] 2026-03-17
+
 ### Added
 
 - `js/shopDetailsData.js` — new file with four placeholder data arrays (`SHOP_LOCATIONS`, `SHOP_APPEARANCES`, `SHOP_QUIRKS`, `SHOP_SECURITY`) for the Shop Details Generator.
@@ -18,6 +20,7 @@ All notable changes to this project will be documented in this file.
 - `js/shopDetailsData.js`: all four arrays populated — 40 locations, 29 appearances, 108 quirks, 108 security entries.
 
 ### Fixed
+
 - `css/style.css`: `#shop-details-header` styles added — matches `#merchant-header` layout with `space-between`, correct button size (`0.8rem`, `0.25rem 0.75rem` padding), and hover state. Collapse/expand button now sits to the right of the section title in both Merchant and Shop Details sections.
 - `css/style.css`: `#shop-details-body.hidden` rule added for collapse visibility toggle.
 - `css/style.css`: `#merchant-header` and `#shop-details-header` changed from `justify-content: space-between` to `gap: 0.75rem` — collapse/expand buttons now sit immediately to the right of their section title rather than at the far right edge.
