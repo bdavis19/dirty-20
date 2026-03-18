@@ -58,6 +58,18 @@ function resetGeneratorForm() {
   });
   document.getElementById('min-price').value = '';
   document.getElementById('max-price').value = '';
+
+  // Clear merchant fields
+  document.getElementById('merchant-species').value       = '';
+  document.getElementById('merchant-name').value          = '';
+  document.getElementById('merchant-background').value    = '';
+  document.getElementById('merchant-appearance').value    = '';
+  document.getElementById('merchant-bias-positive').value = '';
+  document.getElementById('merchant-bias-negative').value = '';
+  document.getElementById('merchant-personalities').innerHTML = '';
+  document.getElementById('merchant-quirks').innerHTML        = '';
+  const merchantSection = document.getElementById('merchant-section');
+  if (merchantSection) merchantSection._merchantData = null;
 }
 
 function applyPreset(presetName) {
@@ -166,6 +178,7 @@ function initApp() {
   initCustomPresets();
   loadItemData();
   initNameGenerator();
+  initMerchant();
 
   document.getElementById('builtin-preset-select').addEventListener('change', (e) => {
     if (e.target.value !== '') {
@@ -232,6 +245,7 @@ function buildShopData() {
       filters,
     },
     items,
+    merchant: readMerchantFromUI(),
   };
 }
 
@@ -305,6 +319,12 @@ function applyLoadedShop(data) {
   updatePriceHeader();
   setUnsavedChanges(false);
   showView('results');   // ← navigates to results view after restoring
+
+  if (data.merchant) {
+    renderMerchant(data.merchant);
+  } else {
+    renderMerchant(generateMerchant());
+  }
 }
 
 // app.js — Generate button
@@ -352,11 +372,13 @@ function renderItems(items) {
 }
 
 document.getElementById('btn-generate').addEventListener('click', () => {
-  document.getElementById('shop-name').value = '';          // ← new line
+  document.getElementById('shop-name').value = '';
   document.getElementById('markup-applied').value = document.getElementById('markup-percent').value || 0;
   const shopData = buildShopData();
   const items = generateShop(allItems, shopData.settings);
   renderItems(items);
+  const merchant = generateMerchant();        // ← new
+  renderMerchant(merchant);                   // ← new
   setUnsavedChanges(true);
   showView('results');
 });

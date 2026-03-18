@@ -2,6 +2,62 @@
 
 All notable changes to this project will be documented in this file.
 
+## [Unreleased]
+
+### Added
+
+- `js/merchant.js`: merchant NPC generation logic (Phase M1) — species/creature
+  rolls with full sub-tables, background, personality, bias, quirk, and name
+  resolution; `generateMerchant()` orchestrator returns a complete merchant object.
+- `js/merchantData.js`: data scaffold — hardcoded tables for backgrounds,
+  personalities, biases, species, and creature types; placeholder banks for
+  names, appearances, and quirks (to be populated in phases M5/M6).
+- `index.html`: `#merchant-section` added to results view above `#output-section` —
+  collapsible section with fields for Species/Creature Type, Name, Background,
+  Appearance, Personality (multi), Quirks (multi), Likes, and Dislikes (Phase M2).
+- `css/style.css`: merchant section styles — `.merchant-row` two-column flex layout,
+  `.merchant-field` label/input/button stack, `.merchant-multi-row` for personality
+  and quirk rows, `.btn-reroll` and `.btn-remove-item` secondary button styles,
+  `#merchant-body.hidden` visibility toggle.
+- `js/merchant.js`: `renderMerchant(merchantData)` — populates all merchant
+  UI fields from a merchant object (Phase M3).
+- `js/merchant.js`: `initMerchant()` — wires collapse toggle, all reroll
+  buttons, add/remove for personality and quirk rows (Phase M3).
+- `js/merchant.js`: species/creature inline reroll panel with branch and
+  per-type checkboxes; constrained reroll respects checked pool only.
+- `js/app.js`: `generateMerchant()` + `renderMerchant()` called on Generate;
+  `initMerchant()` called in `initApp()`.
+- `css/style.css`: `.merchant-species-panel` styles for the inline
+  species/creature reroll panel.
+- `js/merchant.js`: `readMerchantFromUI()` — reads all merchant UI fields and collapsed state back into a merchant object for persistence.
+- `js/app.js`: merchant data is now saved with the shop via `readMerchantFromUI()` in `buildShopData()`.
+- `js/app.js`: merchant fields are restored on shop load via `renderMerchant()` in `applyLoadedShop()`; shops without a saved merchant generate a fresh one.
+- `js/app.js`: `resetGeneratorForm()` now clears all merchant UI fields.
+- `js/merchantData.js`: `MERCHANT_NAMES` populated with full name banks for all
+  species and creature type keys (Phase M5).
+- `js/merchantData.js`: `MERCHANT_APPEARANCES` replaced with a flat array of ~200
+  appearance descriptors shared across all species and creature types (Phase M5).
+- `js/merchantData.js`: `MERCHANT_QUIRKS` populated with 118 quirk entries covering speech patterns, mannerisms, habits, and physical tics (Phase M6).
+
+### Changed
+
+- `js/merchant.js`: appearance lookup simplified — `_appearanceKey()` removed;
+  `generateMerchant()` and the appearance reroll handler now draw directly from
+  the flat `MERCHANT_APPEARANCES` array.
+
+### Fixed
+
+- `js/merchantData.js` and `js/merchant.js` not loaded — added script tags to `index.html`.
+- Species/creature reroll panel now remembers branch and per-type
+  checkbox selections between opens.
+- Clicking Roll no longer closes the species/creature reroll panel;
+  selections persist and the button can be clicked repeatedly.
+- `js/merchant.js`: `renderMerchant()` now restores the collapsed/expanded state of the merchant section and updates the toggle button label accordingly.
+- `js/merchant.js`: `_nameKey()` now maps all creature subtypes (giant, dragon,
+  monstrosity, celestial, construct, elemental, fey, fiend, undead) to their
+  respective name bank keys; previously all non-humanoid creatures fell through
+  to the `default` fallback.
+
 ## [3.2.0] - 2026-03-16
 
 ### Added
@@ -11,6 +67,7 @@ All notable changes to this project will be documented in this file.
 - Editing any qty field triggers the unsaved changes warning.
 
 ### Fixed
+
 - Loaded shops now render qty as an editable input (was still rendering as plain text).
 - Blur-to-zero and keydown filtering now apply correctly to loaded shops.
 
