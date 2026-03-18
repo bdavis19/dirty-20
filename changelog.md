@@ -4,6 +4,8 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+## [3.3.0] - 2026-03-17
+
 ### Added
 
 - `js/merchant.js`: merchant NPC generation logic (Phase M1) — species/creature
