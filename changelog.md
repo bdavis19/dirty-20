@@ -7,6 +7,7 @@ All notable changes to this project will be documented in this file.
 ### Added
 
 - `js/shopDetailsData.js` — new file with four placeholder data arrays (`SHOP_LOCATIONS`, `SHOP_APPEARANCES`, `SHOP_QUIRKS`, `SHOP_SECURITY`) for the Shop Details Generator.
+- `js/shopDetails.js` — Shop Details generation logic: `generateShopDetails()`, `renderShopDetails()`, `readShopDetailsFromUI()`, and `initShopDetails()` with collapse toggle and delegated reroll button wiring.
 
 ## [3.3.0] - 2026-03-17
 
