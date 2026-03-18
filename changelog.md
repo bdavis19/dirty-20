@@ -4,6 +4,10 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+### Added
+
+- `js/shopDetailsData.js` — new file with four placeholder data arrays (`SHOP_LOCATIONS`, `SHOP_APPEARANCES`, `SHOP_QUIRKS`, `SHOP_SECURITY`) for the Shop Details Generator.
+
 ## [3.3.0] - 2026-03-17
 
 ### Added
