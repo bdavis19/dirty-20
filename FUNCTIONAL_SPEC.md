@@ -269,3 +269,18 @@
 - The collapsed/expanded state of the merchant section is also saved and restored.
 - Shops saved before the merchant feature was added (no `merchant` key) generate a fresh merchant on load.
 - Clicking ← New Shop clears all merchant fields.
+
+---
+
+## 19. Shop Details
+
+- A Shop Details section appears on the results view between the Merchant section and the output table.
+- The section contains four fields: **Location**, **Appearance**, **Quirk**, and **Security**.
+- Each field is populated with one randomly selected value at generation time.
+- Each field has a ⟳ reroll button that replaces its value with a new random pick from the corresponding data array.
+- The section is collapsible. Clicking **▲ Collapse** hides the body; clicking **▼ Expand** restores it.
+- Collapsed state is saved with the shop and restored on load.
+- All four fields are free-text editable by the user.
+- Shop Details are saved with the shop via `buildShopData()` and restored via `applyLoadedShop()`.
+- Shops saved before this feature was added will have a fresh set of details generated on load.
+- Clicking ← New Shop clears all four fields.

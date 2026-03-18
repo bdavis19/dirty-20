@@ -68,6 +68,10 @@ function resetGeneratorForm() {
   document.getElementById('merchant-bias-negative').value = '';
   document.getElementById('merchant-personalities').innerHTML = '';
   document.getElementById('merchant-quirks').innerHTML        = '';
+  document.getElementById('shop-detail-location').value   = '';
+  document.getElementById('shop-detail-appearance').value = '';
+  document.getElementById('shop-detail-quirk').value      = '';
+  document.getElementById('shop-detail-security').value   = '';
   const merchantSection = document.getElementById('merchant-section');
   if (merchantSection) merchantSection._merchantData = null;
 }
@@ -179,6 +183,7 @@ function initApp() {
   loadItemData();
   initNameGenerator();
   initMerchant();
+  initShopDetails();
 
   document.getElementById('builtin-preset-select').addEventListener('change', (e) => {
     if (e.target.value !== '') {
@@ -246,6 +251,7 @@ function buildShopData() {
     },
     items,
     merchant: readMerchantFromUI(),
+    shopDetails: readShopDetailsFromUI(),
   };
 }
 
@@ -325,6 +331,12 @@ function applyLoadedShop(data) {
   } else {
     renderMerchant(generateMerchant());
   }
+
+  if (data.shopDetails) {
+    renderShopDetails(data.shopDetails);
+  } else {
+    renderShopDetails(generateShopDetails());
+  }
 }
 
 // app.js — Generate button
@@ -377,8 +389,9 @@ document.getElementById('btn-generate').addEventListener('click', () => {
   const shopData = buildShopData();
   const items = generateShop(allItems, shopData.settings);
   renderItems(items);
-  const merchant = generateMerchant();        // ← new
-  renderMerchant(merchant);                   // ← new
+  const merchant = generateMerchant();
+  renderMerchant(merchant);
+  renderShopDetails(generateShopDetails());
   setUnsavedChanges(true);
   showView('results');
 });
