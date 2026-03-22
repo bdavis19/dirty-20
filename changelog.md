@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file.
 
+## [Unreleased]
+
+### Added
+
+- `data/herbs_arctic.json` — 6 common, 15 rare arctic herbs (Firestore upload only)
+- `data/herbs_cave.json` — 6 common, 15 rare cave herbs (Firestore upload only)
+- `data/herbs_coast.json` — 6 common, 15 rare coastal herbs (Firestore upload only)
+- `data/herbs_desert.json` — 6 common, 15 rare desert herbs (Firestore upload only)
+- `data/herbs_forest.json` — 6 common, 15 rare forest herbs (Firestore upload only)
+- `data/herbs_grassland.json` — 6 common, 15 rare grassland herbs (Firestore upload only)
+- `data/herbs_mountain.json` — 6 common, 15 rare mountain herbs (Firestore upload only)
+- `data/herbs_swamp.json` — 6 common, 15 rare swamp herbs (Firestore upload only)
+
 ## [v3.5.0] 2026-03-21
 
 ### Added
