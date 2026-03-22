@@ -4,6 +4,19 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+### Added
+
+- Admin item import panel (visible only to the configured admin email).
+  Upload a JSON file matching the item schema; the tool previews items
+  grouped by source book, then writes to Firestore — creating new source
+  documents or merging into existing ones (duplicates matched by name are
+  skipped).
+- `js/admin.js` — `initAdmin()`, file parse/preview, and `importSourceBook()`
+  merge logic.
+- `showView()` now syncs the active nav-link highlight when switching views.
+- Shop Generator nav link `data-tool` corrected from `shop-generator` to
+  `generator` to match the view ID used by `showView()`.
+
 ### Fixed
 
 - Brief theme flash on page refresh — an inline script immediately after `<body>` reads the cached theme from `localStorage` and applies the body class before any rendering occurs, eliminating the default theme flicker while Firestore loads.

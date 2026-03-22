@@ -33,7 +33,8 @@
     <div id="top-bar">
       <div id="app-title">Dirty 20</div>
       <nav id="main-nav">
-        <button class="nav-link active" data-tool="shop-generator">Shop Generator</button>
+        <button class="nav-link active" data-tool="generator">Shop Generator</button>
+        <button class="nav-link hidden" id="nav-link-admin" data-tool="admin">Admin</button>
       </nav>
       <div id="theme-controls">
         <select id="theme-select" title="Choose theme"></select>
@@ -335,6 +336,30 @@
       </div>
     </main>
 
+    <!-- View: Admin -->
+    <div id="view-admin" class="view hidden">
+      <div class="view-content">
+        <section>
+          <h2>Item Import</h2>
+          <p style="color: var(--color-text-muted); margin-bottom: 1.5rem;">
+            Import items from a JSON file (array of item objects). New sourcebooks are created; existing ones are merged — only items with names not already in Firestore are added.
+          </p>
+
+          <div style="display: flex; flex-direction: column; gap: 1rem; max-width: 480px;">
+            <div>
+              <label for="admin-file-input" style="display: block; margin-bottom: 0.4rem;">Select JSON file</label>
+              <input type="file" id="admin-file-input" accept=".json" />
+            </div>
+            <button id="btn-admin-import" disabled>Import to Firestore</button>
+          </div>
+
+          <div id="admin-preview" style="margin-top: 1.5rem;"></div>
+
+          <div id="admin-log" style="margin-top: 1rem; max-height: 300px; overflow-y: auto; font-size: 0.85rem; font-family: monospace;"></div>
+        </section>
+      </div>
+    </div>
+
     <!-- Shop Browser Modal -->
     <div id="shop-browser-modal" class="modal hidden">
       <div class="modal-content">
@@ -360,6 +385,7 @@
   <script src="js/print.js"></script>
   <script src="js/shopDetailsData.js"></script>
   <script src="js/shopDetails.js"></script>
+  <script src="js/admin.js"></script>
   <script type="module" src="js/main.js"></script>
 
 </body>
