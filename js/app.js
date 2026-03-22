@@ -43,6 +43,12 @@ function showView(viewId) {
   document.querySelectorAll('.view').forEach(v => v.classList.add('hidden'));
   const target = document.getElementById('view-' + viewId);
   if (target) { target.classList.remove('hidden'); window.scrollTo(0, 0); }
+
+  document.querySelectorAll('#main-nav .nav-link').forEach(btn => {
+  btn.addEventListener('click', () => {
+    if (btn.dataset.tool) showView(btn.dataset.tool);
+  });
+});
 }
 
 function resetGeneratorForm() {
@@ -184,6 +190,7 @@ function initApp() {
   initNameGenerator();
   initMerchant();
   initShopDetails();
+  initAdmin();
 
   document.getElementById('builtin-preset-select').addEventListener('change', (e) => {
     if (e.target.value !== '') {
