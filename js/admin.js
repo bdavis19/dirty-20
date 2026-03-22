@@ -10,7 +10,10 @@ function initAdmin() {
   if (!isAdmin()) return;
 
   // Show the nav link
-  document.getElementById('nav-link-admin').classList.remove('hidden');
+  // Show the nav link and wire navigation
+  const navLink = document.getElementById('nav-link-admin');
+  navLink.classList.remove('hidden');
+  navLink.addEventListener('click', () => showView('admin'));
 
   // Wire file input → preview
   document.getElementById('admin-file-input').addEventListener('change', handleAdminFileSelect);

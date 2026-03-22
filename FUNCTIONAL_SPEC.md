@@ -284,3 +284,22 @@
 - Shop Details are saved with the shop via `buildShopData()` and restored via `applyLoadedShop()`.
 - Shops saved before this feature was added will have a fresh set of details generated on load.
 - Clicking ← New Shop clears all four fields.
+
+---
+
+## 20. Admin Panel
+
+- The Admin nav link is only visible when signed in as the configured
+  admin email (hardcoded in `js/admin.js`).
+- Clicking Admin navigates to the admin view.
+- The admin view contains an item import tool. The user selects a JSON
+  file containing an array of item objects matching the item schema.
+- On file selection, a preview table shows item counts grouped by source
+  book.
+- Clicking Import writes each source group to the Firestore `items`
+  collection. New source documents are created; existing ones are merged
+  — only items whose name does not already exist in the document are
+  appended.
+- A status log displays per-source results and any errors.
+- After a successful import, `allItems` is reloaded so newly imported
+  items are immediately available in the generator.

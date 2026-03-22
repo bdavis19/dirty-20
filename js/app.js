@@ -45,8 +45,10 @@ function showView(viewId) {
   if (target) { target.classList.remove('hidden'); window.scrollTo(0, 0); }
 
   document.querySelectorAll('#main-nav .nav-link').forEach(btn => {
-    btn.classList.toggle('active', btn.dataset.tool === viewId);
+  btn.addEventListener('click', () => {
+    if (btn.dataset.tool) showView(btn.dataset.tool);
   });
+});
 }
 
 function resetGeneratorForm() {
