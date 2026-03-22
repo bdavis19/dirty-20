@@ -356,6 +356,35 @@
           <div id="admin-preview" style="margin-top: 1.5rem;"></div>
 
           <div id="admin-log" style="margin-top: 1rem; max-height: 300px; overflow-y: auto; font-size: 0.85rem; font-family: monospace;"></div>
+
+          <hr style="margin: 2rem 0; border-color: var(--color-border);">
+
+          <h2>Herb Upload</h2>
+          <p style="color: var(--color-text-muted); margin-bottom: 1.5rem;">
+            Upload a region's herb JSON to Firestore. This overwrites any existing data for that region.
+          </p>
+
+          <div style="display: flex; flex-direction: column; gap: 1rem; max-width: 480px;">
+            <div>
+              <label for="herb-region-select" style="display: block; margin-bottom: 0.4rem;">Region</label>
+              <select id="herb-region-select">
+                <option value="">— Select region —</option>
+                <option value="arctic">Arctic</option>
+                <option value="cave">Cave</option>
+                <option value="coast">Coast</option>
+                <option value="desert">Desert</option>
+                <option value="forest">Forest</option>
+                <option value="grassland">Grassland</option>
+                <option value="mountain">Mountain</option>
+                <option value="swamp">Swamp</option>
+              </select>
+            </div>
+            <div>
+              <label for="admin-herb-file-input" style="display: block; margin-bottom: 0.4rem;">Select JSON file</label>
+              <input type="file" id="admin-herb-file-input" accept=".json" />
+            </div>
+            <button id="btn-admin-herb-upload" disabled>Upload to Firestore</button>
+          </div>
         </section>
       </div>
     </div>

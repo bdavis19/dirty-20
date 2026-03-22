@@ -20,6 +20,8 @@ function initAdmin() {
 
   // Wire import button
   document.getElementById('btn-admin-import').addEventListener('click', handleAdminImport);
+
+  initHerbUpload();
 }
 
 // --- File selection & preview ---
@@ -140,4 +142,44 @@ function adminLog(msg, type = 'info') {
   line.textContent = msg;
   log.appendChild(line);
   log.scrollTop = log.scrollHeight;
+}
+
+// --- Herb Upload ---
+
+function initHerbUpload() {
+  document.getElementById('herb-region-select').addEventListener('change', updateHerbUploadBtn);
+  document.getElementById('admin-herb-file-input').addEventListener('change', updateHerbUploadBtn);
+  document.getElementById('btn-admin-herb-upload').addEventListener('click', handleHerbUpload);
+}
+
+function updateHerbUploadBtn() {
+  const region = document.getElementById('herb-region-select').value;
+  const file = document.getElementById('admin-herb-file-input').files[0];
+  document.getElementById('btn-admin-herb-upload').disabled = !(region && file);
+}
+
+async function handleHerbUpload() {
+  const region = document.getElementById('herb-region-select').value;
+  const file = document.getElementById('admin-herb-file-input').files[0];
+  if (!region || !file) return;
+
+  const btn = document.getElementById('btn-admin-herb-upload');
+  btn.disabled = true;
+  adminLog(`Uploading herbs for region: ${region}…`, 'info');
+
+  const reader = new FileReader();
+  reader.onload = async (evt) => {
+    try {
+      const data = JSON.parse(evt.target.result);
+      if (!data.common || !data.rare) throw new Error('JSON must have "common" and "rare" arrays.');
+
+      const docRef = window.doc(window.db, 'herbs', region);
+      await window.setDoc(docRef, data);
+      adminLog(`✓ herbs/${region} uploaded (${data.common.length} common, ${data.rare.length} rare).`, 'success');
+    } catch (err) {
+      adminLog(`ERROR: ${err.message}`, 'error');
+    }
+    btn.disabled = false;
+  };
+  reader.readAsText(file);
 }

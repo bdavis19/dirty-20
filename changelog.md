@@ -14,6 +14,9 @@ All notable changes to this project will be documented in this file.
 - `data/herbs_grassland.json` — 6 common, 15 rare grassland herbs (Firestore upload only)
 - `data/herbs_mountain.json` — 6 common, 15 rare mountain herbs (Firestore upload only)
 - `data/herbs_swamp.json` — 6 common, 15 rare swamp herbs (Firestore upload only)
+- Admin panel: Herb Upload section — select a region, pick the corresponding
+  JSON file, and write it directly to `herbs/{region}` in Firestore.
+  Overwrites any existing document for that region.
 
 ## [v3.5.0] 2026-03-21
 
